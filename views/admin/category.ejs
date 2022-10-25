@@ -1,0 +1,102 @@
+
+
+<main class="main-content">
+    <div class="category-grid">
+        <div class="categoryTable">
+            <div class="card">
+                <div class="header">
+                    <h3>Category List</h3>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addCategory">Add New Category
+                        <span class="las la-add"></span>
+                    </button>
+                </div>
+
+                <!-- Add Category Modal -->
+                <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <form action="/admin/category/addCategory" method="post"
+                                onsubmit="return categoryValidate()">
+                                <div class="modal-body">
+                                    <div>
+                                        <label for="">Category Name</label>
+                                        <input type="text" name="categoryName" id="categoryName">
+                                        <span class="validationError" id="catergoryError"></span>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                                    <button type="submit" class="btn btn-primary">SAVE</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Update Category Modal -->
+                <div class="modal fade" id="updateCategory" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Category</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <form action="" method="post"
+                                onsubmit="return categoryValidate()">
+                                <div class="modal-body">
+                                    <div>
+                                        <label for="">Category Name</label>
+                                        <input type="text" name="categoryName" id="categoryName" value="<%=categoryData.categoryName %>">
+                                        <span class="validationError" id="catergoryError"></span>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                                    <button type="submit" class="btn btn-primary">UPDATE</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table width="100%">
+                            <thead>
+                                <tr>
+                                    <td>SL NO.</td>
+                                    <td>Category Name</td>
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (var i=0; i<category.length; i++) { %>
+                                    <tr class="table-data">
+                                        <td class="slno"></td>
+                                        <td>
+                                            <%= category[i].categoryName %>
+                                        </td>
+                                        <td>
+                                            <a style="background: #5E4548;" href="/admin/category/edit?id=<%= category[i]._id %>"
+                                                class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#updateCategory">Edit</a>
+                                            <a style="background: #B05541;" href="/admin/category/delete?id=<%= category[i]._id %>"
+                                                class="btn btn-primary">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,44 @@
+<section class="adminLogin">
+    <div class="admin-login hide-login">
+        <form action="/admin/login" method="post" class="login-container" onsubmit="return adminLoginValidation()">
+            <img src="/img/man.png" alt="">
+            <% if(locals.errMsg){%>
+                <div class="errorstyle">
+                    <p style="text-align:center; color: rgb(255, 0, 0);">
+                        <%= errMsg %>
+                    </p>
+                </div>
+            <% } %>
+            <div class="input-container hide-section">
+                <span><input class="credentials" type="text" id="userName" name="userName" placeholder="User Name"></span>
+                <span style="color: rgb(255, 0, 0);" id="userNameError"></span>
+                <span><input class="credentials" type="password" id="password" name="password" placeholder="Password"></span>
+                <span style="color: rgb(255, 0, 0);"  id="passwordError"></span>
+                <span><input type="submit" value="Login"></span>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    function adminLoginValidation(){
+        let userName = document.getElementById('userName').value.trim();
+        let password = document.getElementById('password').value.trim();
+        let error =0;
+        if(userName==""){
+            document.getElementById('userNameError').innerHTML="*User Name Required"
+            error=1;
+        }else{
+            document.getElementById('userNameError').innerHTML=""
+        }
+        if(password==""){
+            document.getElementById('passwordError').innerHTML="*Password Required"
+            error=1;
+        }else{
+            document.getElementById('passwordError').innerHTML=""
+        }
+        if(error==1){
+            return false
+        }
+    }
+</script>

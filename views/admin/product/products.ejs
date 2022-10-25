@@ -1,0 +1,45 @@
+<main class="main-content">
+    <div class="product-grid">
+        <div class="card">
+            <div class="header">
+                <h3>Product List</h3>
+                <a href="/admin/addProduct">Add New Product
+                    <span class="las la-add"></span>
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <td>SL NO.</td>
+                                <td>Category</td>
+                                <td>Product Name</td>
+                                <td>Price</td>
+                                <td>Total Qty</td>
+                                <td>Sold</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0;i<product.length;i++) { %>
+                            <tr class="table-data">
+                                <td class="slno"></td>
+                                <td><%= product[i].category_Name%></td>
+                                <td><%= product[i].product_Name%></td>
+                                <td><span>₹ </span><%= product[i].selling_Price%></td>
+                                <td><%= product[i].stock_In_Hand%></td>
+                                <td></td>
+                                <td>
+                                    <a style="background: #5E4548;" href="/admin/productUpdate?id=<%= product[i]._id %>" class="btn btn-primary">Edit</a>
+                                    <a style="background: #B05541;" href="/admin/Product/delete?id=<%= product[i]._id %>" class="btn btn-primary">Delete</a>
+                                </td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
