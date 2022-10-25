@@ -58,7 +58,11 @@ const updatePage = async(req,res)=>{
     console.log(productData);
     if(req.session.loggedIn){
         console.log(productData[0].product_Name);
-        res.render('admin/product/updateProduct',{admin:true,title:"Update Product",productData})        
+        categoryController.getCategory().then((category) => {
+            brandController.getAllBrand().then((brand) => {
+        res.render('admin/product/updateProduct',{admin:true,title:"Update Product",productData,category,brand})  
+            })
+        })      
     }
 }
 

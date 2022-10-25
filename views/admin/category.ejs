@@ -49,12 +49,12 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <form action="" method="post"
-                                onsubmit="return categoryValidate()">
+                            <form action="/admin/category/edit/" method="post"
+                                onsubmit="return categoryValidate()" id="formData">
                                 <div class="modal-body">
                                     <div>
                                         <label for="">Category Name</label>
-                                        <input type="text" name="categoryName" id="categoryName" value="<%=categoryData.categoryName %>">
+                                        <input type="text" name="categoryName" id="editCategoryName" value="<%=categoryData.categoryName %>">
                                         <span class="validationError" id="catergoryError"></span>
                                     </div>
                                 </div>
@@ -85,8 +85,9 @@
                                             <%= category[i].categoryName %>
                                         </td>
                                         <td>
-                                            <a style="background: #5E4548;" href="/admin/category/edit?id=<%= category[i]._id %>"
-                                                class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#updateCategory">Edit</a>
+                                            <!-- /admin/category/edit?id=<%= category[i]._id %> -->
+                                            <a style="background: #5E4548;" href=""
+                                                class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#updateCategory" onclick="edit('<%= category[i]._id %>','<%= category[i].categoryName %>')">Edit</a>
                                             <a style="background: #B05541;" href="/admin/category/delete?id=<%= category[i]._id %>"
                                                 class="btn btn-primary">Delete</a>
                                         </td>
@@ -100,3 +101,14 @@
         </div>
     </div>
 </main>
+
+<script>
+    function edit(id,name){
+        let editName = document.getElementById('editCategoryName');
+        let formData = document.getElementById('formData')
+        alert(formData)
+
+        editName.value = name;
+        formData = id
+    }
+</script>
