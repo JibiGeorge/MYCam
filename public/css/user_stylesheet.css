@@ -1,36 +1,116 @@
+:root {
+    --main-color: #22495E;
+    --color-dark: #1d2231;
+    --text-grey: #8390a2;
+    --orange: #ff7800;
+    --black: #130f40;
+    --light-color: #666;
+    --box-shadow: 0.5rem 1rem rgba(0, 0, 0, .1);
+    --border: .2rem solid rgba(0, 0, 0, .1);
+    --outline: .1rem solid rgba(0, 0, 0, .1);
+    --outline-hover: .2rem solid var(--black);
+}
 
-.user-navabr{
+
+.user-navabr {
     background: url('../img/gggrain.svg ');
     background-repeat: no-repeat;
     background-size: cover;
+    padding: 0 20px;
 }
-.homeNavBarTitle{
+
+.homeNavBarTitle {
     font-family: 'Lobster', cursive;
     font-weight: bold;
     font-size: 30px;
-    
+
 }
-.userNavbar .dropdown-menu{
+
+.userNavbar .dropdown-menu {
     background: rgb(248, 255, 214);
 }
-.user-navabr .login-btn{
+
+.user-navabr .login-btn {
     background: #AAFFA1;
     color: rgb(0, 0, 0);
     font-weight: 500;
     transition: 1s;
     font-size: 15px;
 }
-.user-navabr .login-btn:hover{
+
+.user-navabr .login-btn:hover {
     background: rgb(0, 0, 0);
     color: #AAFFA1;
 }
-.product-offer{
-    margin-bottom: 30px;  
+.user-navabr .icons{
+    margin: 0 10px;
+}
+.user-navabr .icons div{
+    height: 25px;
+    width: 25px;
+    line-height: 1.5rem;
+    border-radius: .5rem;
+    background: #eee;
+    color: var(--black);
+    font-size: 20px;
+    margin-left: .3rem;
+    text-align: center;
+    cursor: pointer;
+}
+.user-navabr .icons div:hover{
+    background-color: var(--orange);
+    color: #fff;
+}
+.product-offer {
+    margin-bottom: 30px;
     height: 200px;
     width: 387.656px;
     position: relative;
 }
-.product-offer img{
+
+.product-offer img {
     width: 100%;
-    object-fit: contain;    
+    object-fit: contain;
+}
+
+/* offer 1st Section */
+.offer .carousel-item{
+    height: 430px;
+}
+.offer .product-offer{
+    height: 200px;
+}
+
+.service .card{
+    padding: 30px;
+}
+.service .card h1{
+    color: #FFD333;
+    font-weight: 900;
+    font-size: 2.5rem;
+    margin-right: 1rem;
+}
+.service .card label{
+    font-size: 1.25rem;
+    font-weight: bolder;
+    color: #3D464D;
+}
+.category .card{
+    border: 0;
+    border-radius: 0;
+}
+.category .card img{
+    border-radius: 0;
+}
+.category .row h6{
+    font-size: 1rem;    
+    color: #3D464D;
+    font-weight: bold;
+}
+.category .title h1,
+.featured-products .title h1{
+    text-transform: uppercase;
+    font-size: 2rem;
+    color: #3D464D;
+    font-weight: 700;
 }

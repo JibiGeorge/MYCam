@@ -8,8 +8,9 @@
   --black: #130f40;
   --light-color: #666;
   --box-shadow: 0.5rem 1rem rgba(0,0,0,.1);
-  --border: 1rem solid rgba(0,0,0,.1);
-  --outline: 1rem solid rgba(0,0,0,.1)
+  --border: .2rem solid rgba(0,0,0,.1);
+  --outline: .1rem solid rgba(0,0,0,.1);
+  --outline-hover: .2rem solid  var(--black);
 }
 
 * {
@@ -190,7 +191,7 @@ form {
   margin-left: 345px;
 }
 
-.admin-login header {
+.admin-header header {
   background: #fff;
   display: flex;
   justify-content: space-between;

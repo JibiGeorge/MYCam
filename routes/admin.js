@@ -9,7 +9,7 @@ const router = express.Router();
 
 
 //Storage Setting
-let storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination:'./public/images', //directory (folder) setting
     filename:(req, file, cb)=>{
         cb(null, Date.now()+file.originalname) // file name setting
@@ -17,7 +17,7 @@ let storage = multer.diskStorage({
 })
 
 //Upload Setting
-let upload = multer({
+const upload = multer({
     storage: storage,
     fileFilter:(req, file, cb)=>{
      if(
