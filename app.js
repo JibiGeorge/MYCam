@@ -3,6 +3,7 @@ const app = express()
 const expressLayouts = require("express-ejs-layouts")
 const path = require('path')
 const adminRouter = require('./routes/admin')
+const userRouter = require('./routes/user')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
@@ -42,6 +43,7 @@ app.set('view engine', 'ejs')
 
 
 app.use('/admin', adminRouter)
+app.use('/',userRouter)
 
 app.listen(port, () => {
     console.log("Server Started at port || ", port);

@@ -1,0 +1,36 @@
+
+.user-navabr{
+    background: url('../img/gggrain.svg ');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.homeNavBarTitle{
+    font-family: 'Lobster', cursive;
+    font-weight: bold;
+    font-size: 30px;
+    
+}
+.userNavbar .dropdown-menu{
+    background: rgb(248, 255, 214);
+}
+.user-navabr .login-btn{
+    background: #AAFFA1;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    transition: 1s;
+    font-size: 15px;
+}
+.user-navabr .login-btn:hover{
+    background: rgb(0, 0, 0);
+    color: #AAFFA1;
+}
+.product-offer{
+    margin-bottom: 30px;  
+    height: 200px;
+    width: 387.656px;
+    position: relative;
+}
+.product-offer img{
+    width: 100%;
+    object-fit: contain;    
+}

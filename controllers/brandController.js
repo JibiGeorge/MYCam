@@ -3,10 +3,10 @@ const brandController = require('../model/brand')
 const brandPage = (req,res)=>{
     if(req.session.loggedIn){        
     brandController.getAllBrand().then((brand)=>{
-        res.render('admin/brand',{admin:true,brand,title:"Brand"})
+        res.render('admin/brand',{admin:true,brand,title:"Brand",user:false})
     })
     }else{
-        res.render('admin/adminLogin', { admin: false })
+        res.render('admin/adminLogin', { admin: false,user:false })
     }
 }
 const addBrand = (req,res)=>{
@@ -20,10 +20,10 @@ const getBrandDetail = async (req, res) => {
     let brandData = await brandController.getBrandDetail(brandId)
     if (req.session.loggedIn) {
         categoryController.getAllBrand().then((brand) => {
-            res.render('admin/brand', { admin: true, brand, brandData ,title:"Brand" })
+            res.render('admin/brand', { admin: true, brand, brandData ,title:"Brand",user:false})
         })
     } else {
-        res.render('admin/adminLogin', { admin: false })
+        res.render('admin/adminLogin', { admin: false,user:false })
     }
 }
 const updateBrandDetail = (req, res) => {
@@ -32,7 +32,7 @@ const updateBrandDetail = (req, res) => {
             res.redirect('/admin/brand')
         })
     } else {
-        res.render('admin/adminLogin', { admin: false })
+        res.render('admin/adminLogin', { admin: false,user:false })
     }
 }
 const deleteBrand = (req, res) => {
@@ -42,7 +42,7 @@ const deleteBrand = (req, res) => {
             res.redirect('/admin/brand')
         })
     } else {
-        res.render('admin/adminLogin', { admin: false })
+        res.render('admin/adminLogin', { admin: false,user:false })
     }
 }
 

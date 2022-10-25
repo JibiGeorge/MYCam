@@ -6,21 +6,21 @@ const product = require('../model/product')
 const productManagementPage = (req, res) => {
     if (req.session.loggedIn) {
         productController.getProduct().then((product) => {
-            res.render('admin/product/products', { admin: true, title: "Products", product })
+            res.render('admin/product/products', { admin: true, title: "Products", product, user: false })
         })
     } else {
-        res.render('admin/adminLogin', { admin: false })
+        res.render('admin/adminLogin', { admin: false, user: false })
     }
 }
 const addProductPage = (req, res) => {
     categoryController.getCategory().then((category) => {
         brandController.getAllBrand().then((brand) => {
-            res.render('admin/product/addProduct', { admin: true, title: "Products", category, brand })
+            res.render('admin/product/addProduct', { admin: true, title: "Products", category, brand, user: false })
         })
     })
 }
 const addProduct = (req, res) => {
-    const {product_Name,category_Name,brand,actual_Price,selling_Price,stock_In_Hand,description,specification}=req.body
+    const { product_Name, category_Name, brand, actual_Price, selling_Price, stock_In_Hand, description, specification } = req.body
     // req.files.forEach((singale_image)=>{
     productController.addProduct({
         Picture: req.files,
@@ -50,19 +50,19 @@ const deleteProduct = (req, res) => {
             res.redirect('/admin/productManagement')
         })
     } else {
-        res.render('admin/adminLogin', { admin: false })
+        res.render('admin/adminLogin', { admin: false, user: false })
     }
 }
-const updatePage = async(req,res)=>{
+const updatePage = async (req, res) => {
     let productData = await productController.getProduct(req.query.id)
     console.log(productData);
-    if(req.session.loggedIn){
+    if (req.session.loggedIn) {
         console.log(productData[0].product_Name);
         categoryController.getCategory().then((category) => {
             brandController.getAllBrand().then((brand) => {
-        res.render('admin/product/updateProduct',{admin:true,title:"Update Product",productData,category,brand})  
+                res.render('admin/product/updateProduct', { admin: true, title: "Update Product", productData, category, brand, user: false })
             })
-        })      
+        })
     }
 }
 

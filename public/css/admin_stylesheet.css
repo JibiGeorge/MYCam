@@ -4,6 +4,12 @@
   --main-color: #22495E;
   --color-dark: #1d2231;
   --text-grey: #8390a2;
+  --orange: #ff7800;
+  --black: #130f40;
+  --light-color: #666;
+  --box-shadow: 0.5rem 1rem rgba(0,0,0,.1);
+  --border: 1rem solid rgba(0,0,0,.1);
+  --outline: 1rem solid rgba(0,0,0,.1)
 }
 
 * {
@@ -47,7 +53,7 @@ form {
   transition: 1s;
 }
 
-img {
+.adminLogin img {
   width: 80px;
   border-radius: 50%;
   padding: 12px;
@@ -184,7 +190,7 @@ img {
   margin-left: 345px;
 }
 
-header {
+.admin-login header {
   background: #fff;
   display: flex;
   justify-content: space-between;

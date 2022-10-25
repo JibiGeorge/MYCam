@@ -3,10 +3,10 @@ const categoryController = require('../model/category')
 const categoryPage = (req, res) => {
     if (req.session.loggedIn) {
         categoryController.getCategory().then((category) => {
-            res.render('admin/category', { admin: true, category, categoryData: false ,title:"Category"})
+            res.render('admin/category', { admin: true, category, categoryData: false ,title:"Category",user:false})
         })
     } else {
-        res.render('admin/adminLogin', { admin: false })
+        res.render('admin/adminLogin', { admin: false,user:false })
     }
 }
 const addCategory = (req, res) => {
@@ -15,7 +15,7 @@ const addCategory = (req, res) => {
             res.redirect('/admin/Category')
         })
     } else {
-        res.render('admin/adminLogin', { admin: false })
+        res.render('admin/adminLogin', { admin: false ,user:false})
     }
 }
 const getCategoryDetail = async (req, res) => {
@@ -23,10 +23,10 @@ const getCategoryDetail = async (req, res) => {
     let categoryData = await categoryController.getCategoryDetail(categoryId)
     if (req.session.loggedIn) {
         categoryController.getCategory().then((category) => {
-            res.render('admin/category', { admin: true, category, categoryData  ,title:"Category"})
+            res.render('admin/category', { admin: true, category, categoryData  ,title:"Category",user:false})
         })
     } else {
-        res.render('admin/adminLogin', { admin: false })
+        res.render('admin/adminLogin', { admin: false ,user:false})
     }
 }
 const updateCategoryDetail = (req, res) => {
@@ -35,7 +35,7 @@ const updateCategoryDetail = (req, res) => {
             res.redirect('/admin/Category')
         })
     } else {
-        res.render('admin/adminLogin', { admin: false })
+        res.render('admin/adminLogin', { admin: false ,user:false})
     }
 }
 const deleteCategory = (req, res) => {
@@ -45,7 +45,7 @@ const deleteCategory = (req, res) => {
             res.redirect('/admin/category')
         })
     } else {
-        res.render('admin/adminLogin', { admin: false })
+        res.render('admin/adminLogin', { admin: false,user:false })
     }
 }
 
