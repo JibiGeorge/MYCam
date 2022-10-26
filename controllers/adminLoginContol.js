@@ -17,17 +17,17 @@ const adminLoginPage = (req,res)=>{
 //For admin login to admin panel with predefined credentials
 const adminLogin = (req,res)=>{
     adminLoginContol.doLogin(req.body).then((response)=>{
+        if(response.userFalse){
+            return res.render("admin/adminLogin",{admin:false,user:false,errMsg:"User Not Found"})
+        }
         
         if(response.status){
             req.session.loggedIn = true
             req.session.user = response.user
             res.render('admin/adminPanel',{admin:true,title:"Dashboard",user:false})
         }
-        else if(response.passwordError){
-            return res.render('admin/adminLogin', { admin:false,errMsg: "Invalid Username or Password",user:false})
-        }
         else{
-            res.redirect('/admin')
+            return res.render('admin/adminLogin', { admin:false,errMsg: "Invalid Username or Password",user:false})
         }
     })
 }

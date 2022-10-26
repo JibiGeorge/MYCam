@@ -15,7 +15,6 @@ module.exports = {
                         response.status = true
                         resolve(response)
                     }else{
-                        response.passwordError=true
                         console.log("Password Wrong");
                         resolve({status:false})
                     }
@@ -23,7 +22,8 @@ module.exports = {
             }else{
                 response.passwordError=true
                 console.log("User not found");
-                resolve({status:false})
+                noUser = "User not Found"
+                resolve({userFalse:true,noUser})
             }
         })
     }
