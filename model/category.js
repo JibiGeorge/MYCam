@@ -25,8 +25,6 @@ module.exports={
         })
     },
     updateCategory:(catId, catNewData)=>{
-        console.log(catId);
-        console.log("data:",catNewData);
         return new Promise (async(resolve,reject)=>{
             db.get().collection(collections.CATEGORY_DETAILS).updateOne({_id: ObjectId(catId)},{
                 $set:{

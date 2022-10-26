@@ -27,8 +27,10 @@ const getBrandDetail = async (req, res) => {
     }
 }
 const updateBrandDetail = (req, res) => {
+    let id = req.body.brandID;
+    let brandName = req.body.editBrandName
     if (req.session.loggedIn) {
-        brandController.updateBrand(req.params.id, req.body).then(() => {
+        brandController.updateBrand(id, brandName).then(() => {
             res.redirect('/admin/brand')
         })
     } else {

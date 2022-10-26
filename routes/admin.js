@@ -54,7 +54,7 @@ router.get('/category/delete',categoryController.deleteCategory)
 router.get('/brand',branController.brandPage)
 router.post('/brand/addBrand',branController.addBrand)
 router.get('/brand/edit',branController.getBrandDetail)
-router.post('/brand/update/:id',branController.updateBrandDetail)
+router.post('/brand/update',branController.updateBrandDetail)
 router.get('/brand/delete',branController.deleteBrand)
 
 router.get('/productManagement',productController.productManagementPage)

@@ -25,9 +25,9 @@ module.exports={
     } ,
     updateBrand:(brandId, brandNewData)=>{
         return new Promise (async(resolve,reject)=>{
-            db.get().collection(collections.BRAND_DETAILS).updateOne({id: ObjectId(brandId)},{
+            db.get().collection(collections.BRAND_DETAILS).updateOne({_id: ObjectId(brandId)},{
                 $set:{
-                    brandName: brandNewData.brandName
+                    brandName: brandNewData
                 }
             }).then((response)=>{
                 resolve()
