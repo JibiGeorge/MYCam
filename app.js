@@ -23,7 +23,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session({
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: { maxAge: 30000 },
     resave: false,
     store: store

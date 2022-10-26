@@ -114,3 +114,26 @@
     color: #3D464D;
     font-weight: 700;
 }
+.featured-products .product-item img{
+    width: 100%;
+    height: 283.250px;
+    object-fit: cover;
+}
+.featured-products .card a{
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #3D464D;
+}
+.featured-products .card h5{
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #3D464D;
+}
+.featured-products .card h6{
+    margin-left: .5rem;
+}
+.featured-products .product-item,
+.category .product-item{
+    width: 100%;
+}

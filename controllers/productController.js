@@ -20,6 +20,7 @@ const addProductPage = (req, res) => {
     })
 }
 const addProduct = (req, res) => {
+    console.log(req.body);
     const { product_Name, category_Name, brand, actual_Price, selling_Price, stock_In_Hand, description, specification } = req.body
     // req.files.forEach((singale_image)=>{
     productController.addProduct({
