@@ -20,7 +20,6 @@ const adminLogin = (req,res)=>{
         
         if(response.status){
             req.session.loggedIn = true
-            req.session.isAuth = true
             req.session.user = response.user
             res.render('admin/adminPanel',{admin:true,title:"Dashboard",user:false})
         }

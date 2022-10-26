@@ -31,8 +31,10 @@ const getCategoryDetail = async (req, res) => {
     }
 }
 const updateCategoryDetail = (req, res) => {
+    let id = req.body.categoryID;
+    let categoryName = req.body.categoryName
     if (req.session.loggedIn) {
-        categoryController.updateCategory(req.params.id, req.body).then(() => {
+        categoryController.updateCategory(id,categoryName).then(() => {
             res.redirect('/admin/Category')
         })
     } else {
@@ -41,7 +43,6 @@ const updateCategoryDetail = (req, res) => {
 }
 const deleteCategory = (req, res) => {
     if (req.session.loggedIn) {
-
         categoryController.deleteCategory(req.query.id).then((response) => {
             res.redirect('/admin/category')
         })
