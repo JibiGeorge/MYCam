@@ -1,4 +1,5 @@
 const categoryController = require('../model/category')
+const authencation = require('../config/connection')
 
 const categoryPage = (req, res) => {
     if (req.session.loggedIn) {

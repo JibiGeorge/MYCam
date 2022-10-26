@@ -1,21 +1,21 @@
 const mongoClient = require('mongodb').MongoClient
 
 const state = {
-    db:null
+    db: null
 }
 
-module.exports.connect=function(done){
+module.exports.connect = function (done) {
     const url = 'mongodb://0.0.0.0:27017'
     const dbname = 'MyCam'
 
-    mongoClient.connect(url,(err,data)=>{
-        if(err) return done(err)
+    mongoClient.connect(url, (err, data) => {
+        if (err) return done(err)
         state.db = data.db(dbname)
         done()
     })
-    
 }
 
-module.exports.get= function(){
+module.exports.get = function () {
     return state.db
 }
+

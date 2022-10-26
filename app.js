@@ -8,7 +8,13 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const db = require('./config/connection')
+const MongoDBSession = require('connect-mongodb-session')(session);
 const port = 4000;
+
+const store = new MongoDBSession({
+    uri: 'mongodb://0.0.0.0:27017/MyCam',
+    collection: 'MySession'
+})
 
 app.use(expressLayouts)
 app.use(express.static(path.join(__dirname,'public')))
@@ -17,9 +23,10 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session({
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-    saveUninitialized: true,
-    cookie: { maxAge: 6000000 },
-    resave: false
+    saveUninitialized: false,
+    cookie: { maxAge: 30000 },
+    resave: false,
+    store: store
 }));
 app.use(function (req, res, next) {
     res.set(
