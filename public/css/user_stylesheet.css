@@ -101,6 +101,8 @@
 }
 .category .card img{
     border-radius: 0;
+    object-fit: contain;
+    height: 100%;
 }
 .category .row h6{
     font-size: 1rem;    

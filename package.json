@@ -8,7 +8,7 @@
     "start": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jibi George || jibiyyan@gmail.com",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

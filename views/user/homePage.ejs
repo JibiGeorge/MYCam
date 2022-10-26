@@ -101,90 +101,20 @@
                 <div class="title mb-4">
                     <h1>Categories</h1>
                 </div>
+                <% for (var i=0; i<category.length; i++) { %>
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1 mr-1rem mb-3">
                     <div class="card" style="background: rgb(255, 255, 255); border-radius: 0;">
                         <div class="d-flex align-items-center">
                             <div style="width: 100px; height:100px;">
-                                <img src="/img/gggrain.svg" class="card-img-top" alt="...">
+                                <img src="/images/<%= category[i].categoryPicture %>" class="card-img-top" alt="...">
                             </div>
                             <div style="padding-left: 1rem;">
-                                <h6>DSLR</h6>
+                                <h6><%= category[i].categoryName %></h6>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1 mr-1rem mb-3">
-                    <div class="card" style="background: rgb(255, 255, 255);">
-                        <div class="d-flex align-items-center">
-                            <div style="width: 100px; height:100px;">
-                                <img src="/img/gggrain.svg" class="card-img-top" alt="...">
-                            </div>
-                            <div style="padding-left: 1rem;">
-                                <h6>Sporty & Action</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1 mr-1rem mb-3">
-                    <div class="card" style="background: rgb(255, 255, 255);">
-                        <div class="d-flex align-items-center">
-                            <div style="width: 100px; height:100px;">
-                                <img src="/img/gggrain.svg" class="card-img-top" alt="...">
-                            </div>
-                            <div style="padding-left: 1rem;">
-                                <h6>Lens</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1 mr-1rem mb-3">
-                    <div class="card" style="background: rgb(255, 255, 255);">
-                        <div class="d-flex align-items-center">
-                            <div style="width: 100px; height:100px;">
-                                <img src="/img/gggrain.svg" class="card-img-top" alt="...">
-                            </div>
-                            <div style="padding-left: 1rem;">
-                                <h6>Tripods</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1 mr-1rem mb-3">
-                    <div class="card" style="background: rgb(255, 255, 255);">
-                        <div class="d-flex align-items-center">
-                            <div style="width: 100px; height:100px;">
-                                <img src="/img/gggrain.svg" class="card-img-top" alt="...">
-                            </div>
-                            <div style="padding-left: 1rem;">
-                                <h6>Cards</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1 mr-1rem mb-3">
-                    <div class="card" style="background: rgb(255, 255, 255);">
-                        <div class="d-flex align-items-center">
-                            <div style="width: 100px; height:100px;">
-                                <img src="/img/gggrain.svg" class="card-img-top" alt="...">
-                            </div>
-                            <div style="padding-left: 1rem;">
-                                <h6>Battery</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1 mr-1rem mb-3">
-                    <div class="card" style="background: rgb(255, 255, 255);">
-                        <div class="d-flex align-items-center">
-                            <div style="width: 100px; height:100px;">
-                                <img src="/img/gggrain.svg" class="card-img-top" alt="...">
-                            </div>
-                            <div style="padding-left: 1rem;">
-                                <h6>Bags</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <% } %>
             </div>
         </div>
     </section>
