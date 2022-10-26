@@ -11,8 +11,9 @@ const categoryPage = (req, res) => {
     }
 }
 const addCategory = (req, res) => {
+    console.log(req.body);
     if (req.session.loggedIn) {
-        categoryController.addCategory(req.body).then((data) => {
+        categoryController.addCategory({categoryPicture:req.file.filename,categoryName:req.body.categoryName}).then((data) => {
             res.redirect('/admin/Category')
         })
     } else {
@@ -33,8 +34,9 @@ const getCategoryDetail = async (req, res) => {
 const updateCategoryDetail = (req, res) => {
     let id = req.body.categoryID;
     let categoryName = req.body.categoryName
+    let categoryPicture =req.file.filename
     if (req.session.loggedIn) {
-        categoryController.updateCategory(id,categoryName).then(() => {
+        categoryController.updateCategory(id,categoryName,categoryPicture).then(() => {
             res.redirect('/admin/Category')
         })
     } else {

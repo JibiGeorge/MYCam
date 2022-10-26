@@ -17,13 +17,9 @@
               Category
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">DSLR</a></li>
-              <li><a class="dropdown-item" href="#">Sports & Action</a></li>
-              <li><a class="dropdown-item" href="#">Lens</a></li>
-              <li><a class="dropdown-item" href="#">Tripods</a></li>
-              <li><a class="dropdown-item" href="#">Cards</a></li>
-              <li><a class="dropdown-item" href="#">Battery</a></li>
-              <li><a class="dropdown-item" href="#">Bags</a></li>
+              <% for(var i=0;i<category.length;i++) { %>
+                <li><a class="dropdown-item" href="#"><%= category[i].categoryName %></a></li>
+                <% } %>
             </ul>
           </li>
           <li class="nav-item">

@@ -1,5 +1,9 @@
+const categoryController = require('/Brototype/Week 8/MyCam/model/category')
+
 const homePage = (req,res)=>{
-    res.render('user/homePage',{admin:false,user:true})
+    categoryController.getCategory().then((category)=>{
+        res.render('user/homePage',{admin:false,user:true,category})
+    })    
 }
 
 module.exports ={

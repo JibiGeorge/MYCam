@@ -4,9 +4,9 @@ const { ObjectId } = require('mongodb')
 const { response } = require('express')
 
 module.exports={
-    addCategory:(categoryData)=>{
+    addCategory:(imageID,categoryData)=>{
         return new Promise(async(resolve,reject)=>{
-            db.get().collection(collections.CATEGORY_DETAILS).insertOne(categoryData).then((data)=>{
+            db.get().collection(collections.CATEGORY_DETAILS).insertOne(imageID,categoryData).then((data)=>{
                 resolve.apply(data)
             })
         })
@@ -24,11 +24,12 @@ module.exports={
             })
         })
     },
-    updateCategory:(catId, catNewData)=>{
+    updateCategory:(catId, catNewData,editCategoryPicture)=>{
         return new Promise (async(resolve,reject)=>{
             db.get().collection(collections.CATEGORY_DETAILS).updateOne({_id: ObjectId(catId)},{
                 $set:{
-                    categoryName: catNewData
+                    categoryName: catNewData,
+                    categoryPicture: editCategoryPicture
                 }
             }).then((response)=>{
                 resolve()

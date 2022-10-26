@@ -46,9 +46,9 @@ router.post('/login',adminLogin)
 router.get('/admin_Logout',adminLogout)
 
 router.get('/Category',categoryController.categoryPage)
-router.post('/category/addCategory',categoryController.addCategory)
+router.post('/category/addCategory',upload.single('categoryImage'),categoryController.addCategory)
 router.get('/category/edit',categoryController.getCategoryDetail)
-router.post('/category/update',categoryController.updateCategoryDetail)
+router.post('/category/update',upload.single('editCategoryImage'),categoryController.updateCategoryDetail)
 router.get('/category/delete',categoryController.deleteCategory)
 
 router.get('/brand',branController.brandPage)
