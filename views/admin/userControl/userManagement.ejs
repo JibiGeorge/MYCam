@@ -1,0 +1,39 @@
+<main class="main-content">
+    <div class="product-grid">
+        <div class="card">
+            <div class="header">
+                <h3><span style="color: rgb(23, 131, 1);">Active : </span> Users List</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <td style="width: 55px;">SL NO.</td>
+                                <td>User ID</td>
+                                <td style="width: 25%;">User Name</td>
+                                <td>Email</td>
+                                <td>Phone No</td>
+                                <td style="width: 15%;">Action</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0;i<usersList.length;i++) { %>
+                            <tr class="table-data">                                
+                                <td class="slno"></td>
+                                <td><%= usersList[i]._id %></td>
+                                <td><%= usersList[i].user_Name %></td>
+                                <td><%= usersList[i].user_Email %></td>
+                                <td><%= usersList[i].mobile_No %></td>
+                                <td>
+                                    <a style="background: #5E4548;" href="" class="btn btn-primary">BLOCK</a>
+                                </td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

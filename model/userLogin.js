@@ -21,5 +21,11 @@ module.exports = {
             }
             
         })        
+    },
+    showUsers: ()=>{
+        return new Promise (async(resolve,reject)=>{
+            let users = await db.get().collection(collections.USER_DETAILS).find().toArray()
+            resolve(users)
+        })
     }
 }

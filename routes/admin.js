@@ -4,6 +4,7 @@ const { noPage, adminLoginPage, adminLogin, adminLogout } = require('../controll
 const categoryController = require('../controllers/categoryController')
 const branController = require('../controllers/brandController')
 const productController = require('../controllers/productController')
+const userManagementControl = require('../controllers/adminControl/adminUserManagement')
 
 const router = express.Router();
 
@@ -59,5 +60,7 @@ router.post('/addProduct/add', upload.single('productImage'), productController.
 router.get('/Product/delete', productController.deleteProduct)
 router.get('/productUpdate', productController.updatePage)
 router.post('/productUpdate/updateData', upload.single('productUpdateImage'), productController.updateProductData)
+
+router.get('/userManagement', userManagementControl.userManagementPage);
 
 module.exports = router
