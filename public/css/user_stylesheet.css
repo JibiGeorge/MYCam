@@ -139,3 +139,49 @@
 .category .product-item{
     width: 100%;
 }
+
+/* User Signup Page & Login Page */
+.userPage .container-fluid{    
+    background: url('/img/sunset.jpg');
+    background-size: cover;
+}
+.user-signup{
+    background: rgb(230, 210, 210);
+    width: auto;
+    padding: 2rem;
+    border-radius: 5%;
+    box-shadow: 0 0px 40px #ff7800;
+    box-shadow: 4px #ff7800;
+}
+.user-signup h2{
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-shadow: 0 0 10px #a4e60a;
+    text-decoration: underline;
+}
+.user-signup label{
+    width: 150px;
+    text-align: left;
+}
+.user-signup .signup-data div{
+    padding-bottom: 5px;
+}
+.user-signup .signup-data input[type=text],
+.user-signup .signup-data input[type=email],
+.user-signup .signup-data input[type=number],
+.user-signup .signup-data input[type=password]{
+    border: none;
+    border-radius: 6px;
+    padding: 5px 15px 5px 15px;
+}
+.user-signup .signup-data .btn{
+    background: rgb(27, 226, 176);
+    color: rgb(0, 0, 0);
+    font-size: large;
+    font-weight: 600;
+    transition: .8s;
+}
+.user-signup .signup-data .btn:hover{
+    background: rgb(0, 0, 0);
+    color: rgb(27, 226, 176);
+}

@@ -1,0 +1,77 @@
+
+<section class="userPage">
+    <div class="container-fluid bg-success pt-5 pb-5">
+        <div class="row justify-content-center">
+            <div class="form-container user-signup">
+                <form action="/userSignUp" method="post" onsubmit="return signupValidate()">
+                    <div>
+                        <h2>SIGNUP</h2>
+                    </div>
+                    <% if(locals.errMsg){%>
+                        <div class="errorstyle">
+                            <p style="text-align:center; color: rgb(255, 0, 0);">
+                                <%= errMsg %>
+                            </p>
+                        </div>
+                    <% } %>
+                    <div class="signup-data">
+                        <div class="mb-2">
+                            <label for="" style="width: 150px;">First Name</label>
+                            <input type="text" placeholder="First Name" name="first_Name" id="first_Name">
+                            <div>
+                                <span style="color: rgb(255, 0, 0);" class="error" id="fnameError"></span>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="" style="width: 150px;">Last Name</label>
+                            <input type="text" placeholder="Last Name" name="last_Name" id="last_Name">
+                            <div>
+                                <span style="color: rgb(255, 0, 0);" class="error" id="lnameError"></span>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="" style="width: 150px;">User Name</label>
+                            <input type="text" placeholder="User Name" name="user_Name" id="user_Name">
+                            <div>
+                                <span style="color: rgb(255, 0, 0);" class="error" id="unameError"></span>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="" style="width: 150px;">Email</label>
+                            <input type="email" placeholder="Email" name="user_Email" id="user_Email">
+                            <div>
+                                <span style="color: rgb(255, 0, 0);" class="error" id="emailError"></span>
+                            </div>
+                        </div>            
+                        <div class="mb-2">
+                            <label for="" style="width: 150px;">Mobile No. (Code)</label>
+                            <input type="number" placeholder="+91 0000 0000 00" name="mobile_No" id="mobile_No">
+                            <div>
+                                <span style="color: rgb(255, 0, 0);" class="error" id="mobileError"></span>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="" style="width: 150px;">Password</label>
+                            <input type="password" placeholder="Password" name="password" id="password">
+                            <div>
+                                <span style="color: rgb(255, 0, 0);" class="error" id="passwordError"></span>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="" style="width: 150px;">Confirm Password</label>
+                            <input type="password" placeholder="Confirm Password" name="confirm_Password" id="confirm_Password">
+                            <div>
+                                <span style="color: rgb(255, 0, 0);" class="error" id="confirmPaswordError"></span>
+                            </div>
+                        </div>            
+                        <input class="btn" type="submit" value="SignUp">
+                    </div>
+                </form>
+                <div class="ms-5 mt-3">
+                    <span for="">Do You have an Account?</span>
+                    <a href="/login" class="ms-2" style="text-decoration: none; font-size: 20px;">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

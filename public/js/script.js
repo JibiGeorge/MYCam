@@ -152,7 +152,96 @@ function productFormValidate(){
 
     if(errorFlag == 1){
         return false
+    }    
+}
+
+
+//User SignUp validation
+function signupValidate(){
+    let fname = document.getElementById('first_Name').value.trim();
+    let lname = document.getElementById('last_Name').value.trim();
+    let username = document.getElementById('user_Name').value.trim();
+    let email = document.getElementById('user_Email').value.trim();
+    let mobileNo = document.getElementById('mobile_No').value.trim();
+    let password = document.getElementById('password').value.trim();
+    let confirmPasword = document.getElementById('confirm_Password').value.trim();
+    errorFlag=0
+
+    // For First Name
+    if(fname==""){
+        document.getElementById('fnameError').innerHTML = "*Required";
+        errorFlag=1;
+    }else if(fname.length < 2){
+        document.getElementById('fnameError').innerHTML = "*First Name is too Short";
+        errorFlag=1;
+    }else{
+        document.getElementById('fnameError').innerHTML = "";
     }
 
-    
+    // For Last Name
+    if(lname==""){
+        document.getElementById('lnameError').innerHTML = "*Required";
+        errorFlag=1;
+    }else if(lname.length < 2){
+        document.getElementById('lnameError').innerHTML = "*Last Name is too Short";
+        errorFlag=1;
+    }else{
+        document.getElementById('lnameError').innerHTML = "";
+    }
+
+    // For User Name
+    if(username==""){
+        document.getElementById('unameError').innerHTML = "*Required";
+        errorFlag=1;
+    }else if(username.length < 2){
+        document.getElementById('unameError').innerHTML = "*User Name is too Short";
+        errorFlag=1;
+    }else{
+        document.getElementById('unameError').innerHTML = "";
+    }
+
+    // For Email
+    if (email == ""){
+        document.getElementById('emailError').innerHTML = "*Email Require";
+        errorFlag = 1;
+    }else{
+        document.getElementById('emailError').innerHTML = "";
+    }
+
+    // For Mobile
+    if(mobileNo == ""){
+        document.getElementById('mobileError').innerHTML = "*Mobile No. Required";
+        errorFlag=1
+    }else if(mobileNo.length<12){
+        document.getElementById('mobileError').innerHTML = "*Invalid Mobile No.";
+        errorFlag=1
+    }else{
+        document.getElementById('mobileError').innerHTML = "";
+    }
+
+    // For Password
+    if(password == ""){
+        document.getElementById('passwordError').innerHTML ="*Password Required";
+        errorFlag=1
+    }else if(password.length < 6){
+        document.getElementById('passwordError').innerHTML = "*Password lenth must 6";
+        errorFlag =1
+    }else{
+        document.getElementById('passwordError').innerHTML = "";
+    }
+
+    //For Confirm Password
+    if(confirmPasword == ""){
+        document.getElementById('confirmPaswordError').innerHTML = "*Confirm Pasword Required";
+        errorFlag=1
+    }else if (confirmPasword != password){
+        document.getElementById('confirmPaswordError').innerHTML = "*Password does not Match";
+        errorFlag=1
+    }else{
+        document.getElementById('confirmPaswordError').innerHTML = "";
+    }
+
+    if(errorFlag==1){
+        return false
+    }
 }
