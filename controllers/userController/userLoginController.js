@@ -12,8 +12,8 @@ const signUp = (req, res) => {
     })
 }
 const doSignUp = (req,res)=>{
-    userLoginModel.doSignUp(req.body).then((result)=>{
-        if(result.userexist){
+    userLoginModel.doSignUp(req.body).then((response)=>{
+        if(response){
             categoryController.getCategory().then((category) => {
             res.render('user/userSignUpPage', { admin: false, user: true, category, errMsg:"UserName Already Exist!" })
             })

@@ -5,8 +5,10 @@ const { response } = require('express')
 
 module.exports = {
     doSignUp: (data)=>{
-        return new Promise ((resolve,reject)=>{
-            let user = db.get().collection(collections.USER_DETAILS).find({user_Name: data.user_Name})
+        return new Promise (async(resolve,reject)=>{
+            data.password = await bcrypt.hash(data.password, 10)
+            data.confirm_Password = await bcrypt.hash(data.confirm_Password, 10)
+            let user = await db.get().collection(collections.USER_DETAILS).findOne({user_Name: data.user_Name})
 
             if(!user){
                 db.get().collection(collections.USER_DETAILS).insertOne(data).then((result)=>{
