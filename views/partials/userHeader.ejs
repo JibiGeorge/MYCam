@@ -31,7 +31,20 @@
         <div class="las la-shopping-cart" id="cart-btn"></div>
         <div class="las la-user" id="login-btn"></div>
       </div>
-      <a href="/login" class="btn login-btn" type="submit">Login</a>      
+      <% if (userData) { %>
+        <div class="btn-group">
+          <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= userData.user_Name %>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            
+          </ul>
+        </div>
+        <% } else { %>
+
+      <a href="/login" class="btn login-btn" type="submit">Login</a>
+      <% } %>      
     </div>
   </nav>
 </section>

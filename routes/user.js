@@ -9,6 +9,7 @@ router.get('/login',userLoginController.loginPage)
 router.get('/signup',userLoginController.signUpPage)
 router.post('/userSignUp',userLoginController.doSignUp)
 router.post('/userLogin',userLoginController.doLogin)
+router.get('/logout',userLoginController.doLogout)
 
 
 module.exports = router
