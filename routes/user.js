@@ -4,9 +4,11 @@ const userHomePageController = require('../controllers/userController/userHomePa
 const userLoginController = require('../controllers/userController/userLoginController')
 
 router.get('/',userHomePageController.homePage)
-router.get('/login',userLoginController.login)
-router.get('/signup',userLoginController.signUp)
+
+router.get('/login',userLoginController.loginPage)
+router.get('/signup',userLoginController.signUpPage)
 router.post('/userSignUp',userLoginController.doSignUp)
+router.post('/userLogin',userLoginController.doLogin)
 
 
 module.exports = router

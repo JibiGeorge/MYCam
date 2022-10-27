@@ -245,3 +245,29 @@ function signupValidate(){
         return false
     }
 }
+
+
+//User Login Validate
+function loginValidate(){
+    let email = document.getElementById('user_Email').value.trim();
+    let password = document.getElementById('password').value.trim();
+    errorFlag=0;
+
+    if(email == ""){
+        document.getElementById('emailError').innerHTML = "*Email Required";
+        errorFlag=1
+    }else{
+        document.getElementById('emailError').innerHTML = "";
+    }
+
+    if(password == ""){
+        document.getElementById('passwordError').innerHTML = "*Password Required";
+        errorFlag=1
+    }else{
+        document.getElementById('passwordError').innerHTML = "";
+    }
+
+    if(errorFlag==1){
+        return false
+    }
+}

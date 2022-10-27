@@ -3,10 +3,17 @@
     <div class="container-fluid bg-success pt-5 pb-5">
         <div class="row justify-content-center">
             <div class="form-container user-signup">
-                <form action="" method="post" onsubmit="">
+                <form action="/userLogin" method="post" onsubmit="return loginValidate()">
                     <div>
                         <h2>LOGIN</h2>
                     </div>
+                    <% if(locals.errMsg){%>
+                        <div class="errorstyle">
+                            <p style="text-align:center; color: rgb(255, 0, 0);">
+                                <%= errMsg %>
+                            </p>
+                        </div>
+                    <% } %>
                     <div class="signup-data">                        
                         <div class="mb-2">
                             <label for="" style="width: 150px;">Email</label>
@@ -22,7 +29,7 @@
                                 <span style="color: rgb(255, 0, 0);" class="error" id="passwordError"></span>
                             </div>
                         </div>           
-                        <input class="btn" type="submit" value="SignUp">
+                        <input class="btn" type="submit" value="Login">
                     </div>
                 </form>
                 <div class="ms-5 mt-3">
