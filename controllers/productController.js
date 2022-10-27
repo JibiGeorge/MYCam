@@ -5,7 +5,7 @@ const product = require('../model/product')
 
 const productManagementPage = (req, res) => {
     if (req.session.loggedIn) {
-        productController.getProduct().then((product) => {
+        productController.getProducts().then((product) => {
             res.render('admin/product/products', { admin: true, title: "Products", product, user: false })
         })
     } else {
@@ -24,7 +24,7 @@ const addProduct = (req, res) => {
     const { product_Name, category_Name, brand, actual_Price, selling_Price, stock_In_Hand, description, specification } = req.body
     // req.files.forEach((singale_image)=>{
     productController.addProduct({
-        Picture: req.files,
+        Picture: req.file.filename,
         product_Name,
         product_Name,
         category_Name,
@@ -55,10 +55,11 @@ const deleteProduct = (req, res) => {
     }
 }
 const updatePage = async (req, res) => {
-    let productData = await productController.getProduct(req.query.id)
-    console.log(productData);
+    console.log(req.query.id);
+    let productData = await productController.getProductDetail(req.query.id)
+    console.log("check",productData);
     if (req.session.loggedIn) {
-        console.log(productData[0].product_Name);
+        // console.log(productData[0].product_Name);
         categoryController.getCategory().then((category) => {
             brandController.getAllBrand().then((brand) => {
                 res.render('admin/product/updateProduct', { admin: true, title: "Update Product", productData, category, brand, user: false })

@@ -10,14 +10,14 @@
                         <div class="mb-3">
                             <label for="" class="form-label">Product Name</label>
                             <span style="color: rgb(255, 0, 0); margin-left: 4px;" id="errorProductName"></span>
-                            <input type="text" class="form-control" placeholder="Product Name" id="productName" name="product_Name" value="<%= productData[0].product_Name%>">
+                            <input type="text" class="form-control" placeholder="Product Name" id="productName" name="product_Name" value="<%= productData.product_Name%>">
                         </div>
                         <div class="mb-3 d-flex" style="justify-content: space-between;">
                             <div style="width: 50%; margin-right: 5px;">
                                 <label for="" class="form-label">Category Name</label>
                                 <span style="color: rgb(255, 0, 0); margin-left: 4px;" id="errorCategory"></span>
                                 <select class="form-select" name="category_Name" id="category">
-                                    <option selected value=""><%= productData[0].category_Name%></option>
+                                    <option selected value=""><%= productData.category_Name%></option>
                                     <option></option><% for (var i=0; i<category.length; i++) { %>
                                         <option value="<%= category[i].categoryName %>"><%= category[i].categoryName %></option>
                                         <% } %>
@@ -38,35 +38,33 @@
                             <div style="width: 50%; margin-right: 5px;">
                                 <label for="" class="form-label">Actual Price</label>
                                 <span style="color: rgb(255, 0, 0); margin-left: 4px;" id="errorActualPrice"></span>
-                                <input type="number" value="<%= productData[0].actual_Price %>" class="form-control" placeholder="Actual Price" name="actual_Price" id="actualPrice">
+                                <input type="number" value="<%= productData.actual_Price %>" class="form-control" placeholder="Actual Price" name="actual_Price" id="actualPrice">
                             </div>
                             <div style="width: 50%; margin-left: 5px;">
                                 <label for="" class="form-label">Selling Price</label>
                                 <span style="color: rgb(255, 0, 0); margin-left: 4px;" id="errorSellingPrice"></span>
-                                <input type="number" value="<%= productData[0].selling_Price %>" class="form-control" placeholder="Selling Price" name="selling_Price" id="sellingPrice">
+                                <input type="number" value="<%= productData.selling_Price %>" class="form-control" placeholder="Selling Price" name="selling_Price" id="sellingPrice">
                             </div>
                         </div>
                         <div class="mb-3" style="width: 50%; padding-right: 5px;">
                             <label for="" class="form-label">Stock in Hand</label>
                             <span style="color: rgb(255, 0, 0); margin-left: 4px;" id="errorstock"></span>
-                            <input type="number" value="<%= productData[0].stock_In_Hand %>" class="form-control" placeholder="Stock in Hand" name="stock_In_Hand" id="stock">
+                            <input type="number" value="<%= productData.stock_In_Hand %>" class="form-control" placeholder="Stock in Hand" name="stock_In_Hand" id="stock">
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Description</label>
                             <span style="color: rgb(255, 0, 0); margin-left: 4px;" id="errorDescription"></span>
-                            <textarea class="form-control" style="height: 100px;" name="description" id="description"><%= productData[0].description %>"</textarea>
+                            <textarea class="form-control" style="height: 100px;" name="description" id="description"><%= productData.description %>"</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Specifications</label>
                             <span style="color: rgb(255, 0, 0); margin-left: 4px;" id="errorSpecifiaction"></span>
-                            <textarea class="form-control" style="height: 100px;" name="specification" id="specifiaction"><%= productData[0].specification %></textarea>
+                            <textarea class="form-control" style="height: 100px;" name="specification" id="specifiaction"><%= productData.specification %></textarea>
                         </div>
-                        <% for (var i=0;i<productData[0].Picture.length;i++) { %>
                         <div class="mb-3">
                             <label for="" class="form-label">Image</label>
-                            <img src="./images/<%=productData[0].Picture %>" alt="">
+                            <img width="50px" height="50px" src="/images/<%=productData.Picture %>" alt="Somthing Wrong">
                         </div>
-                        <% } %>
                         <div class="mb-3">
                             <label for="" class="form-label">Image</label>
                             <span style="color: rgb(255, 0, 0); margin-left: 4px;" id=""></span>

@@ -59,7 +59,7 @@ router.get('/brand/delete',branController.deleteBrand)
 
 router.get('/productManagement',productController.productManagementPage)
 router.get('/addProduct',productController.addProductPage)
-router.post('/addProduct/add',upload.array('productImage',5),productController.addProduct)
+router.post('/addProduct/add',upload.single('productImage'),productController.addProduct)
 router.get('/Product/delete',productController.deleteProduct)
 router.get('/productUpdate',productController.updatePage)
 
