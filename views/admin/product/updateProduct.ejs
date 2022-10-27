@@ -6,7 +6,8 @@
             </div>
             <div class="card-body">
                 <div>
-                    <form action="/admin/addProduct/update" method="post" class="productForm" enctype="multipart/form-data" onsubmit="return productFormValidate()">
+                    <form action="/admin/productUpdate/updateData" method="post" class="productForm" enctype="multipart/form-data">
+                        <input style="display: none;" type="text" id="categoryID" name="productID" value="<%= productData._id %>">
                         <div class="mb-3">
                             <label for="" class="form-label">Product Name</label>
                             <span style="color: rgb(255, 0, 0); margin-left: 4px;" id="errorProductName"></span>
@@ -17,8 +18,8 @@
                                 <label for="" class="form-label">Category Name</label>
                                 <span style="color: rgb(255, 0, 0); margin-left: 4px;" id="errorCategory"></span>
                                 <select class="form-select" name="category_Name" id="category">
-                                    <option selected value=""><%= productData.category_Name%></option>
-                                    <option></option><% for (var i=0; i<category.length; i++) { %>
+                                    <option selected value="<%= productData.category_Name%>"><%= productData.category_Name%></option>
+                                    <% for (var i=0; i<category.length; i++) { %>
                                         <option value="<%= category[i].categoryName %>"><%= category[i].categoryName %></option>
                                         <% } %>
                                 </select>
@@ -27,7 +28,7 @@
                                 <label for="" class="form-label">Brand</label>
                                 <span style="color: rgb(255, 0, 0); margin-left: 4px;" id="errorbrand"></span>
                                 <select class="form-select" name="brand" id="brand">
-                                    <option selected value="">Select a Brand</option>
+                                    <option selected value="<%= productData.brand%>"><%= productData.brand%></option>
                                     <% for (var i=0; i<brand.length; i++) { %>
                                         <option value="<%= brand[i].brandName %>"><%= brand[i].brandName %></option>
                                         <% } %>
@@ -68,7 +69,7 @@
                         <div class="mb-3">
                             <label for="" class="form-label">Image</label>
                             <span style="color: rgb(255, 0, 0); margin-left: 4px;" id=""></span>
-                            <input type="file" multiple name="productImage" class="form-control" >
+                            <input type="file" name="productUpdateImage" class="form-control" >
                         </div>
                         <div>
                             <button type="submit" class="btn btn-success">UPDATE</button>

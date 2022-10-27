@@ -29,5 +29,24 @@ module.exports = {
                 resolve(data)
             })
         })
+    },
+    updateProduct:(proId,data,image)=>{
+        return new Promise (async(resolve,reject)=>{
+            db.get().collection(collections.PRODUCT_DETAILS).updateOne({_id: ObjectId(proId)},{
+                $set: {
+                    product_Name: data.product_Name,
+                    category_Name: data.category_Name,
+                    brand: data.brand,
+                    actual_Price: data.actual_Price,
+                    selling_Price: data.selling_Price,
+                    stock_In_Hand: data.stock_In_Hand,
+                    description: data.description,
+                    specification: data.specification,
+                    productImage: image
+                }
+            }).then((response)=>{
+                resolve(response)
+            })
+        })
     }
 }

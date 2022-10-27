@@ -55,17 +55,29 @@ const deleteProduct = (req, res) => {
     }
 }
 const updatePage = async (req, res) => {
-    console.log(req.query.id);
     let productData = await productController.getProductDetail(req.query.id)
-    console.log("check",productData);
     if (req.session.loggedIn) {
-        // console.log(productData[0].product_Name);
         categoryController.getCategory().then((category) => {
             brandController.getAllBrand().then((brand) => {
                 res.render('admin/product/updateProduct', { admin: true, title: "Update Product", productData, category, brand, user: false })
             })
         })
+    }else {
+        res.render('admin/adminLogin', { admin: false,user:false })
     }
+}
+
+const updateProductData = async (req,res)=>{
+    let id = req.body.productID;
+    let productPicture =req.file.filename
+    if(req.session.loggedIn){
+        productController.updateProduct(id,req.body,productPicture).then(()=>{
+            res.redirect("/admin/productManagement");
+        })
+    }else {
+        res.render('admin/adminLogin', { admin: false,user:false })
+    }
+
 }
 
 
@@ -74,5 +86,6 @@ module.exports = {
     addProductPage,
     addProduct,
     deleteProduct,
-    updatePage
+    updatePage,
+    updateProductData
 }
