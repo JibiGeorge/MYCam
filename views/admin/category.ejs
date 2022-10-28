@@ -98,7 +98,7 @@
                                             <!-- /admin/category/edit?id=<%= category[i]._id %> -->
                                             <a style="background: #5E4548;" href="" class="btn btn-primary"
                                                 data-bs-toggle="modal" data-bs-target="#updateCategory"
-                                                onclick="edit('<%= category[i]._id %>','<%= category[i].categoryName %>')">Edit</a>
+                                                onclick="categoryEdit('<%= category[i]._id %>','<%= category[i].categoryName %>')">Edit</a>
                                             <a style="background: #B05541;"
                                                 href="/admin/category/delete?id=<%= category[i]._id %>"
                                                 class="btn btn-primary">Delete</a>
@@ -115,7 +115,7 @@
 </main>
 
 <script>
-    function edit(id, categoryName) {
+    function categoryEdit(id, categoryName) {
         let editName = document.getElementById('editCategoryName');
         let categoryID = document.getElementById('categoryID')
 

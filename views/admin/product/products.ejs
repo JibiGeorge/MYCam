@@ -23,7 +23,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             <% for (values of product) { %>
                                 <tr class="table-data">
                                     <td class="slno"></td>
@@ -39,25 +38,6 @@
                                     </td>
                                 </tr>
                                 <% } %>
-
-
-
-
-
-                            <!-- <% for(var i=0;i<product.length;i++) { %>
-                            <tr class="table-data">
-                                <td class="slno"></td>
-                                <td><%= product[i].category_Name%></td>
-                                <td><%= product[i].product_Name%></td>
-                                <td><span>₹ </span><%= product[i].selling_Price%></td>
-                                <td><%= product[i].stock_In_Hand%></td>
-                                <td></td>
-                                <td>
-                                    <a style="background: #5E4548;" href="/admin/productUpdate?id=<%= product[i]._id %>" class="btn btn-primary">Edit</a>
-                                    <a style="background: #B05541;" href="/admin/Product/delete?id=<%= product[i]._id %>" class="btn btn-primary">Delete</a>
-                                </td>
-                            </tr>
-                            <% } %> -->
                         </tbody>
                     </table>
                 </div>

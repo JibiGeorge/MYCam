@@ -1,0 +1,114 @@
+<main class="main-content">
+    <div class="product-grid">
+        <div class="card">
+            <div class="header">
+                <h3>Slider Image List</h3>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addSlider">Add New Slider
+                    <span class="las la-add"></span>
+                </button>
+            </div>
+
+            <!-- Add Slider Modal -->
+            <div class="modal fade" id="addSlider" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Slider</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="/admin/add" method="post" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div>
+                                    <label for="" class="form-label">Any Caption</label>
+                                    <input type="text" class="form-control" name="caption" id="caption">
+                                    <span class="validationError" id="captionError"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Image</label>
+                                    <input type="file" class="form-control" id="image" name="sliderImage" value=""
+                                        id="sliderImage">
+                                </div>                               
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">SAVE</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Update Slider Modal -->
+            <div class="modal fade" id="updateSlider" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Update Slider</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="/admin/update" method="post" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div>
+                                    <input type="text" style="display: none;" name="id" id="sliderId">
+                                </div>
+                                <div>
+                                    <label for="" class="form-label">Any Caption</label>
+                                    <input type="text" class="form-control" name="caption" id="editCaption">
+                                    <span class="validationError" id="captionError"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Image</label>
+                                    <input type="file" class="form-control" id="image" name="sliderImage" value=""
+                                        id="sliderImage">
+                                </div>                               
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">UPDATE</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td style="width: 56px;">SL NO.</td>
+                                <td style="width: 100px;">Image</td>
+                                <td style="width: 100px;">Caption</td>
+                                <td style="width: 15%;">Action</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (values of sliderImages) { %>
+                            <tr class="table-data">
+                                <td class="slno"></td>
+                                <td><img width="50px" height="50px" src="/images/<%=values.sliderImage %>" alt="Somthing Wrong"></td>
+                                <td><%= values.caption %></td>
+                                <td>
+                                    <a style="background: #5E4548;" href="" class="btn btn-primary"data-bs-toggle="modal" data-bs-target="#updateSlider" onclick="sliderEdit('<%= values._id %>','<%= values.caption %>')">Edit</a>
+                                    <a style="background: #B05541;" href="" class="btn btn-primary">Delete</a>
+                                </td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    function sliderEdit(id,caption){
+        let editCaption = document.getElementById('editCaption')
+        let sliderId = document.getElementById('sliderId')
+
+        editCaption.value = caption
+        sliderId.value = id
+    }
+</script>

@@ -3,5 +3,6 @@ module.exports={
     CATEGORY_DETAILS: 'category',
     BRAND_DETAILS: 'brand',
     PRODUCT_DETAILS: 'product',
-    USER_DETAILS: 'user'
+    USER_DETAILS: 'user',
+    SLIDER_IMAGE: 'slideImage'
 }                   

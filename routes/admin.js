@@ -5,6 +5,7 @@ const categoryController = require('../controllers/categoryController')
 const branController = require('../controllers/brandController')
 const productController = require('../controllers/productController')
 const userManagementControl = require('../controllers/adminControl/adminUserManagement')
+const sliderImageManagementControl = require('../controllers/adminControl/sliderImageManagementControl')
 
 const router = express.Router();
 
@@ -62,5 +63,9 @@ router.get('/productUpdate', productController.updatePage)
 router.post('/productUpdate/updateData', upload.single('productImage'), productController.updateProductData)
 
 router.get('/userManagement', userManagementControl.userManagementPage);
+
+router.get('/silderImage',sliderImageManagementControl.sliderPage);
+router.post('/add',upload.single('sliderImage'),sliderImageManagementControl.sliderImageAdd)
+router.post('/update',upload.single('sliderImage'),sliderImageManagementControl.updateSlider)
 
 module.exports = router
