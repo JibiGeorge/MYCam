@@ -256,7 +256,12 @@ function loginValidate(){
     if(email == ""){
         document.getElementById('emailError').innerHTML = "*Email Required";
         errorFlag=1
-    }else{
+    }
+    // else if(email.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)){
+    //     document.getElementById('emailError').innerHTML = "*Invalid Email";
+    //     errorFlag=1
+    // }
+    else{
         document.getElementById('emailError').innerHTML = "";
     }
 

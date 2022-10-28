@@ -19,7 +19,7 @@
                                 <select class="form-select" name="category_Name" id="category">
                                     <option selected value="">Select a Category</option>
                                     <% for (var i=0; i<category.length; i++) { %>
-                                    <option value="<%= category[i].categoryName %>"><%= category[i].categoryName %></option>
+                                    <option value="<%= category[i]._id %>"><%= category[i].categoryName %></option>
                                     <% } %>
                                 </select>
                             </div>
@@ -29,7 +29,7 @@
                                 <select class="form-select" name="brand" id="brand">
                                     <option selected value="">Select a Brand</option>
                                     <% for (var i=0; i<brand.length; i++) { %>
-                                    <option value="<%= brand[i].brandName %>"><%= brand[i].brandName %></option>
+                                    <option value="<%= brand[i]._id %>"><%= brand[i].brandName %></option>
                                     <% } %>
                                 </select>
                             </div>

@@ -2,14 +2,15 @@ const categoryController = require('../model/category')
 const brandController = require('../model/brand')
 const productController = require('../model/product')
 const product = require('../model/product')
+const { ObjectID } = require('bson')
 
 const productManagementPage = (req, res) => {
     if (req.session.loggedIn) {
         productController.getProducts().then((product) => {
-            res.render('admin/product/products', { admin: true, title: "Products", product, user: false })
+            res.render('admin/product/products', { admin: true, title: "Products", product, user: false });
         })
     } else {
-        res.render('admin/adminLogin', { admin: false, user: false })
+        res.render('admin/adminLogin', { admin: false, user: false });
     }
 }
 const addProductPage = (req, res) => {
@@ -20,15 +21,19 @@ const addProductPage = (req, res) => {
     })
 }
 const addProduct = (req, res) => {
-    console.log(req.body);
-    const { product_Name, category_Name, brand, actual_Price, selling_Price, stock_In_Hand, description, specification } = req.body
+    // console.log(req.query);
+    let category_id = ObjectID(req.body.category_Name)
+    let brand_id = ObjectID(req.body.brand)
+    // console.log("Category ID is ",category_id);
+    // console.log("Brand ID is: ", brand_id);
+    const { product_Name, actual_Price, selling_Price, stock_In_Hand, description, specification } = req.body
     // req.files.forEach((singale_image)=>{
     productController.addProduct({
-        Picture: req.file.filename,
+        picture: req.file.filename,
+        category_id,
+        brand_id,
         product_Name,
         product_Name,
-        category_Name,
-        brand,
         actual_Price,
         selling_Price,
         stock_In_Hand,
@@ -70,8 +75,10 @@ const updatePage = async (req, res) => {
 const updateProductData = async (req,res)=>{
     let id = req.body.productID;
     let productPicture =req.file.filename
+    let category_id = ObjectID(req.body.category_Name)
+    let brand_id = ObjectID(req.body.brand)
     if(req.session.loggedIn){
-        productController.updateProduct(id,req.body,productPicture).then(()=>{
+        productController.updateProduct(id,req.body,productPicture,category_id,brand_id).then(()=>{
             res.redirect("/admin/productManagement");
         })
     }else {
