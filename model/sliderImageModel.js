@@ -27,5 +27,12 @@ module.exports = {
                 resolve()
             })
         })
+    },
+    deleteSlider: (id)=>{
+        return new Promise ((resolve,reject)=>{
+            db.get().collection(collections.SLIDER_IMAGE).deleteOne({_id: ObjectID(id)}).then((result)=>{
+                resolve(result)
+            })
+        })
     }
 }

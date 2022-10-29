@@ -65,7 +65,8 @@ router.post('/productUpdate/updateData', upload.single('productImage'), productC
 router.get('/userManagement', userManagementControl.userManagementPage);
 
 router.get('/silderImage',sliderImageManagementControl.sliderPage);
-router.post('/add',upload.single('sliderImage'),sliderImageManagementControl.sliderImageAdd)
-router.post('/update',upload.single('sliderImage'),sliderImageManagementControl.updateSlider)
+router.post('/slideradd',upload.single('sliderImage'),sliderImageManagementControl.sliderImageAdd)
+router.post('/sliderUpdate',upload.single('sliderImage'),sliderImageManagementControl.updateSlider)
+router.delete('/sliderDelete',sliderImageManagementControl.deleteSlider)
 
 module.exports = router
