@@ -207,6 +207,7 @@ function signupValidate(){
         errorFlag = 1;
     }else if (email.test != emailCheck){
         document.getElementById('emailError').innerHTML = "*Email Invalid";
+        errorFlag =1
     }
     else{
         document.getElementById('emailError').innerHTML = "";

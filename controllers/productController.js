@@ -24,9 +24,8 @@ const addProduct = (req, res) => {
     // console.log(req.query);
     let category_id = ObjectID(req.body.category_Name)
     let brand_id = ObjectID(req.body.brand)
-    // console.log("Category ID is ",category_id);
-    // console.log("Brand ID is: ", brand_id);
-    const { product_Name, actual_Price, selling_Price, stock_In_Hand, description, specification } = req.body
+    console.log(req.body.feature_or_recent);
+    const { product_Name, actual_Price, selling_Price, stock_In_Hand, feature_or_recent, description, specification } = req.body
     // req.files.forEach((singale_image)=>{
     productController.addProduct({
         picture: req.file.filename,
@@ -37,6 +36,7 @@ const addProduct = (req, res) => {
         actual_Price,
         selling_Price,
         stock_In_Hand,
+        feature_or_recent,
         description,
         specification
         // data: req.body

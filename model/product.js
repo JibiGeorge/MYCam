@@ -3,25 +3,25 @@ const collections = require('../config/collections')
 const { ObjectId } = require('mongodb')
 
 module.exports = {
-    addProduct:(imageID,categoryID,BrandID,productData)=>{
-        return new Promise(async(resolve,reject)=>{
-            db.get().collection(collections.PRODUCT_DETAILS).insertOne(imageID,categoryID,BrandID,productData).then((data)=>{
+    addProduct: (imageID, categoryID, BrandID, productData) => {
+        return new Promise(async (resolve, reject) => {
+            db.get().collection(collections.PRODUCT_DETAILS).insertOne(imageID, categoryID, BrandID, productData).then((data) => {
                 resolve.apply(data)
             })
         })
     },
-    getProducts:()=>{
-        return new Promise (async(resolve,reject)=>{
+    getProducts: () => {
+        return new Promise(async (resolve, reject) => {
             let productItems = await db.get().collection(collections.PRODUCT_DETAILS).aggregate([
                 {
-                    $lookup:{
+                    $lookup: {
                         from: collections.CATEGORY_DETAILS,
                         localField: 'category_id',
                         foreignField: '_id',
-                        as: 'categoryItem'                        
+                        as: 'categoryItem'
                     }
                 },
-                {                    
+                {
                     $lookup: {
                         from: collections.BRAND_DETAILS,
                         localField: 'brand_id',
@@ -33,34 +33,34 @@ module.exports = {
             resolve(productItems)
         })
     },
-    deleteProduct:(proId)=>{
-        return new Promise (async(resolve,reject)=>{
-            db.get().collection(collections.PRODUCT_DETAILS).deleteOne({_id:ObjectId(proId)}).then((response)=>{
+    deleteProduct: (proId) => {
+        return new Promise(async (resolve, reject) => {
+            db.get().collection(collections.PRODUCT_DETAILS).deleteOne({ _id: ObjectId(proId) }).then((response) => {
                 resolve(response)
             })
         })
     },
-    getProductDetail:(proId)=>{
-        return new Promise(async(resolve,reject)=>{
+    getProductDetail: (proId) => {
+        return new Promise(async (resolve, reject) => {
             // db.get().collection(collections.PRODUCT_DETAILS).findOne({_id: ObjectId(proId)}).then((data)=>{
             //     resolve(data)
             // })
-            console.log("ID",proId);
+            console.log("ID", proId);
             let product = await db.get().collection(collections.PRODUCT_DETAILS).aggregate([
                 {
-                    $match:{
-                        _id:ObjectId(proId)
+                    $match: {
+                        _id: ObjectId(proId)
                     }
                 },
                 {
-                    $lookup:{
+                    $lookup: {
                         from: collections.CATEGORY_DETAILS,
                         localField: 'category_id',
                         foreignField: '_id',
                         as: 'category'
                     }
                 },
-                {                    
+                {
                     $lookup: {
                         from: collections.BRAND_DETAILS,
                         localField: 'brand_id',
@@ -73,9 +73,9 @@ module.exports = {
             resolve(product)
         })
     },
-    updateProduct:(proId,data,image,categoryID,brandID)=>{
-        return new Promise (async(resolve,reject)=>{
-            db.get().collection(collections.PRODUCT_DETAILS).updateOne({_id: ObjectId(proId)},{
+    updateProduct: (proId, data, image, categoryID, brandID) => {
+        return new Promise(async (resolve, reject) => {
+            db.get().collection(collections.PRODUCT_DETAILS).updateOne({ _id: ObjectId(proId) }, {
                 $set: {
                     product_Name: data.product_Name,
                     category_id: categoryID,
@@ -87,9 +87,21 @@ module.exports = {
                     specification: data.specification,
                     picture: image
                 }
-            }).then((response)=>{
+            }).then((response) => {
                 resolve(response)
             })
+        })
+    },
+    getFeaturedProducts: () => {
+        return new Promise(async (resolve, reject) => {
+            let featuredProducts = await db.get().collection(collections.PRODUCT_DETAILS).find({ feature_or_recent: "Featured Products" }).toArray()
+            resolve(featuredProducts)
+        })
+    },
+    getRecentProducts: () => {
+        return new Promise(async (resolve, reject) => {
+            let recentProducts = await db.get().collection(collections.PRODUCT_DETAILS).find({ feature_or_recent: "Recent Products" }).toArray()
+            resolve(recentProducts)
         })
     }
 }

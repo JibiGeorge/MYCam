@@ -28,14 +28,12 @@
                     </div>
                 </div>
                 <div class="col-lg-4 mb-3">
+                    <% for (var i=2;i<SliderImage.length && i<4 ;i++) { %>
                     <div class="product-offer" style="width: 100%;">
                         <img class="img-fluid" style="object-fit: cover; height: 100%; width:100%"
-                            src="/img/test/47fSyL.jpeg" alt="">
+                            src="/images/<%=SliderImage[i].sliderImage %>" alt="">
                     </div>
-                    <div class="product-offer" style="width: 100%;">
-                        <img class="img-fluid" style="object-fit: cover; height: 100%; width:100%"
-                            src="/img/test/images.jpg" alt="">
-                    </div>
+                    <% } %>
                 </div>
             </div>
         </div>
@@ -114,118 +112,25 @@
                 <div class="title mb-4">
                     <h1>Featured Products</h1>
                 </div>
+                    <% for (var i=0;i<featuredProducts.length && i<8 ;i++) { %>
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
                     <div class="card align-items-center">
                         <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
+                            <img src="/images/<%=featuredProducts[i].picture %>" alt="">
                         </div>
                         <div class="text-center py-4">
-                            <a href="#">Product Name</a>
+                            <a href="#"><%=featuredProducts[i].product_Name %></a>
                             <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
+                                <h5>₹ <%=featuredProducts[i].selling_Price %></h5>
+                                <h6 class="text-muted" style="text-decoration: line-through;">₹ <%=featuredProducts[i].actual_Price %></h6>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <% } %>
+            </div>
+            <div class="viewmorebtn">
+                    <a class="btn btn-warning ps-4 pe-4">More</a>
             </div>
         </div>
     </section>
@@ -233,18 +138,14 @@
     <section class="offer">
         <div class="container-fluid mb-3 pb-4">
             <div class="row px-xl-5">
+                <% for (var i=2;i<SliderImage.length && i<4 ;i++) { %>
                 <div class="col-lg-6 mb-3">
                     <div class="product-offer" style="height: 300px; width: 100%;">
                         <img class="img-fluid" style="object-fit: cover; height: 100%; width:100%"
-                            src="/img/test/images.jpg" alt="">
+                            src="/images/<%=SliderImage[i].sliderImage %>" alt="">
                     </div>
                 </div>
-                <div class="col-lg-6 mb-3">
-                    <div class="product-offer" style="height: 300px; width: 100%;">
-                        <img class="img-fluid" style="object-fit: cover; height: 100%; width:100%"
-                            src="/img/test/47fSyL.jpeg" alt="">
-                    </div>
-                </div>                
+                <% } %>             
             </div>
         </div>
     </section>
@@ -257,118 +158,25 @@
                 <div class="title mb-4">
                     <h1>Recent Products</h1>
                 </div>
+                <% for (var i=0;i<recentProducts.length && i<8 ;i++) { %>
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
                     <div class="card align-items-center">
                         <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
+                            <img src="/images/<%=recentProducts[i].picture %>" alt="">
                         </div>
                         <div class="text-center py-4">
-                            <a href="#">Product Name</a>
+                            <a href="#"><%=recentProducts[i].product_Name %></a>
                             <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
+                                <h5>₹ <%=recentProducts[i].selling_Price %></h5>
+                                <h6 class="text-muted" style="text-decoration: line-through;">₹ <%=recentProducts[i].actual_Price %></h6>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="/img/test/images.jpg" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="#">Product Name</a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ 123</h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ 678</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <% } %>
+            </div>
+            <div class="viewmorebtn">
+                    <a class="btn btn-warning ps-4 pe-4">More</a>
             </div>
         </div>
     </section>
