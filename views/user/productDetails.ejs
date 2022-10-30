@@ -25,22 +25,22 @@
     <div class="container-fluid pb-5" style="padding-top: 30px;">
         <div class="row px-xl-5">
             <div class="col-lg-5" style="margin-bottom: 30px;">
-                <div class="bg-secondary">
-                    <div class="bg-primary p-3" style=" width: 100%; height: 492px;">
-                        <img src="img/test/images.jpg" alt="" width="100%" height="100%" style="object-fit:cover;">
+                <div>
+                    <div class="p-3" style=" width: 100%; height: 492px; background: #fff;">
+                        <img src="/images/<%= productData.picture %>" alt="" width="100%" height="100%" style="object-fit:contain;">
                     </div>
                 </div>
             </div>
             <div class="col-lg-7 h-auto" style="margin-bottom: 30px;">
                 <div class="" style="padding: 30px; height:100%; background: #fff;">
-                    <h3 style="font-weight: 700;">Product Name</h3>
+                    <h4 style="font-weight: 700;"><%= productData.product_Name %></h4>
                     <div style="display: flex;">
-                        <h3 style="font-weight: 700;" class=" me-3">$150</h3>
-                        <h4 style="font-weight: 700; text-decoration: line-through; color: #6C757D;" class="mb-4">$150</h4>
+                        <h3 style="font-weight: 700;" class=" me-3">₹<%= productData.selling_Price %></h3>
+                        <h4 style="font-weight: 700; text-decoration: line-through; color: #6C757D;" class="mb-4">₹<%= productData.actual_Price %></h4>
                     </div>
                     <div class="d-flex">
-                        <span style="font-weight: 600;">Description : </span>
-                        <p style="color: #6C757D;">fvghj</p>
+                        <span style="font-weight: 600;">Description : <p style="color: #6C757D;"><%= productData.description %></p></span>
+                        
                     </div>
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="d-flex" style="width:130px; margin-right: 1rem; position: relative">
@@ -91,41 +91,14 @@
                             aria-labelledby="nav-home-tab" tabindex="0">
                             <h4 class="mb-3">Product Description</h4>
                             <p style="color: #6C757D;">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus blanditiis cumque
-                                perferendis ab voluptas quos dignissimos beatae esse, unde ad et itaque repellendus.
-                                Quaerat
-                                fugit ut, eveniet quas hic illum. Lorem ipsum dolor sit, amet consectetur adipisicing
-                                elit.
-                                Officiis ex placeat et consequatur hic optio? Natus rem, quod quibusdam inventore
-                                praesentium, esse ex a ea nihil iusto nemo! Voluptas, unde?
+                                <%= productData.description %>
                             </p>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
                             tabindex="0">
                             <h4 class="mb-3">Product Specification</h4>
                             <p style="color: #6C757D;">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit suscipit voluptate
-                                architecto.
-                                Nobis, alias numquam! Iste, omnis. Totam aperiam, exercitationem quod quam, est
-                                cupiditate
-                                molestiae illo officiis, dolor eaque at?
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Id ipsum saepe culpa sit rem
-                                omnis
-                                necessitatibus dolorum numquam nemo, beatae ipsa nihil nam veniam, dolorem tempora
-                                aliquid
-                                nesciunt perferendis eligendi.
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel doloribus tempora
-                                distinctio
-                                esse veniam deserunt quaerat deleniti nemo laborum, nisi quisquam quis, rerum itaque,
-                                recusandae corporis repudiandae. Fuga, eius mollitia!
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt totam rerum ipsum
-                                possimus,
-                                animi voluptatum? Fugiat incidunt excepturi at dolor, sequi atque culpa tenetur esse eos
-                                ipsa blanditiis nam dolores?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet est commodi vel, quia ad
-                                laborum cupiditate fugit? Quis fugiat id, voluptas, vero quo velit adipisci recusandae
-                                amet
-                                molestiae doloribus accusamus!
+                                <%= productData.specification %>
                             </p>
                         </div>
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"

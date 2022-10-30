@@ -1,57 +1,82 @@
 const categoryController = require('/Brototype/Week 8/MyCam/model/category')
 const userLoginModel = require('/Brototype/Week 8/MyCam/model/userLogin')
+const imageSlider = require('/Brototype/Week 8/MyCam/model/sliderImageModel')
+const productModel = require('/Brototype/Week 8/MyCam/model/product')
 
 const loginPage = (req, res) => {
     let userData = req.session.user
-    categoryController.getCategory().then((category) => {
-        res.render('user/userLoginPage', { admin: false, user: true, category,userData })
-    })
-}
-const signUpPage = (req, res) => {    
-    let userData = req.session.user
-    categoryController.getCategory().then((category) => {
-        res.render('user/userSignUpPage', { admin: false, user: true, category,userData })
-    })
-}
-const doSignUp = (req,res)=>{
-     
-    let userData = req.session.user
-    userLoginModel.doSignUp(req.body).then((response)=>{
-        if(response){
+    if (req.session.userLoggedIn) {
+        imageSlider.showImages().then((SliderImage) => {
             categoryController.getCategory().then((category) => {
-            res.render('user/userSignUpPage', { admin: false, user: true, category, errMsg:"UserName Already Exist!",userData })
+                productModel.getFeaturedProducts().then((featuredProducts) => {
+                    productModel.getRecentProducts().then((recentProducts) => {
+                        res.render('user/homePage', { admin: false, user: true, category, userData, SliderImage, featuredProducts, recentProducts })
+                    })
+                })
             })
-        }else{
+        })
+    } else {
+        categoryController.getCategory().then((category) => {
+            res.render('user/userLoginPage', { admin: false, user: true, category, userData })
+        })
+    }
+}
+const signUpPage = (req, res) => {
+    let userData = req.session.user
+    if (req.session.userLoggedIn) {
+        imageSlider.showImages().then((SliderImage) => {
+            categoryController.getCategory().then((category) => {
+                productModel.getFeaturedProducts().then((featuredProducts) => {
+                    productModel.getRecentProducts().then((recentProducts) => {
+                        res.render('user/homePage', { admin: false, user: true, category, userData, SliderImage, featuredProducts, recentProducts })
+                    })
+                })
+            })
+        })
+    } else {
+        categoryController.getCategory().then((category) => {
+            res.render('user/userSignUpPage', { admin: false, user: true, category, userData })
+        })
+    }
+}
+const doSignUp = (req, res) => {
+    let userData = req.session.user
+    userLoginModel.doSignUp(req.body).then((response) => {
+        if (response) {
+            categoryController.getCategory().then((category) => {
+                res.render('user/userSignUpPage', { admin: false, user: true, category, errMsg: "UserName Already Exist!", userData })
+            })
+        } else {
             res.redirect('/')
         }
     })
 }
-const doLogin = (req,res)=>{
+const doLogin = (req, res) => {
     let userData = req.session.user
-    userLoginModel.doLogin(req.body).then((response)=>{
-        if(response.userFalse){
+    userLoginModel.doLogin(req.body).then((response) => {
+        if (response.userFalse) {
             categoryController.getCategory().then((category) => {
-                return res.render('user/userLoginPage', { admin: false, user: true, category,errMsg:"User Not Found",userData})
+                return res.render('user/userLoginPage', { admin: false, user: true, category, errMsg: "User Not Found", userData })
             })
         }
         console.log(response.status);
-        if(response.status){
-            req.session.loggedIn = true
+        if (response.status) {
+            req.session.userLoggedIn = true
             req.session.user = response.user
             res.redirect('/')
-        }else{
+        } else {
             categoryController.getCategory().then((category) => {
-                return res.render('user/userLoginPage', { admin: false, user: true, category,errMsg:"Invalid Username or Password",userData})
+                return res.render('user/userLoginPage', { admin: false, user: true, category, errMsg: "Invalid Username or Password", userData })
             })
         }
     })
 }
-const doLogout = (req,res)=>{
-    req.session.destroy(function (err){
-        if(err){
+const doLogout = (req, res) => {
+    req.session.destroy(function (err) {
+        if (err) {
             console.log("Error");
             res.send("Error")
-        }else{
+        } else {
             res.redirect('/login')
         }
     })

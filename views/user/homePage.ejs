@@ -119,7 +119,7 @@
                             <img src="/images/<%=featuredProducts[i].picture %>" alt="">
                         </div>
                         <div class="text-center py-4">
-                            <a href="#"><%=featuredProducts[i].product_Name %></a>
+                            <a href="/product/showDetail?id=<%=featuredProducts[i]._id %>"><%=featuredProducts[i].product_Name %></a>
                             <div class="rate d-flex align-items-center justify-content-center mt-2">
                                 <h5>₹ <%=featuredProducts[i].selling_Price %></h5>
                                 <h6 class="text-muted" style="text-decoration: line-through;">₹ <%=featuredProducts[i].actual_Price %></h6>
@@ -165,7 +165,7 @@
                             <img src="/images/<%=recentProducts[i].picture %>" alt="">
                         </div>
                         <div class="text-center py-4">
-                            <a href="#"><%=recentProducts[i].product_Name %></a>
+                            <a href="/product/showDetail?id=<%=recentProducts[i]._id %>"><%=recentProducts[i].product_Name %></a>
                             <div class="rate d-flex align-items-center justify-content-center mt-2">
                                 <h5>₹ <%=recentProducts[i].selling_Price %></h5>
                                 <h6 class="text-muted" style="text-decoration: line-through;">₹ <%=recentProducts[i].actual_Price %></h6>

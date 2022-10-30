@@ -1,6 +1,6 @@
 const { response } = require('express');
 const session = require('express-session');
-const adminLoginContol = require('../model/adminLogin')
+const adminLoginContol = require('../../model/adminLogin')
 
 // For No Page Found
 // const noPage = (req,res)=>{
@@ -8,7 +8,7 @@ const adminLoginContol = require('../model/adminLogin')
 // }
 //For admin Login Page
 const adminLoginPage = (req,res)=>{
-    if(req.session.loggedIn){
+    if(req.session.adminloggedIn){
         res.render('admin/adminPanel',{admin:true,title:"Dashboard",user:false})
     }else{
         res.render('admin/adminLogin',{admin:false,user:false})
@@ -22,7 +22,7 @@ const adminLogin = (req,res)=>{
         }
         
         if(response.status){
-            req.session.loggedIn = true
+            req.session.adminloggedIn = true
             req.session.admin = response.admin
             res.render('admin/adminPanel',{admin:true,title:"Dashboard",user:false})
         }

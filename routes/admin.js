@@ -1,9 +1,9 @@
 const express = require('express')
 const multer = require('multer');
-const { noPage, adminLoginPage, adminLogin, adminLogout } = require('../controllers/adminLoginContol.js')
-const categoryController = require('../controllers/categoryController')
-const branController = require('../controllers/brandController')
-const productController = require('../controllers/productController')
+const { noPage, adminLoginPage, adminLogin, adminLogout } = require('../controllers/adminControl/adminLoginContol')
+const categoryController = require('../controllers/adminControl/categoryController')
+const branController = require('../controllers/adminControl/brandController')
+const productController = require('../controllers/adminControl/productController')
 const userManagementControl = require('../controllers/adminControl/adminUserManagement')
 const sliderImageManagementControl = require('../controllers/adminControl/sliderImageManagementControl')
 
