@@ -5,7 +5,6 @@ const addtoCart= (req,res)=>{
     userCartModel.addToCart(req.params.id,req.session.user._id).then(()=>{
         res.redirect('/')
     })
-
 }
 
 module.exports={
