@@ -4,5 +4,6 @@ module.exports={
     BRAND_DETAILS: 'brand',
     PRODUCT_DETAILS: 'product',
     USER_DETAILS: 'user',
-    SLIDER_IMAGE: 'slideImage'
+    SLIDER_IMAGE: 'slideImage',
+    CART_COLLECTION: 'cart'
 }                   
