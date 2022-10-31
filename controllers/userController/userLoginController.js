@@ -6,15 +6,7 @@ const productModel = require('/Brototype/Week 8/MyCam/model/product')
 const loginPage = (req, res) => {
     let userData = req.session.user
     if (req.session.userLoggedIn) {
-        imageSlider.showImages().then((SliderImage) => {
-            categoryController.getCategory().then((category) => {
-                productModel.getFeaturedProducts().then((featuredProducts) => {
-                    productModel.getRecentProducts().then((recentProducts) => {
-                        res.render('user/homePage', { admin: false, user: true, category, userData, SliderImage, featuredProducts, recentProducts })
-                    })
-                })
-            })
-        })
+        res.redirect('/')
     } else {
         categoryController.getCategory().then((category) => {
             res.render('user/userLoginPage', { admin: false, user: true, category, userData })
@@ -24,15 +16,7 @@ const loginPage = (req, res) => {
 const signUpPage = (req, res) => {
     let userData = req.session.user
     if (req.session.userLoggedIn) {
-        imageSlider.showImages().then((SliderImage) => {
-            categoryController.getCategory().then((category) => {
-                productModel.getFeaturedProducts().then((featuredProducts) => {
-                    productModel.getRecentProducts().then((recentProducts) => {
-                        res.render('user/homePage', { admin: false, user: true, category, userData, SliderImage, featuredProducts, recentProducts })
-                    })
-                })
-            })
-        })
+        res.redirect('/')
     } else {
         categoryController.getCategory().then((category) => {
             res.render('user/userSignUpPage', { admin: false, user: true, category, userData })

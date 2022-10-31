@@ -27,8 +27,10 @@ const addProductPage = (req, res) => {
 const addProduct = (req, res) => {
     let category_id = ObjectID(req.body.category_Name)
     let brand_id = ObjectID(req.body.brand)
+    let actual_Price = parseInt(req.body.actual_Price)
+    let selling_Price = parseInt(req.body.selling_Price)
     if (req.session.adminloggedIn) {
-        const { product_Name, actual_Price, selling_Price, stock_In_Hand, feature_or_recent, description, specification } = req.body
+        const { product_Name, stock_In_Hand, feature_or_recent, description, specification } = req.body
         productController.addProduct({
             picture: req.file.filename,
             category_id,

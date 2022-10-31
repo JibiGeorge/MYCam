@@ -281,3 +281,19 @@ function loginValidate(){
         return false
     }
 }
+
+
+//Add product to cart
+function addToCart(productID){
+    $.ajax({
+        url:'/product/showDetail/add-tocart/'+productID,
+        method: 'get',
+        success: (response)=>{
+            if(response.status){
+                let count = $('#cartCount').html()
+                count = parseInt(count)+1
+                $("#cartCount").html(count)
+            }
+        }
+    })
+}

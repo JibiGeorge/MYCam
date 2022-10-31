@@ -28,7 +28,7 @@
 
                     </div>
                     <div class="d-flex align-items-center mb-4 pt-2">
-                        <div class="d-flex" style="width:130px; margin-right: 1rem; position: relative">
+                        <!-- <div class="d-flex" style="width:130px; margin-right: 1rem; position: relative">
                             <div>
                                 <button class="btn btn-primary"
                                     style="color: #3D464D; background-color: #FFD333; border-color: #FFD333; border-radius: 0;">
@@ -49,7 +49,10 @@
                             style="color: #3D464D; background-color: #FFD333; border-color: #FFD333; border-radius: 0;">
                             <i class="las la-shopping-cart ms-1"></i>
                             Add to Cart
-                        </a>
+                        </a> -->
+                        <p class="ms-5"></p>
+                        <button onclick="addToCart('<%= productData._id %>')" class="btn btn-primary px-3"
+                        style="color: #3D464D; background-color: #FFD333; border-color: #FFD333; border-radius: 0;">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -101,3 +104,4 @@
         </div>
     </div>
 </div>
+

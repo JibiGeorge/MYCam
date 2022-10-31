@@ -99,7 +99,8 @@
                                         <!-- <form action="/admin/sliderDelete/<%= values._id %>" id="sliderDelete">
                                             <input type="submit" value="Delete" style="background: #B05541;" class="btn btn-primary"></input>
                                         </form> -->
-                                        <button id="deleteSlider" onclick="deleteSlider('<%= values._id %>')" class="btn btn-primary">DELETE</button>
+                                        <button id="deleteSlider" onclick="deleteSlider('<%= values._id %>')"
+                                            class="btn btn-primary">DELETE</button>
 
                                     </td>
                                 </tr>
@@ -121,35 +122,15 @@
         sliderId.value = id
     }
 
-    function deleteSlider(id){
-        fetch('/admin/sliderDelete',{
+    function deleteSlider(id) {
+        fetch('/admin/sliderDelete', {
             method: 'DELETE',
-            headers: { 'Content-Type' : 'application/json'},
-            body: JSON.stringify({id})
-        }).then(()=>{
-            window.location='/admin/silderImage'
-        })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id })
+        }).then(() => {
+            window.location = '/admin/silderImage'
+        }).catch((error) => {
+            console.error('Error:', error);
+        });
     }
-
-    
-
-
-    // $(document).ready(() => {
-    //     $('#sliderDelete').on('submit', (event) => {
-    //         event.preventDefault();
-    //         const data = $(this).serialize();
-    //         console.log("data", data);
-
-    //         $.ajax({
-    //             url: '/admin/sliderDelete/',
-    //             method: 'delete',
-    //             success: (result, status, xhr) => {
-    //                 console.log("Success");
-    //             },
-    //             error: (xhr, status, error) => {
-    //                 console.log("Something Wrong");
-    //             }
-    //         })
-    //     })
-    // })
 </script>

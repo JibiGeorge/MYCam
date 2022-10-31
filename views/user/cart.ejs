@@ -13,146 +13,38 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle">
+                                <% for (var i=0;i<products.length;i++) { %>
                         <tr style="border-bottom: 15px solid #f5f5f5;">
                             <td>
-                                <img src="img/sunset.jpg" alt="Sorry" width="50px">
-                                <a href="" style="text-decoration: none; color: #6C757D">Product Name</a>
+                                <img src="/images/<%= products[i].product.picture %>" alt="Sorry" width="50px">
+                                <a href="" style="text-decoration: none; color: #6C757D"><%= products[i].product.product_Name %></a>
                             </td>
-                            <td>$56</td>
+                            <td>₹<%= products[i].product.selling_Price %></td>
                             <td>
                                 <div class="mx-auto d-flex" style="width: 100px;">
                                     <div>
-                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;">
+                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;"onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',-1,'<%= userData._id %>')">
                                             <i class="las la-minus"></i>
                                         </button>
                                     </div>
-                                    <input type="text" value="1" style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;">
+                                    <span id="<%= products[i].product._id %>"><%= products[i].quantity %></span>
+
+                                    <!-- <input disabled type="text" value="<%= products[i].quantity %>" style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;" id="<%= products[i].quantity %>"> -->
                                     <div>
-                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;">
+                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;" onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',1,'<%= userData._id %>')">
                                             <i class="las la-plus"></i>
                                         </button>
                                     </div>
                                 </div>
                             </td>
-                            <td>$76</td>
+                            <td>₹ 76</td>
                             <td>
                                 <button class="btn btn-danger" style="padding: 0.35rem 0.5rem; font-size: 0.875rem;">
                                     <i class="las la-times"></i>
                                 </button>
                             </td>
                         </tr>
-                        <tr style="border-bottom: 15px solid #f5f5f5;">
-                            <td>
-                                <img src="img/sunset.jpg" alt="Sorry" width="50px">
-                                <a href="" style="text-decoration: none; color: #6C757D">Product Name</a>
-                            </td>
-                            <td>$56</td>
-                            <td>
-                                <div class="mx-auto d-flex" style="width: 100px;">
-                                    <div>
-                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;">
-                                            <i class="las la-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" value="1" style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;">
-                                    <div>
-                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;">
-                                            <i class="las la-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>$76</td>
-                            <td>
-                                <button class="btn btn-danger" style="padding: 0.35rem 0.5rem; font-size: 0.875rem;">
-                                    <i class="las la-times"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr style="border-bottom: 15px solid #f5f5f5;">
-                            <td>
-                                <img src="img/sunset.jpg" alt="Sorry" width="50px">
-                                <a href="" style="text-decoration: none; color: #6C757D">Product Name</a>
-                            </td>
-                            <td>$56</td>
-                            <td>
-                                <div class="mx-auto d-flex" style="width: 100px;">
-                                    <div>
-                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;">
-                                            <i class="las la-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" value="1" style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;">
-                                    <div>
-                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;">
-                                            <i class="las la-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>$76</td>
-                            <td>
-                                <button class="btn btn-danger" style="padding: 0.35rem 0.5rem; font-size: 0.875rem;">
-                                    <i class="las la-times"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr style="border-bottom: 15px solid #f5f5f5;">
-                            <td>
-                                <img src="img/sunset.jpg" alt="Sorry" width="50px">
-                                <a href="" style="text-decoration: none; color: #6C757D">Product Name</a>
-                            </td>
-                            <td>$56</td>
-                            <td>
-                                <div class="mx-auto d-flex" style="width: 100px;">
-                                    <div>
-                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;">
-                                            <i class="las la-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" value="1" style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;">
-                                    <div>
-                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;">
-                                            <i class="las la-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>$76</td>
-                            <td>
-                                <button class="btn btn-danger" style="padding: 0.35rem 0.5rem; font-size: 0.875rem;">
-                                    <i class="las la-times"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr style="border-bottom: 15px solid #f5f5f5;">
-                            <td>
-                                <img src="img/sunset.jpg" alt="Sorry" width="50px">
-                                <a href="" style="text-decoration: none; color: #6C757D">Product Name</a>
-                            </td>
-                            <td>$56</td>
-                            <td>
-                                <div class="mx-auto d-flex" style="width: 100px;">
-                                    <div>
-                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;">
-                                            <i class="las la-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" value="1" style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;">
-                                    <div>
-                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;">
-                                            <i class="las la-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>$76</td>
-                            <td>
-                                <button class="btn btn-danger" style="padding: 0.35rem 0.5rem; font-size: 0.875rem;">
-                                    <i class="las la-times"></i>
-                                </button>
-                            </td>
-                        </tr>
+                        <% } %>                        
                     </tbody>
                 </table>
             </div>
@@ -163,17 +55,17 @@
                     <div class="pb-2" style="border-bottom: 1px solid #dee2e6">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Sub Total</h6>
-                            <h6>$98</h6>
+                            <h6 id="totalAmount"><%=totalAmount %></h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6>Shipping</h6>
-                            <h6>$98</h6>
+                            <h6>₹98</h6>
                         </div>
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
-                            <h5>$097</h5>
+                            <h5>₹097</h5>
                         </div>
                         <button style="font-weight: 700; width: 100%; color: #3D464D; background: #FFD333; border: 0;" class="my-3 py-3">Procced to Checkout</button>
                     </div>
@@ -182,3 +74,29 @@
         </div>
     </div>
 </div>
+
+<script>
+    function changeQuantity(cartID, productID,count,userID){
+        let quantity = parseInt(document.getElementById(productID).innerHTML)
+        $.ajax({
+            url: '/cart/chageProductQuanity',
+            data:{
+                cart:cartID,
+                product:productID,
+                count:count,
+                quantity: quantity,
+                userID:userID
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.removeProduct){
+                    // alert("Product Removed from cart")
+                    location.reload()
+                }else{
+                    document.getElementById(productID).innerHTML=quantity+count
+                    document.getElementById("totalAmount").innerHTML = response.totalAmount
+                }
+            }
+        })
+    }
+</script>
