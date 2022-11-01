@@ -32,8 +32,23 @@ const changeQuantity = (req,res,next)=>{
         res.json(response)
     })
 }
+
+const proceedToPayment = async (req,res)=>{
+    console.log("adca");
+    let userData = req.session.user
+    let cartCount = null;
+    if (req.session.userLoggedIn) {
+        cartCount = await userCartModel.getCartCount(req.session.user._id)
+    }
+    console.log("count", cartCount);
+    categoryController.getCategory().then((category) => {
+        res.render('user/placeorder', { admin: false, user: true, category, userData, cartCount })
+        // res.json({status:true})
+    })
+}
 module.exports = {
     addtoCart,
     showCart,
-    changeQuantity
+    changeQuantity,
+    proceedToPayment
 }

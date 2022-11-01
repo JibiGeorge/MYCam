@@ -5,6 +5,7 @@ const { response } = require('express')
 
 module.exports = {
     addToCart: (productID, userID) => {
+        console.log(userID);
         let productObject = {
             item: ObjectID(productID),
             quantity: 1
