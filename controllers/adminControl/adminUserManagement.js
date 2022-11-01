@@ -1,4 +1,6 @@
 const userModel = require('/Brototype/Week 8/MyCam/model/userLogin')
+
+
 const userManagementPage = (req, res) => {
     if (req.session.adminloggedIn) {
         userModel.showUsers().then((usersList) => {

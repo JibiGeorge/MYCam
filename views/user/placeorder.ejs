@@ -15,18 +15,17 @@
                 <div class="col-lg-12 mb-4">
                     <a href="/addressPage" class="btn btn-success mb-2">Add new Address</a>
                     <div class="p-4" style="width: 100%; background: #fff;">
-                        <div class="mb-2">
-                            <input type="radio" class="form-check-input me-2" name="address">vsadv
+                        <% for (var i=0;i<addressList.address.length;i++) { %>
+                        <div class="mb-2 d-flex">
+                            <div>
+                                <input type="radio" class="form-check-input me-2" name="address">
+                            </div>
+                            <div>
+                                <p class="m-0" style="font-weight: bold;"><%= addressList.address[i].name %></p>
+                                <p style="font-size: 14px;"><%= addressList.address[i].address %> <span style="font-weight: bold;"><%= addressList.address[i].pin_Code %></span></p>
+                            </div>
                         </div>
-                        <div class="mb-2">
-                            <input type="radio" class="form-check-input me-2" name="address">vsadv
-                        </div>
-                        <div class="mb-2">
-                            <input type="radio" class="form-check-input me-2" name="address">vsadv
-                        </div>
-                        <div class="mb-2">
-                            <input type="radio" class="form-check-input me-2" name="address">vsadv
-                        </div>
+                        <% } %>                        
                     </div>
                 </div>
             </div>

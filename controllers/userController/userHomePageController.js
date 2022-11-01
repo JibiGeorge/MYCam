@@ -10,7 +10,6 @@ const homePage = async (req, res) => {
     if (req.session.userLoggedIn) {
         cartCount = await userCartModel.getCartCount(req.session.user._id)
     }
-    console.log("count",cartCount);
     imageSlider.showImages().then((SliderImage) => {
         categoryController.getCategory().then((category) => {
             productModel.getFeaturedProducts().then((featuredProducts) => {

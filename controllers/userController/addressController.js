@@ -14,7 +14,6 @@ const getAddressPage = async (req,res)=>{
     if (req.session.userLoggedIn) {
         cartCount = await userCartModel.getCartCount(req.session.user._id)
     }
-    console.log("count", cartCount);
     categoryController.getCategory().then((category) => {
         res.render('user/billingAddress', { admin: false, user: true, category, userData, cartCount })
     })

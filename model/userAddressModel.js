@@ -28,5 +28,13 @@ module.exports = {
             }
 
         })
+    },
+    getAddressList: (id)=>{
+        return new Promise (async (resolve,reject)=>{
+            await db.get().collection(collections.USER_ADDRESS_COLLECTION).findOne({user:ObjectID(id)}).then((result)=>{
+                resolve(result)
+            })
+            // console.log(addressList.address[0]);
+        })
     }
 }
