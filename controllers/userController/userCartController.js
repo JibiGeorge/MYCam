@@ -36,7 +36,7 @@ const proceedToPayment = async (req,res)=>{
         cartCount = await userCartModel.getCartCount(req.session.user._id)
     }
     categoryController.getCategory().then((category) => {
-        userAddressModel.getAddressList(req.session.user._id).then((addressList)=>{  
+        userAddressModel.getAddressList(req.session.user._id).then((addressList)=>{ 
         res.render('user/placeorder', { admin: false, user: true, category, userData, cartCount, addressList })
         })
     })

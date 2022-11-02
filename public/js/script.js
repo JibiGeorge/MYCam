@@ -165,7 +165,7 @@ function signupValidate(){
     let mobileNo = document.getElementById('mobile_No').value.trim();
     let password = document.getElementById('password').value.trim();
     let confirmPasword = document.getElementById('confirm_Password').value.trim();
-    let emailCheck = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
+    // let emailCheck = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
     errorFlag=0
 
     // For First Name
@@ -205,10 +205,11 @@ function signupValidate(){
     if (email == ""){
         document.getElementById('emailError').innerHTML = "*Email Require";
         errorFlag = 1;
-    }else if (email.test != emailCheck){
-        document.getElementById('emailError').innerHTML = "*Email Invalid";
-        errorFlag =1
     }
+    // else if (email.test != emailCheck){
+    //     document.getElementById('emailError').innerHTML = "*Email Invalid";
+    //     errorFlag =1
+    // }
     else{
         document.getElementById('emailError').innerHTML = "";
     }
@@ -297,3 +298,4 @@ function addToCart(productID){
         }
     })
 }
+

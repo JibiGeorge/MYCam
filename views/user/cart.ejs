@@ -17,7 +17,7 @@
                         <tr style="border-bottom: 15px solid #f5f5f5;">
                             <td>
                                 <img src="/images/<%= products[i].product.picture %>" alt="Sorry" width="50px">
-                                <a href="" style="text-decoration: none; color: #6C757D"><%= products[i].product.product_Name %></a>
+                                <a href="" style="text-decoration: none; color: #6C757D;"><%= products[i].product.product_Name %></a>
                             </td>
                             <td>₹<%= products[i].product.selling_Price %></td>
                             <td>
@@ -27,7 +27,7 @@
                                             <i class="las la-minus"></i>
                                         </button>
                                     </div>
-                                    <span id="<%= products[i].product._id %>"><%= products[i].quantity %></span>
+                                    <span id="<%= products[i].product._id %>"style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;" class="pt-1"><%= products[i].quantity %></span>
 
                                     <!-- <input disabled type="text" value="<%= products[i].quantity %>" style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;" id="<%= products[i].quantity %>"> -->
                                     <div>
@@ -55,17 +55,17 @@
                     <div class="pb-2" style="border-bottom: 1px solid #dee2e6">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Sub Total</h6>
-                            <h6 id="totalAmount"><%=totalAmount %></h6>
+                            <h6 id="subTotal" class="totalAmount"><%=totalAmount %></h6>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <!-- <div class="d-flex justify-content-between">
                             <h6>Shipping</h6>
-                            <h6>₹98</h6>
-                        </div>
+                            <h6 id="shipping"></h6>
+                        </div> -->
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
-                            <h5>Total</h5>
-                            <h5>₹097</h5>
+                            <h4 style="font-weight: 600;">Total</h4>
+                            <h4 id="totalAmount" class="totalAmount" style="font-weight: 600;"><%=totalAmount %></h4>
                         </div>
                         <a style="font-weight: 700; width: 100%; color: #3D464D; background: #FFD333; border: 0;" class="my-3 py-3 btn" href="/cart/proceedToPayment">Procced to Checkout</a>
                     </div>
@@ -94,9 +94,17 @@
                     location.reload()
                 }else{
                     document.getElementById(productID).innerHTML=quantity+count
+                    document.getElementById("subTotal").innerHTML = response.totalAmount
                     document.getElementById("totalAmount").innerHTML = response.totalAmount
+                    // let shippingCharge = (response.totalAmount*5)/100;
+                    // if(response.totalAmount >300000){
+                    //     document.getElementById('shipping').innerHTML = "No Shipping"
+                    // }else{
+                    //     document.getElementById('shipping').innerHTML = shippingCharge
+                    // }
                 }
             }
         })
     }
+
 </script>

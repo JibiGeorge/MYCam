@@ -1,0 +1,40 @@
+<section class="userPage">
+    <div class="container-fluid bg-success pt-5 pb-5">
+        <div class="row justify-content-center">
+            <div class="form-container user-signup">
+                <form action="" id="otpverification">
+                    <label for="">Enter Your OTP</label>
+                    <input type="text" name="id" value="<%= userId %>">
+                <input type="text" name="OTP">
+                <input type="submit" class="btn btn-success" value="Submit">
+                </form>
+                <% if(locals.errMsg){%>
+                    <div class="errorstyle">
+                        <p style="text-align:center; color: rgb(255, 0, 0);">
+                            <%= errMsg %>
+                        </p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    const verificationForm = document.getElementById('otpverification');
+
+    verificationForm.addEventListener('submit',(e)=>{
+        e.preventDefault();
+
+        const verificationData = new FormData(verificationForm);
+        const data = Object.fromEntries(verificationData);
+        fetch('/signup/verification',{
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(data)
+        }).then((status)=>{               
+            window.location = '/login'
+        })
+    })
+</script>

@@ -34,7 +34,6 @@ module.exports = {
             await db.get().collection(collections.USER_ADDRESS_COLLECTION).findOne({user:ObjectID(id)}).then((result)=>{
                 resolve(result)
             })
-            // console.log(addressList.address[0]);
         })
     }
 }

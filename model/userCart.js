@@ -162,5 +162,11 @@ module.exports = {
             // console.log(totalAmount);
             resolve(totalAmount[0].total)
         })
+    },
+    getCartProductList: (userID)=>{
+        return new Promise(async(resolve,reject)=>{
+            let cart = await db.get().collection(collections.CART_COLLECTION).findOne({user:ObjectID(userID)})
+            resolve(cart.products)
+        })
     }
 }
