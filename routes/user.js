@@ -28,7 +28,14 @@ router.get('/addressPage',addressController.getAddressPage)
 
 router.post('/placeOrder',orderController.placeOrder)
 router.get('/order-success',orderController.orderSuccess)
+router.get('/orders',orderController.ordersPage)
 
+router.post('/orders/viewOrderDetails',orderController.getOrderProductDetails)
+
+
+router.post('/verifyPayment',(req,res)=>{
+    console.log(req.body);
+})
 
 
 

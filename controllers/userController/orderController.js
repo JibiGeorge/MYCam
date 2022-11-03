@@ -2,16 +2,23 @@ const orderModel = require('/Brototype/Week 8/MyCam/model/orderModel')
 const userCartModel = require('/Brototype/Week 8/MyCam/model/userCart')
 const categoryController = require('/Brototype/Week 8/MyCam/model/category')
 
-const placeOrder = async(req,res)=>{
+const placeOrder = async (req, res) => {
     // if(req.body.paymentMethod == 'COD')
     let products = await userCartModel.getCartProductList(req.body.userID)
     let totalPrice = await userCartModel.getTotalAmount(req.body.userID)
-    orderModel.placeOrder(req.body,products,totalPrice).then((response)=>{
-        res.json({status:true})
+    orderModel.placeOrder(req.body, products, totalPrice).then((orderID) => {
+        if (req.body.paymentMethod == 'COD') {
+
+            res.json({ codSuccess: true })
+        } else {
+            orderModel.generateRazorPay(orderID, totalPrice).then((response) => {
+                res.json(response)
+            })
+        }
     })
 
 }
-const orderSuccess = async(req,res)=>{
+const orderSuccess = async (req, res) => {
     let userData = req.session.user
     let cartCount = null;
     if (req.session.userLoggedIn) {
@@ -22,7 +29,32 @@ const orderSuccess = async(req,res)=>{
     })
 }
 
+const ordersPage = async (req, res) => {
+    let userData = req.session.user
+    console.log(userData);
+    let cartCount = null;
+    if (req.session.userLoggedIn) {
+        cartCount = await userCartModel.getCartCount(req.session.user._id)
+    }
+    categoryController.getCategory().then((category) => {
+        orderModel.getOrderList(userData._id).then((productList)=>{
+            res.render('user/userOrder', { admin: false, user: true, category, userData, cartCount, productList })
+        })
+    })
+}
+
+const getOrderProductDetails = (req,res)=>{
+    let orderID = req.body.orderID
+    console.log(orderID);
+    orderModel.getOrderedProductDetails(orderID).then((orderProductDetails)=>{
+        console.log(orderProductDetails);
+        res.json({orderProductDetails})
+    })
+}
+
 module.exports = {
     placeOrder,
-    orderSuccess
+    orderSuccess,
+    ordersPage,
+    getOrderProductDetails
 }

@@ -49,33 +49,27 @@
                             <div style="border-bottom: 1px solid #bdc2c7;" class="mb-3">
                                 <label for="" style="font-weight: bold; text-decoration: underline;"
                                     class="mb-2">Products</label>
+                                    <% for (var i=0;i<products.length;i++) { %>
                                 <div class="d-flex justify-content-between mb-1">
-                                    <h6 style="max-width: 15rem; overflow: hidden;">Product Name</h6>
-                                    <h6>₹98</h6>
+                                    <h6 style="max-width: 20rem; max-height: 1rem; text-align: left; overflow: hidden;"><%= products[i].product.product_Name %></h6>
+                                    <!-- <h6>₹98</h6> -->
                                 </div>
-                                <div class="d-flex justify-content-between mb-1">
-                                    <h6 style="max-width: 15rem; overflow: hidden;">Product Name</h6>
-                                    <h6>₹98</h6>
-                                </div>
-                                <div class="d-flex justify-content-between mb-1">
-                                    <h6 style="max-width: 15rem; overflow: hidden;">Product Name</h6>
-                                    <h6>₹98</h6>
-                                </div>
+                                <% } %>
                             </div>
                             <div style="border-bottom: 1px solid #bdc2c7;" class="mb-3">
                                 <div class="d-flex justify-content-between mb-1">
                                     <h6 style="max-width: 15rem; overflow: hidden;">Sub Total</h6>
-                                    <h6>₹98</h6>
+                                    <h6><%=totalAmount %></h6>
                                 </div>
-                                <div class="d-flex justify-content-between mb-1">
+                                <!-- <div class="d-flex justify-content-between mb-1">
                                     <h6 style="max-width: 15rem; overflow: hidden;">Shipping</h6>
                                     <h6>₹98</h6>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between mb-1">
                                     <label for="" style="font-weight: bold;" class="mb-2">Total Amount</label>
-                                    <h6>₹98</h6>
+                                    <h6 style="font-weight: bold;"><%=totalAmount %></h6>
                                 </div>
                             </div>
                         </div>
@@ -84,16 +78,16 @@
                     <div class="col-lg-12">
                         <h5 class="mb-3 text-uppercase" style="line-height: 1.2;">Payment Methods</h5>
                         <div class="p-4" style="width: 100%; background: #fff;">
-                            <div class="mb-2">
+                            <!-- <div class="mb-2">
                                 <input type="radio" class="form-check-input me-2" name="paymentMethod"
                                     value="PayTM">PayTM
                             </div>
                             <div class="mb-2">
                                 <input type="radio" class="form-check-input me-2" name="paymentMethod" value="UPI">UPI
-                            </div>
+                            </div> -->
                             <div class="mb-2">
                                 <input type="radio" class="form-check-input me-2" name="paymentMethod"
-                                    value="Online Bank">Online Bank
+                                    value="Online Bank">Online Payment
                             </div>
                             <div class="mb-2">
                                 <input type="radio" class="form-check-input me-2" name="paymentMethod" value="COD">COD
@@ -106,11 +100,12 @@
                 </div>
                 <!-- Order Details End -->
             </form>
-                
+
         </div>
     </div>
 </div>
 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
     let radioBtn = document.querySelectorAll("input[name='address']");
     let result = document.getElementById('result');
@@ -133,18 +128,66 @@
     //     alert("cdajh")
     // })
 
-    $("#checkout").submit((e)=>{
+    $("#checkout").submit((e) => {
         e.preventDefault()
         $.ajax({
-            url:'/placeOrder',
-            method:'post',
-            data:$('#checkout').serialize(),
-            success:(response)=>{
+            url: '/placeOrder',
+            method: 'post',
+            data: $('#checkout').serialize(),
+            success: (response) => {
                 alert(response)
-                if(response.status){
-                    location.href='/order-success'
+                if (response.codSuccess) {
+                    location.href = '/order-success'
+                }
+                 else {
+                    razorpayPayment(response)
                 }
             }
         })
     })
+
+
+    function razorpayPayment(order) {
+        var options = {
+            "key": "***************", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "MyCam",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {      
+                alert(response.razorpay_payment_id);
+                alert(response.razorpay_order_id);
+                alert(response.razorpay_signature);
+
+                verifyPayment(response,order);
+            },
+            "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+            "prefill": {
+                "name": "Jibi George",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+
+    function verifyPayment(payment, order){
+        $.ajax({
+            url:'/verifyPayment',
+            data:{
+                payment,
+                order
+            },
+            method:'post'
+        })
+    }
 </script>

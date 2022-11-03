@@ -1,0 +1,130 @@
+<div style="background: #eeeeee;">
+    <div class="container-fluid pb-5" style="padding-top: 30px;">
+        <div class="row px-xl-5">
+            <div class="projects">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 style="font-size: 19px; font-weight: bold;">Orders List</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>Order ID</td>
+                                        <td>Payment Type</td>
+                                        <td>Order Status</td>
+                                        <td>Expected Delivery</td>
+                                        <td>Amount</td>
+                                        <td>View</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (values of productList) { %>
+                                        <tr>
+                                            <td>
+                                                <%= values._id %>
+                                            </td>
+                                            <td>
+                                                <%= values.paymentMethod %>
+                                            </td>
+                                            <% if (values.status=="placed" ) { %>
+                                                <td>
+                                                    <span class="status green"></span>
+                                                    <%= values.status %>
+                                                </td>
+                                                <% } else if(values.status=="pending" ) { %>
+                                                    <td>
+                                                        <span class="status red"></span>
+                                                        <%= values.status %>
+                                                    </td>
+                                                    <% } %>
+                                                        <td>
+                                                            <%= values.date %>
+                                                        </td>
+                                                        <td>
+                                                            <%= values.totalAmount %>
+                                                        </td>
+                                                        <td>
+                                                            <!-- <button
+                                                                onclick="orderDetailView('<%=values._id %>','<%= values.products[0].product_Name %>')"
+                                                                class="btn btn-warning">View Detail
+                                                            </button> -->
+                                                            <button type="button" class="btn btn-warning"
+                                                                data-bs-toggle="modal" data-bs-target="#addCategory"
+                                                                onclick="view('<%=values._id%>')">View Detail
+                                                            </button>
+                                                        </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Product Details -->
+<div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Order Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive" id="table_main">
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="submit" class="btn btn-primary">CANCEL ORDER</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- href="/orders/viewOrderDetails?id=<%= values._id %><%= values.products[0].product_Name %>" -->
+<script>
+    function view(orderID) {
+        const tableMain = document.getElementById('table_main')
+        fetch('/orders/viewOrderDetails', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ orderID })
+        }).then(res => res.json()).then(data => {
+            let datas = data.orderProductDetails
+            console.log(datas);
+            let table =
+                `<table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Product Name</th>
+                        <th>Product price</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>`
+            for( var i=0;i<datas.length;i++){
+                    table +=
+                        `<tr>
+                            <td>
+                                <div class="mb-3" style="background-image:url('/images/${datas[i].product[0].picture}'); width:50px;height:50px; background-size:contain;background-repeat:no-repeat"></div>
+                            </td>
+                            <td>${datas[i].product[0].product_Name}</td>
+                            <td>${datas[i].product[0].selling_Price}</td>
+                            <td>${datas[i].products.quantity}</td>
+                        </tr>`                    
+                }
+            table +=
+                `</tbody>
+            </table>`
+            tableMain.innerHTML = table
+        })
+    }
+
+</script>
