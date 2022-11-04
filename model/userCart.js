@@ -5,7 +5,6 @@ const { response } = require('express')
 
 module.exports = {
     addToCart: (productID, userID) => {
-        console.log(userID);
         let productObject = {
             item: ObjectID(productID),
             quantity: 1
@@ -76,7 +75,6 @@ module.exports = {
                     }
                 }
             ]).toArray()
-            // console.log(cartItems);
             resolve(cartItems)
         })
     },
@@ -117,7 +115,6 @@ module.exports = {
         })
     },
     getTotalAmount: (userID)=>{
-        console.log("user id :",userID);
         return new Promise(async (resolve, reject) => {
             let totalAmount = await db.get().collection(collections.CART_COLLECTION).aggregate([
                 {
@@ -159,8 +156,7 @@ module.exports = {
                     }
                 }
             ]).toArray()
-            // console.log(totalAmount);
-            resolve(totalAmount[0].total)
+            resolve(totalAmount)
         })
     },
     getCartProductList: (userID)=>{
@@ -168,9 +164,5 @@ module.exports = {
             let cart = await db.get().collection(collections.CART_COLLECTION).findOne({user:ObjectID(userID)})
             resolve(cart.products)
         })
-    },
-    // deleteProduct: (id)=>{
-    //     return new Promise ((resolve,reject)=>{
-    //     })
-    // }
+    }
 }

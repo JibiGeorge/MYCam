@@ -64,6 +64,8 @@ router.get('/productUpdate', productController.updatePage)
 router.post('/productUpdate/updateData', upload.single('productImage'), productController.updateProductData)
 
 router.get('/userManagement', userManagementControl.userManagementPage);
+router.post('/userManagement/block',userManagementControl.userBlock)
+router.post('/userManagement/unBlock',userManagementControl.userUnBlock)
 
 router.get('/silderImage',sliderImageManagementControl.sliderPage);
 router.post('/slideradd',upload.single('sliderImage'),sliderImageManagementControl.sliderImageAdd)

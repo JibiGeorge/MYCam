@@ -42,10 +42,6 @@ module.exports = {
     },
     getProductDetail: (proId) => {
         return new Promise(async (resolve, reject) => {
-            // db.get().collection(collections.PRODUCT_DETAILS).findOne({_id: ObjectId(proId)}).then((data)=>{
-            //     resolve(data)
-            // })
-            console.log("ID", proId);
             let product = await db.get().collection(collections.PRODUCT_DETAILS).aggregate([
                 {
                     $match: {

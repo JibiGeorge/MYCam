@@ -4,7 +4,7 @@
             <div class="form-container user-signup">
                 <form action="" id="otpverification">
                     <label for="">Enter Your OTP</label>
-                    <input type="text" name="id" value="<%= userId %>">
+                    <input style="display: none;" type="text" name="id" value="<%= userId %>">
                 <input type="text" name="OTP">
                 <input type="submit" class="btn btn-success" value="Submit">
                 </form>
@@ -33,8 +33,14 @@
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify(data)
-        }).then((status)=>{               
-            window.location = '/login'
+        }).then((response)=>{          
+            if(response.verificationSuccess){
+                 window.location = '/login'
+            }else if(response.verificationFail){
+                window.location = '/user/verificationfailed'
+            }
+        }).catch((error)=>{
+            console.log(error);
         })
     })
 </script>

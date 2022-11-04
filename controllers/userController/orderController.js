@@ -3,7 +3,6 @@ const userCartModel = require('/Brototype/Week 8/MyCam/model/userCart')
 const categoryController = require('/Brototype/Week 8/MyCam/model/category')
 
 const placeOrder = async (req, res) => {
-    // if(req.body.paymentMethod == 'COD')
     let products = await userCartModel.getCartProductList(req.body.userID)
     let totalPrice = await userCartModel.getTotalAmount(req.body.userID)
     orderModel.placeOrder(req.body, products, totalPrice).then((orderID) => {

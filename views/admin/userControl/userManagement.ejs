@@ -19,17 +19,31 @@
                         </thead>
                         <tbody>
                             <% for(var i=0;i<usersList.length;i++) { %>
-                            <tr class="table-data">                                
-                                <td class="slno"></td>
-                                <td><%= usersList[i]._id %></td>
-                                <td><%= usersList[i].user_Name %></td>
-                                <td><%= usersList[i].user_Email %></td>
-                                <td><%= usersList[i].mobile_No %></td>
-                                <td>
-                                    <a style="background: #5E4548;" href="" class="btn btn-primary">BLOCK</a>
-                                </td>
-                            </tr>
-                            <% } %>
+                                <tr class="table-data">
+                                    <td class="slno"></td>
+                                    <td>
+                                        <%= usersList[i]._id %>
+                                    </td>
+                                    <td>
+                                        <%= usersList[i].user_Name %>
+                                    </td>
+                                    <td>
+                                        <%= usersList[i].user_Email %>
+                                    </td>
+                                    <td>
+                                        <%= usersList[i].mobile_No %>
+                                    </td>
+                                    <td>
+                                        <% if (usersList[i].state=="active" ) { %>
+                                            <button onclick="userBlock('<%= usersList[i]._id %>')"
+                                                style="background: #5E4548;" href="" class="btn btn-primary">BLOCK</button>
+                                            <% } else{ %>
+                                                <button onclick="userUnBlock('<%= usersList[i]._id %>')" style="background: #c5cf64;" href="" class="btn btn-primary">UN
+                                                    BLOCK</button>
+                                                <% } %>
+                                    </td>
+                                </tr>
+                                <% } %>
                         </tbody>
                     </table>
                 </div>
@@ -40,6 +54,32 @@
 
 <script>
     $(document).ready(function () {
-    $('#user_Table').DataTable();
-});
+        $('#user_Table').DataTable();
+    });
+
+
+
+    function userBlock(userID){
+        fetch('/admin/userManagement/block',{
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({userID})
+        }).then(()=>{
+            window.location.reload();
+        }).catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+    function userUnBlock(userID){
+        fetch('/admin/userManagement/unBlock',{
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({userID})
+        }).then(() => {
+            window.location.reload()
+        }).catch((error) => {
+            console.error('Error:', error);
+        });
+    }
 </script>

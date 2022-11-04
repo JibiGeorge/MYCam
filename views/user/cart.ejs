@@ -13,38 +13,50 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle">
-                                <% for (var i=0;i<products.length;i++) { %>
-                        <tr style="border-bottom: 15px solid #f5f5f5;">
-                            <td>
-                                <img src="/images/<%= products[i].product.picture %>" alt="Sorry" width="50px">
-                                <a href="" style="text-decoration: none; color: #6C757D;"><%= products[i].product.product_Name %></a>
-                            </td>
-                            <td>₹<%= products[i].product.selling_Price %></td>
-                            <td>
-                                <div class="mx-auto d-flex" style="width: 100px;">
-                                    <div>
-                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;"onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',-1,'<%= userData._id %>')">
-                                            <i class="las la-minus"></i>
-                                        </button>
-                                    </div>
-                                    <span id="<%= products[i].product._id %>"style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;" class="pt-1"><%= products[i].quantity %></span>
+                        <% if(products.length >0){ %>
 
-                                    <!-- <input disabled type="text" value="<%= products[i].quantity %>" style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;" id="<%= products[i].quantity %>"> -->
-                                    <div>
-                                        <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;" onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',1,'<%= userData._id %>')">
-                                            <i class="las la-plus"></i>
+                            <% for (var i=0;i<products.length;i++) { %>
+                                <tr style="border-bottom: 15px solid #f5f5f5;">
+                                    <td>
+                                        <img src="/images/<%= products[i].product.picture %>" alt="Sorry" width="50px">
+                                        <a href="" style="text-decoration: none; color: #6C757D;"><%= products[i].product.product_Name %></a>
+                                    </td>
+                                    <td>₹<%= products[i].product.selling_Price %></td>
+                                    <td>
+                                        <div class="mx-auto d-flex" style="width: 100px;">
+                                            <div>
+                                                <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;"onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',-1,'<%= userData._id %>')">
+                                                    <i class="las la-minus"></i>
+                                                </button>
+                                            </div>
+                                            <span id="<%= products[i].product._id %>"style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;" class="pt-1"><%= products[i].quantity %></span>
+        
+                                            <!-- <input disabled type="text" value="<%= products[i].quantity %>" style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;" id="<%= products[i].quantity %>"> -->
+                                            <div>
+                                                <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;" onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',1,'<%= userData._id %>')">
+                                                    <i class="las la-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <button class="btn btn-danger" style="padding: 0.35rem 0.5rem; font-size: 0.875rem;">
+                                            <i class="las la-times"></i>
                                         </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td></td>
-                            <td>
-                                <button onclick="deleteCartItem('<%= products[i].product._id %>')" class="btn btn-danger" style="padding: 0.35rem 0.5rem; font-size: 0.875rem;">
-                                    <i class="las la-times"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <% } %>                        
+                                    </td>
+                                </tr>
+                                <% } %>  
+                            <% } else { %>
+                                <tr style="border-bottom: 15px solid #f5f5f5;">
+                                    <td><h1>Cart is Empty</h1></td>
+                                    </tr>
+                                <% } %>
+
+
+
+
+                                                      
                     </tbody>
                 </table>
             </div>
@@ -107,12 +119,6 @@
         })
     }
 
-    function deleteCartItem(productID){
-        fetch('/cart/deleteProduct',{
-            method: 'DELETE',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({productID})
-        })
-    }
+
 
 </script>

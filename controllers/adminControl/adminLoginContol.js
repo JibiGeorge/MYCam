@@ -2,10 +2,7 @@ const { response } = require('express');
 const session = require('express-session');
 const adminLoginContol = require('../../model/adminLogin')
 
-// For No Page Found
-// const noPage = (req,res)=>{
-//     res.status(404).send('<h1>404! Page not found</h1>');
-// }
+
 //For admin Login Page
 const adminLoginPage = (req,res)=>{
     if(req.session.adminloggedIn){

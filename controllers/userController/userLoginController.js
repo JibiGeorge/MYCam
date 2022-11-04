@@ -4,7 +4,7 @@ const imageSlider = require('/Brototype/Week 8/MyCam/model/sliderImageModel')
 const productModel = require('/Brototype/Week 8/MyCam/model/product')
 const nodemailer = require("nodemailer")
 const userOTPModel = require('/Brototype/Week 8/MyCam/model/OTPModel')
-
+require('dotenv').config();
 
 const OTP = `${Math.floor(1000 + Math.random() * 9000)}`;
 const sendVerifyMail = async (name, email, id) => {
@@ -15,13 +15,13 @@ const sendVerifyMail = async (name, email, id) => {
             secure: false,
             requireTLS: true,
             auth: {
-                user: 'jibiyyan@gmail.com',
-                pass: '*****************'
+                user: process.env.VERIFICATION_MAIL_ID,
+                pass: process.env.VERIFICATION_MAIL_PASSWORD
             }
         });
 
         const mailOption = {
-            from: 'jibiyyan@gmail.com',
+            from: process.env.VERIFICATION_MAIL_ID,
             to: email,
             subject: "For Verification Mail",
             // html: `<p> HI `+name+` , please click here to <a href="http://localhost:3000/verify?id='+userId+'"> Verify </a> your mail. </p> <h1>${OTP}</h1>` 
@@ -122,7 +122,6 @@ const doLogout = (req, res) => {
 }
 
 const doSignUpVerification = (req, res) => {
-    let userData = req.session.user
     const userOTP = req.body.OTP
     const userId = req.body.id
     console.log(req.body);
@@ -130,17 +129,24 @@ const doSignUpVerification = (req, res) => {
         if (userOTP == OTP) {
             console.log("correct");
             userOTPModel.updateVerification(userId).then((response) => {
-                res.json({ status: true })
+                res.json({ verificationSuccess: true })
             })
         } else {
             console.log("wrong");
-            categoryController.getCategory().then((category) => {
-                res.render('user/verificationOTP', { admin: false, user: true, category, errMsg: "Invalid OTP", userId, userData })
-            })
+                res.json({verificationFail: true})
         }
     } catch (error) {
         console.log(error.message);
     }
+}
+
+
+const loginFailed = (req,res)=>{
+    let userData = req.session.user
+    const userId = req.body.id
+    categoryController.getCategory().then((category) => {
+        res.render('user/verificationOTP', { admin: false, user: true, category, errMsg: "Invalid OTP", userId, userData })
+    })
 }
 
 module.exports = {
@@ -149,5 +155,6 @@ module.exports = {
     doSignUp,
     doLogin,
     doLogout,
-    doSignUpVerification
+    doSignUpVerification,
+    loginFailed
 }

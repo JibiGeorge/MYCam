@@ -9,10 +9,10 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const db = require('./config/connection')
 const MongoDBSession = require('connect-mongodb-session')(session);
-const port = 4000;
+require('dotenv').config();
 
 const store = new MongoDBSession({
-    uri: 'mongodb://0.0.0.0:27017/MyCam',
+    uri: process.env.DB_SERVER,
     collection: 'MySession'
 })
 
@@ -22,9 +22,11 @@ app.use(logger('dev'))
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session({
-    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    secret: process.env.SESSION_SECRET_KEY,
     saveUninitialized: true,
-    cookie: { maxAge: 6000000 },
+    cookie: { 
+        maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+     },
     resave: false,
     store: store
 }));
@@ -52,6 +54,6 @@ app.set('view engine', 'ejs')
 app.use('/admin', adminRouter)
 app.use('/',userRouter)
 
-app.listen(port, () => {
-    console.log("Server Started at port || ", port);
+app.listen(process.env.PORT, () => {
+    console.log("listening to port 4000 .💕❤️💕");
 })

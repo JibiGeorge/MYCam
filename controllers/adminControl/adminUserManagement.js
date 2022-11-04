@@ -11,6 +11,24 @@ const userManagementPage = (req, res) => {
     }
 }
 
+const userBlock = (req,res)=>{
+    if(req.session.admin){
+        userModel.blockUser(req.body.userID).then((response)=>{
+            res.json({status:true})
+        })
+    }
+}
+
+const userUnBlock= (req,res)=>{
+    if(req.session.admin){
+        userModel.unBlockUser(req.body.userID).then((response)=>{
+            res.json({status:true})
+        })
+    }
+}
+
 module.exports = {
-    userManagementPage
+    userManagementPage,
+    userBlock,
+    userUnBlock
 }

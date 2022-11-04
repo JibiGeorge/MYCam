@@ -127,8 +127,8 @@
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id })
-        }).then(() => {
-            window.location = '/admin/silderImage'
+        }).then((response) => {
+            window.location.reload()
         }).catch((error) => {
             console.error('Error:', error);
         });

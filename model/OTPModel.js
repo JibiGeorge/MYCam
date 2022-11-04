@@ -8,7 +8,8 @@ module.exports = {
             db.get().collection(collections.USER_DETAILS).updateOne({_id:ObjectID(userID)},
             {
                 $set:{
-                    verified:1
+                    verified:1,
+                    state:"active"
                 }
             }
             ).then((response)=>{
