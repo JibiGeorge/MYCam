@@ -37,9 +37,9 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>₹ 76</td>
+                            <td></td>
                             <td>
-                                <button class="btn btn-danger" style="padding: 0.35rem 0.5rem; font-size: 0.875rem;">
+                                <button onclick="deleteCartItem('<%= products[i].product._id %>')" class="btn btn-danger" style="padding: 0.35rem 0.5rem; font-size: 0.875rem;">
                                     <i class="las la-times"></i>
                                 </button>
                             </td>
@@ -104,6 +104,14 @@
                     // }
                 }
             }
+        })
+    }
+
+    function deleteCartItem(productID){
+        fetch('/cart/deleteProduct',{
+            method: 'DELETE',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({productID})
         })
     }
 

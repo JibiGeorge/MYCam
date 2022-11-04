@@ -73,13 +73,13 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table>
+                    <table style="width: 100%;" id="slider_table">
                         <thead>
                             <tr>
-                                <td style="width: 56px;">SL NO.</td>
-                                <td style="width: 100px;">Image</td>
-                                <td style="width: 100px;">Caption</td>
-                                <td style="width: 15%;">Action</td>
+                                <td class="rddd">SL NO.</td>
+                                <td>Image</td>
+                                <td>Caption</td>
+                                <td>Action</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -92,15 +92,15 @@
                                         <%= values.caption %>
                                     </td>
                                     <td>
-                                        <a style="background: #5E4548;" href="" class="btn btn-primary"
+                                        <a style=" border-radius: 20px; padding: 10px; color: #fff; border: 0px; background: #5E4548;"
                                             data-bs-toggle="modal" data-bs-target="#updateSlider"
-                                            onclick="sliderEdit('<%= values._id %>','<%= values.caption %>')">Edit</a>
+                                            onclick="sliderEdit('<%= values._id %>','<%= values.caption %>')">EDIT</a>
                                         <!-- <a style="background: #B05541;" href="/admin/sliderDelete" class="btn btn-primary">Delete</a> -->
                                         <!-- <form action="/admin/sliderDelete/<%= values._id %>" id="sliderDelete">
                                             <input type="submit" value="Delete" style="background: #B05541;" class="btn btn-primary"></input>
                                         </form> -->
-                                        <button id="deleteSlider" onclick="deleteSlider('<%= values._id %>')"
-                                            class="btn btn-primary">DELETE</button>
+                                        <a id="deleteSlider" onclick="deleteSlider('<%= values._id %>')"
+                                            style="background: #0d6efd; border-radius: 20px; padding: 10px; color: #fff; border: 0px;">DELETE</a>
 
                                     </td>
                                 </tr>
@@ -133,4 +133,8 @@
             console.error('Error:', error);
         });
     }
+
+    $(document).ready(function () {
+    $('#slider_table').DataTable();
+});
 </script>

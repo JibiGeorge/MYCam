@@ -135,7 +135,7 @@
             method: 'post',
             data: $('#checkout').serialize(),
             success: (response) => {
-                alert(response)
+                // alert(response)
                 if (response.codSuccess) {
                     location.href = '/order-success'
                 }
@@ -149,7 +149,7 @@
 
     function razorpayPayment(order) {
         var options = {
-            "key": "***************", // Enter the Key ID generated from the Dashboard
+            "key": "*****************", // Enter the Key ID generated from the Dashboard
             "amount": order.amount*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
             "currency": "INR",
             "name": "MyCam",
@@ -157,10 +157,10 @@
             "image": "https://example.com/your_logo",
             "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             "handler": function (response) {      
-                alert(response.razorpay_payment_id);
-                alert(response.razorpay_order_id);
-                alert(response.razorpay_signature);
-
+                // alert(response.razorpay_payment_id);
+                // alert(response.razorpay_order_id);
+                // alert(response.razorpay_signature);
+                          
                 verifyPayment(response,order);
             },
             "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",

@@ -168,5 +168,9 @@ module.exports = {
             let cart = await db.get().collection(collections.CART_COLLECTION).findOne({user:ObjectID(userID)})
             resolve(cart.products)
         })
-    }
+    },
+    // deleteProduct: (id)=>{
+    //     return new Promise ((resolve,reject)=>{
+    //     })
+    // }
 }

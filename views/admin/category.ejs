@@ -75,8 +75,8 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table width="100%">
-                            <thead>
+                        <table width="100%" id="category_Table">
+                            <thead class="category">
                                 <tr>
                                     <td>SL NO.</td>
                                     <td>Category Name</td>
@@ -96,12 +96,12 @@
                                         </td>
                                         <td>
                                             <!-- /admin/category/edit?id=<%= category[i]._id %> -->
-                                            <a style="background: #5E4548;" href="" class="btn btn-primary"
+                                            <a style=" text-decoration: none; border-radius: 20px; padding: 10px; color: #fff; border: 0px; background: #5E4548;" href=""
                                                 data-bs-toggle="modal" data-bs-target="#updateCategory"
                                                 onclick="categoryEdit('<%= category[i]._id %>','<%= category[i].categoryName %>')">Edit</a>
-                                            <a style="background: #B05541;"
+                                            <a style="text-decoration: none; background: #0d6efd; border-radius: 20px; padding: 10px; color: #fff; border: 0px;"
                                                 href="/admin/category/delete?id=<%= category[i]._id %>"
-                                                class="btn btn-primary">Delete</a>
+                                                >Delete</a>
                                         </td>
                                     </tr>
                                     <% } %>
@@ -122,4 +122,8 @@
         editName.value = categoryName;
         categoryID.value = id
     }
+
+    $(document).ready(function () {
+    $('#category_Table').DataTable();
+});
 </script>

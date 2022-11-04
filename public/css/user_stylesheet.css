@@ -147,7 +147,7 @@
 }
 .user-signup{
     background: rgb(230, 210, 210);
-    width: auto;
+    width: 100%;
     padding: 2rem;
     border-radius: 5%;
     box-shadow: 0 0px 40px #ff7800;

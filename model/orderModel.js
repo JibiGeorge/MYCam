@@ -3,7 +3,7 @@ const collections = require('../config/collections');
 const { ObjectId } = require('mongodb');
 const Razorpay = require('razorpay')
 
-var instance = new Razorpay({ key_id: '***************', key_secret: '***************' })
+var instance = new Razorpay({ key_id: '*****************', key_secret: '*****************' })
 
 module.exports = {
     placeOrder: (orderDetails, products, total) => {
@@ -11,7 +11,7 @@ module.exports = {
             let status = orderDetails.paymentMethod === 'COD' ? 'placed' : 'pending'
             let orderObj = {
                 deliveryDetails: {
-                    mobile: orderDetails.address,
+                    address: orderDetails.address,
                 },
                 user: ObjectId(orderDetails.userID),
                 paymentMethod: orderDetails.paymentMethod,

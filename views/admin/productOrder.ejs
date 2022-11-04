@@ -1,3 +1,53 @@
 <main class="main-content">
-    ahgdchj
+    <div class="product-grid">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table width="100%" id="order_table">
+                        <thead>
+                            <tr>
+                                <td>Order ID</td>
+                                <td>Customer Name</td>
+                                <td>Order Status</td>
+                                <td>Expected Delivery</td>
+                                <td>Amount</td>
+                                <td>View</td>
+                                <td>Update Status</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-data">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <input type="button"
+                                        style="background: rgb(45, 177, 104); border-radius: 50px; padding: 2px; color: #fff; border: 0px;"
+                                        value="View Details"></input>
+                                </td>
+                                <td>
+                                    <select name="" id=""
+                                        style="background: rgb(122, 115, 115); border-radius: 50px; padding: 4px; color: #fff;">
+                                        <option selected>ordered</option>
+                                        <option value="packed">packed</option>
+                                        <option value="shipped">shipped</option>
+                                        <option value="delivered">delivered</option>
+                                        <option value="canceled">canceled</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
+
+<script>
+    $(document).ready(function () {
+    $('#order_table').DataTable();
+});
+</script>

@@ -2,11 +2,11 @@
     <div class="product-grid">
         <div class="card">
             <div class="header">
-                <h3><span style="color: rgb(23, 131, 1);">Active : </span> Users List</h3>
+                <h3>Users List</h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="user_Table">
                         <thead>
                             <tr>
                                 <td style="width: 55px;">SL NO.</td>
@@ -37,3 +37,9 @@
         </div>
     </div>
 </main>
+
+<script>
+    $(document).ready(function () {
+    $('#user_Table').DataTable();
+});
+</script>

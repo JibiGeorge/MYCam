@@ -9,17 +9,17 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="example">
                         <thead>
                             <tr>
-                                <td>SL NO.</td>
-                                <td>Category</td>
-                                <td>Brand</td>
-                                <td style="width: 25%;">Product Name</td>
-                                <td>Price</td>
-                                <td>Total Qty</td>
-                                <td>Sold</td>
-                                <td style="width: 15%;">Action</td>
+                                <th>SL NO.</th>
+                                <th>Category</th>
+                                <th>Brand</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Total Qty</th>
+                                <th>Sold</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,3 +45,9 @@
         </div>
     </div>
 </main>
+
+<script>
+    $(document).ready(function () {
+    $('#example').DataTable();
+});
+</script>

@@ -5,81 +5,81 @@
     grid-gap: 2rem;
     grid-template-columns: 65% auto;
 }
-.card{
+.user-order .card{
     background: #fff;
     border-radius: 5px;
 }
-.card-header,
-.card-body{
+.user-order .card-header,
+.user-order .card-body{
     padding: 1rem;
 }
-.card-header{
+.user-order .card-header{
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #f0f0f0;
 }
-table{
+.user-order table{
     border-collapse: collapse;
 }
-thead tr{
+.user-order thead tr{
     border-top: 1px solid #f0f0f0;
     border-bottom: 2px solid #f0f0f0;
 }
-thead td{
+.user-order thead td{
     font-weight: 700;
 }
-td{
+.user-order td{
     padding: .5rem 1rem;
     font-size: .9rem;
     color: #222
 }
 
-td .status{
+.user-order td .status{
     display: inline-block;
     height: 10px;
     width: 10px;
     border-radius: 50%;
     margin-right: 1rem;
 }
-tr td:last-child{
+.user-order tr td:last-child{
     display: flex;
     align-items: center;
 }
-.status.green{
+.user-order .status.green{
     background: rgb(0, 255, 13);
 }
-.status.red{
+.user-order .status.red{
     background: rgb(255, 0, 0);
 }
-.table-responsive{
+.user-order .table-responsive{
     width: 100%;
-    overflow-x: auto;
+    overflow: hidden;
 }
-.customer{
+.user-order .customer{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: .5rem .7rem;
 }
-.info{
+.user-order .info{
     display: flex;
     align-items: center;
 }
-.info img{
+.user-order .info img{
     border-radius: 50%;
     margin-right: 1rem;
 }
-.info h4{
+.user-order .info h4{
     font-size: .8rem;
     font-weight: 700;
     color: #222;
 }
-.info small{
+.user-order .info small{
     font-weight: 600;
     color: var(--text-grey);
 }
-.contact span{
+.user-order .contact span{
     font-size: 1.2rem;
     display: inline-block;
     margin-left: .5rem;

@@ -66,7 +66,7 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table width="100%">
+                        <table width="100%" id="brand_table">
                             <thead>
                                 <tr>
                                     <td>SL NO.</td>
@@ -82,11 +82,12 @@
                                             <%= brand[i].brandName %>
                                         </td>
                                         <td>
-                                            <a style="background: #5E4548;" href="" class="btn btn-primary"
-                                                data-bs-toggle="modal" data-bs-target="#updateBrand" onclick="brandEdit('<%= brand[i]._id %>','<%= brand[i].brandName %>')">Edit</a>
-                                            <a style="background: #B05541;"
+                                            <a style=" text-decoration: none; border-radius: 20px; padding: 10px; color: #fff; border: 0px; background: #5E4548;"
+                                                data-bs-toggle="modal" data-bs-target="#updateBrand"
+                                                onclick="brandEdit('<%= brand[i]._id %>','<%= brand[i].brandName %>')">Edit</a>
+                                            <a style="text-decoration: none; background: #0d6efd; border-radius: 20px; padding: 10px; color: #fff; border: 0px;"
                                                 href="/admin/brand/delete?id=<%= brand[i]._id %>"
-                                                class="btn btn-primary">Delete</a>
+                                                >Delete</a>
                                         </td>
                                     </tr>
                                     <% } %>
@@ -100,11 +101,15 @@
 </main>
 
 <script>
-    function brandEdit(id,brandName){
+    function brandEdit(id, brandName) {
         let brandEditField = document.getElementById('editBrandName');
         let brandID = document.getElementById('brandID');
 
         brandEditField.value = brandName;
         brandID.value = id
     }
+
+    $(document).ready(function () {
+        $('#brand_table').DataTable();
+    });
 </script>

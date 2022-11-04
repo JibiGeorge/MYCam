@@ -44,9 +44,15 @@ const proceedToPayment = async (req, res) => {
         })
     })
 }
+
+// const deleteCartProduct = (req,res)=>{
+//     let id = req.body.productID
+//     userCartModel.deleteProduct(id)
+// }
 module.exports = {
     addtoCart,
     showCart,
     changeQuantity,
-    proceedToPayment
+    proceedToPayment,
+    // deleteCartProduct
 }

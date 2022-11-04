@@ -20,6 +20,7 @@ router.get('/product/showDetail/add-tocart/:id', userCartController.addtoCart)
 
 router.get('/cart', userCartController.showCart)
 router.post('/cart/chageProductQuanity', userCartController.changeQuantity)
+// router.delete('/cart/deleteProduct',userCartController.deleteCartProduct)
 
 router.post('/addAddress',addressController.addAddress)
 router.get('/cart/proceedToPayment',userCartController.proceedToPayment)
