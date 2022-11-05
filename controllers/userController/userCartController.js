@@ -3,7 +3,9 @@ const categoryController = require('/Brototype/Week 8/MyCam/model/category')
 const userAddressModel = require('/Brototype/Week 8/MyCam/model/userAddressModel')
 
 const addtoCart = (req, res) => {
-    userCartModel.addToCart(req.params.id, req.session.user._id).then(() => {
+    // console.log("vsdvs");
+    // console.log(req.body);
+    userCartModel.addToCart(req.body.productID, req.body.price, req.session.user._id).then(() => {
         res.json({ status: true })
     })
 }
@@ -14,18 +16,28 @@ const showCart = async (req, res) => {
     if (req.session.userLoggedIn) {
         cartCount = await userCartModel.getCartCount(userData._id)
     }
-    let totalAmount = await userCartModel.getTotalAmount(userData._id)
-    userCartModel.getCartParoducts(req.session.user._id).then((products) => {
-        categoryController.getCategory().then((category) => {
-            res.render('user/cart', { admin: false, user: true, category, userData, products, cartCount, totalAmount })
+    userCartModel.getTotalAmount(userData._id).then((totalAmount)=>{        
+        // console.log("result",totalAmount);
+        userCartModel.getCartParoducts(req.session.user._id).then((products) => {
+            // console.log("vadvav",products);
+            categoryController.getCategory().then((category) => {
+                res.render('user/cart', { admin: false, user: true, category, userData, products, cartCount,totalAmount})
+            })
         })
     })
+    // totalAmount = totalAmount > 0 ? totalAmount : 0;
+    // totalAmount = totalAmount[0].total
+    // console.log("result",totalAmount);
+    
 }
 
 const changeQuantity = (req, res, next) => {
+    let userData = req.session.user
+    // console.log(req.body);
     userCartModel.changeProductQuantity(req.body).then(async (response) => {
-        response.totalAmount = await userCartModel.getTotalAmount(req.body.userID)
-        res.json(response)
+        userCartModel.getTotalAmount(userData._id).then((totalAmount)=>{ 
+        res.json({response,totalAmount})
+        })
     })
 }
 

@@ -16,7 +16,7 @@ router.post('/userLogin', userLoginController.doLogin)
 router.get('/logout', userLoginController.doLogout)
 
 router.get('/product/showDetail', userHomePageController.showDetail)
-router.get('/product/showDetail/add-tocart/:id', userCartController.addtoCart)
+router.post('/product/showDetail/add-tocart', userCartController.addtoCart)
 
 router.get('/cart', userCartController.showCart)
 router.post('/cart/chageProductQuanity', userCartController.changeQuantity)

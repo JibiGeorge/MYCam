@@ -25,7 +25,7 @@
                                     <td>
                                         <div class="mx-auto d-flex" style="width: 100px;">
                                             <div>
-                                                <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;"onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',-1,'<%= userData._id %>')">
+                                                <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;"onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',-1,'<%= userData._id %>','<%= products[i].product.selling_Price %>','<%= products[i].SumOfProducts %>')">
                                                     <i class="las la-minus"></i>
                                                 </button>
                                             </div>
@@ -33,13 +33,13 @@
         
                                             <!-- <input disabled type="text" value="<%= products[i].quantity %>" style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;" id="<%= products[i].quantity %>"> -->
                                             <div>
-                                                <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;" onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',1,'<%= userData._id %>')">
+                                                <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;" onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',1,'<%= userData._id %>','<%= products[i].product.selling_Price %>','<%= products[i].SumOfProducts %>')">
                                                     <i class="las la-plus"></i>
                                                 </button>
                                             </div>
                                         </div>
                                     </td>
-                                    <td></td>
+                                    <td id="<%= products[i].SumOfProducts %>">₹<%= products[i].SumOfProducts %></td>
                                     <td>
                                         <button class="btn btn-danger" style="padding: 0.35rem 0.5rem; font-size: 0.875rem;">
                                             <i class="las la-times"></i>
@@ -79,11 +79,7 @@
                             <h4 style="font-weight: 600;">Total</h4>
                             <h4 id="totalAmount" class="totalAmount" style="font-weight: 600;"><%=totalAmount %></h4>
                         </div>
-                        <% if (totalAmount<=0){ %>
-                        <a style="font-weight: 700; width: 100%; color: #3D464D; background: #FFD333; border: 0; display: none;"  class="my-3 py-3 btn" href="/cart/proceedToPayment">Procced to Checkout</a>
-                        <% } else  { %>
-                            <a style="font-weight: 700; width: 100%; color: #3D464D; background: #FFD333; border: 0;" class="my-3 py-3 btn" href="/cart/proceedToPayment">Procced to Checkout</a>
-                            <% } %>
+                        <a style="font-weight: 700; width: 100%; color: #3D464D; background: #FFD333; border: 0;" class="my-3 py-3 btn" href="/cart/proceedToPayment">Procced to Checkout</a>
                     </div>
                 </div>
             </div>
@@ -92,7 +88,7 @@
 </div>
 
 <script>
-    function changeQuantity(cartID, productID,count,userID){
+    function changeQuantity(cartID, productID,count,userID,price,total){
         let quantity = parseInt(document.getElementById(productID).innerHTML)
         $.ajax({
             url: '/cart/chageProductQuanity',
@@ -101,7 +97,8 @@
                 product:productID,
                 count:count,
                 quantity: quantity,
-                userID:userID
+                userID:userID,
+                price:price
             },
             method:'post',
             success:(response)=>{
@@ -109,9 +106,12 @@
                     // alert("Product Removed from cart")
                     location.reload()
                 }else{
-                    document.getElementById(productID).innerHTML=quantity+count
+                    let counttt = document.getElementById(productID).innerHTML=quantity+count
+                    document.getElementById(total).innerHTML = counttt*price
+                    console.log("dacvacva",counttt);
                     document.getElementById("subTotal").innerHTML = response.totalAmount
                     document.getElementById("totalAmount").innerHTML = response.totalAmount
+                    document.getElementById("totalProductAmount").innerHTML = counttt*price
                     // let shippingCharge = (response.totalAmount*5)/100;
                     // if(response.totalAmount >300000){
                     //     document.getElementById('shipping').innerHTML = "No Shipping"

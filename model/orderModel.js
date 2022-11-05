@@ -59,7 +59,6 @@ module.exports = {
                     }
                 }
             ]).toArray()
-            console.log(productList);
             resolve(productList)
 
         })

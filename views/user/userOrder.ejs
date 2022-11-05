@@ -8,57 +8,62 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table width="100%" id="order_table">
-                                <thead style="text-align: center;">
-                                    <tr>
-                                        <td>Order ID</td>
-                                        <td>Payment Type</td>
-                                        <td>Order Status</td>
-                                        <td>Expected Delivery</td>
-                                        <td>Amount</td>
-                                        <td>View</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <% for (values of productList) { %>
+                            <% if (productList <=0) { %>
+                                <h3>No Orders</h3>
+                            
+                            <% } else { %>
+                                <table width="100%" id="order_table">
+                                    <thead style="text-align: center;">
                                         <tr>
-                                            <td>
-                                                <%= values._id %>
-                                            </td>
-                                            <td>
-                                                <%= values.paymentMethod %>
-                                            </td>
-                                            <% if (values.status=="placed" ) { %>
+                                            <td>Order ID</td>
+                                            <td>Payment Type</td>
+                                            <td>Order Status</td>
+                                            <td>Expected Delivery</td>
+                                            <td>Amount</td>
+                                            <td>View</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (values of productList) { %>
+                                            <tr>
                                                 <td>
-                                                    <span class="status green"></span>
-                                                    <%= values.status %>
+                                                    <%= values._id %>
                                                 </td>
-                                                <% } else if(values.status=="pending" ) { %>
+                                                <td>
+                                                    <%= values.paymentMethod %>
+                                                </td>
+                                                <% if (values.status=="placed" ) { %>
                                                     <td>
-                                                        <span class="status red"></span>
+                                                        <span class="status green"></span>
                                                         <%= values.status %>
                                                     </td>
-                                                    <% } %>
+                                                    <% } else if(values.status=="pending" ) { %>
                                                         <td>
-                                                            <%= values.date %>
+                                                            <span class="status red"></span>
+                                                            <%= values.status %>
                                                         </td>
-                                                        <td>
-                                                            <%= values.totalAmount %>
-                                                        </td>
-                                                        <td>
-                                                            <!-- <button
-                                                                onclick="orderDetailView('<%=values._id %>','<%= values.products[0].product_Name %>')"
-                                                                class="btn btn-warning">View Detail
-                                                            </button> -->
-                                                            <button type="button" class="btn btn-warning"
-                                                                data-bs-toggle="modal" data-bs-target="#addCategory"
-                                                                onclick="view('<%=values._id%>')">View Detail
-                                                            </button>
-                                                        </td>
-                                        </tr>
-                                        <% } %>
-                                </tbody>
-                            </table>
+                                                        <% } %>
+                                                            <td>
+                                                                <%= values.date %>
+                                                            </td>
+                                                            <td>
+                                                                <%= values.totalAmount %>
+                                                            </td>
+                                                            <td>
+                                                                <!-- <button
+                                                                    onclick="orderDetailView('<%=values._id %>','<%= values.products[0].product_Name %>')"
+                                                                    class="btn btn-warning">View Detail
+                                                                </button> -->
+                                                                <button type="button" class="btn btn-warning"
+                                                                    data-bs-toggle="modal" data-bs-target="#addCategory"
+                                                                    onclick="view('<%=values._id%>')">View Detail
+                                                                </button>
+                                                            </td>
+                                            </tr>
+                                            <% } %>
+                                    </tbody>
+                                </table>
+                                <% } %>
                         </div>
                     </div>
                 </div>
@@ -85,10 +90,6 @@
 </div>
 </div>
 
-
-
-
-<!-- href="/orders/viewOrderDetails?id=<%= values._id %><%= values.products[0].product_Name %>" -->
 <script>
     function view(orderID) {
         const tableMain = document.getElementById('table_main')

@@ -91,7 +91,7 @@ const doSignUp = (req, res) => {
     })
 }
 const doLogin = (req, res) => {
-    let userData = req.session.user
+    let userData = req.session.user 
     userLoginModel.doLogin(req.body).then((response) => {
         if (response.userFalse) {
             categoryController.getCategory().then((category) => {

@@ -285,10 +285,12 @@ function loginValidate(){
 
 
 //Add product to cart
-function addToCart(productID){
+function addToCart(productID,price){
     $.ajax({
-        url:'/product/showDetail/add-tocart/'+productID,
-        method: 'get',
+        url:'/product/showDetail/add-tocart',
+        data: {price:price,
+            productID:productID},
+        method: 'post',
         success: (response)=>{
             if(response.status){
                 let count = $('#cartCount').html()
