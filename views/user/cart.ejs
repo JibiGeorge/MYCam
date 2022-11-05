@@ -79,7 +79,11 @@
                             <h4 style="font-weight: 600;">Total</h4>
                             <h4 id="totalAmount" class="totalAmount" style="font-weight: 600;"><%=totalAmount %></h4>
                         </div>
-                        <a style="font-weight: 700; width: 100%; color: #3D464D; background: #FFD333; border: 0;" class="my-3 py-3 btn" href="/cart/proceedToPayment">Procced to Checkout</a>
+                        <% if (totalAmount<=0){ %>
+                        <a style="font-weight: 700; width: 100%; color: #3D464D; background: #FFD333; border: 0; display: none;"  class="my-3 py-3 btn" href="/cart/proceedToPayment">Procced to Checkout</a>
+                        <% } else  { %>
+                            <a style="font-weight: 700; width: 100%; color: #3D464D; background: #FFD333; border: 0;" class="my-3 py-3 btn" href="/cart/proceedToPayment">Procced to Checkout</a>
+                            <% } %>
                     </div>
                 </div>
             </div>
