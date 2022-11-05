@@ -39,7 +39,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td id="<%= products[i].SumOfProducts %>">₹<%= products[i].SumOfProducts %></td>
+                                    <td id="<%= products[i].SumOfProducts %>">₹<%= products[i].product.selling_Price %></td>
                                     <td>
                                         <button class="btn btn-danger" style="padding: 0.35rem 0.5rem; font-size: 0.875rem;">
                                             <i class="las la-times"></i>
@@ -102,8 +102,7 @@
             },
             method:'post',
             success:(response)=>{
-                if(response.removeProduct){
-                    // alert("Product Removed from cart")
+                if(response.response.removeProduct){
                     location.reload()
                 }else{
                     let counttt = document.getElementById(productID).innerHTML=quantity+count

@@ -8,7 +8,7 @@ module.exports = {
         let productObject = {
             item: ObjectID(productID),
             quantity: 1,
-            price: parseInt(price)
+            SumOfProducts: parseInt(price)
         }
         return new Promise(async (resolve, reject) => {
             let userCart = await db.get().collection(collections.CART_COLLECTION).findOne({ user: ObjectID(userID) })
@@ -78,6 +78,7 @@ module.exports = {
                     }
                 }
             ]).toArray()
+            console.log("vadvavadv",cartItems);
             resolve(cartItems)
         })
     },
@@ -108,77 +109,89 @@ module.exports = {
                     _id: ObjectID(data.cart),
                     'products.item': ObjectID(data.product)
                 },
-                {
-                    $inc: {
-                        'products.$.quantity': data.count,
-                                               
-                    },
-                    $set:{
-                        'products.$.SumOfProducts': (data.quantity+data.count)*data.price
-                    }
-                }).then((response) => {
-                    resolve({ status: true })
-                })
+                    {
+                        $inc: {
+                            'products.$.quantity': data.count,
+
+                        },
+                        $set: {
+                            'products.$.SumOfProducts': (data.quantity + data.count) * data.price
+                        }
+                    }).then((response) => {
+                        resolve({ status: true })
+                    })
             }
 
         })
     },
     getTotalAmount: (userID) => {
         return new Promise(async (resolve, reject) => {
-            let totalAmount = await db.get().collection(collections.CART_COLLECTION).aggregate([
-                {
-                    $match: { user: ObjectID(userID) }
-                },
-                {
-                    $unwind: '$products'
-                },
-                {
-                    $project: {
-                        item: '$products.item',
-                        quantity: '$products.quantity'
+            let userCart = await db.get().collection(collections.CART_COLLECTION).findOne({ user: ObjectID(userID) })
+            // console.log("length",userCart.products.length);
+            if (userCart.products.length>0) {
+                // console.log("jahvdcjh");
+                let totalAmount = await db.get().collection(collections.CART_COLLECTION).aggregate([
+                    {
+                        $match: { user: ObjectID(userID) }
+                    },
+                    {
+                        $unwind: '$products'
+                    },
+                    {
+                        $project: {
+                            item: '$products.item',
+                            quantity: '$products.quantity'
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: collections.PRODUCT_DETAILS,
+                            localField: 'item',
+                            foreignField: '_id',
+                            as: 'cartItems'
+                        }
+                    },
+                    {
+                        $project: {
+                            item: 1,
+                            quantity: 1,
+                            product: { $arrayElemAt: ['$cartItems', 0] }
+                        }
+                    },
+                    // {
+                    //     $project: {
+                    //         quantity: 1,
+                    //         total: {
+                    //             $sum: {
+                    //                 $multiply: [
+                    //                     '$quantity', '$product.selling_Price'
+                    //                 ]
+                    //             }
+                    //         }
+                    //     }
+                    // }
+                    {
+                        $group: {
+                            _id: "",
+                            total: {
+                                $sum: {
+                                    $multiply: [
+                                        '$quantity', '$product.selling_Price'
+                                    ]
+                                }
+                            }
+                        }
                     }
-                },
-                {
-                    $lookup: {
-                        from: collections.PRODUCT_DETAILS,
-                        localField: 'item',
-                        foreignField: '_id',
-                        as: 'cartItems'
-                    }
-                },
-                {
-                    $project: {
-                        item: 1,
-                        quantity: 1,
-                        product: { $arrayElemAt: ['$cartItems', 0] }
-                    }
-                },
-                // {
-                //     $project: {
-                //         quantity: 1,
-                //         total: {
-                //             $sum: {
-                //                 $multiply: [
-                //                     '$quantity', '$product.selling_Price'
-                //                 ]
-                //             }
-                //         }
-                //     }
-                // }
-                {
-                    $group:{
-                        _id:"",
-                        total: {
-                            $sum:{
-                                $multiply:[
-                                    '$quantity','$product.selling_Price'
-                                ]
-                        }}
-                    }
-                }
-            ]).toArray()
-            console.log(totalAmount[0].total);
-            resolve(totalAmount[0].total)
+                ]).toArray()
+                response.totalAmount = totalAmount[0].total
+                // console.log("have",response.totalAmount);             
+                resolve(response)
+            } else {
+                response.totalAmount = 0;                
+                // console.log("empty",response.totalAmount);     
+                resolve(response)
+                // console.log("Cart is Empty");
+            }
         })
     },
     getCartProductList: (userID) => {

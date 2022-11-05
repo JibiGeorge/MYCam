@@ -3,9 +3,9 @@ const userCartModel = require('/Brototype/Week 8/MyCam/model/userCart')
 const categoryController = require('/Brototype/Week 8/MyCam/model/category')
 
 const placeOrder = async (req, res) => {
-    let products = await userCartModel.getCartProductList(req.body.userID)
+    console.log(req.body);
     let totalPrice = await userCartModel.getTotalAmount(req.body.userID)
-    orderModel.placeOrder(req.body, products, totalPrice).then((orderID) => {
+    orderModel.placeOrder(req.body, totalPrice,req.body.userID).then((orderID) => {
         if (req.body.paymentMethod == 'COD') {
 
             res.json({ codSuccess: true })
@@ -30,7 +30,6 @@ const orderSuccess = async (req, res) => {
 
 const ordersPage = async (req, res) => {
     let userData = req.session.user
-    console.log(userData);
     let cartCount = null;
     if (req.session.userLoggedIn) {
         cartCount = await userCartModel.getCartCount(req.session.user._id)
@@ -44,9 +43,9 @@ const ordersPage = async (req, res) => {
 
 const getOrderProductDetails = (req,res)=>{
     let orderID = req.body.orderID
-    console.log(orderID);
+    // console.log(orderID);
     orderModel.getOrderedProductDetails(orderID).then((orderProductDetails)=>{
-        console.log(orderProductDetails);
+        // console.log(orderProductDetails);
         res.json({orderProductDetails})
     })
 }

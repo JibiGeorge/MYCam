@@ -7,8 +7,32 @@ require('dotenv').config();
 var instance = new Razorpay({ key_id: process.env.RAZORPAY_KEY_ID, key_secret: process.env.RAZORPAY_KEY_SECRET })
 
 module.exports = {
-    placeOrder: (orderDetails, products, total) => {
-        return new Promise((resolve, reject) => {
+    placeOrder: (orderDetails, total, userID) => {
+        return new Promise(async (resolve, reject) => {
+            let cartProducts = await db.get().collection(collections.CART_COLLECTION).aggregate([
+                {
+                    $match: {user: ObjectId(userID)}
+                },
+                {
+                    $unwind: '$products'
+                },
+                {
+                    $lookup:{
+                        from: collections.PRODUCT_DETAILS,
+                        localField: 'products.item',
+                        foreignField: '_id',
+                        as: 'products'
+                    }
+                },
+                {
+                    $project:{
+                        _id:0,
+                        productDetails: { $arrayElemAt: ['$products', 0] }
+                    }
+                }
+
+            ]).toArray()
+
             let status = orderDetails.paymentMethod === 'COD' ? 'placed' : 'pending'
             let orderObj = {
                 deliveryDetails: {
@@ -16,8 +40,8 @@ module.exports = {
                 },
                 user: ObjectId(orderDetails.userID),
                 paymentMethod: orderDetails.paymentMethod,
-                products: products,
-                totalAmount: total,
+                products: cartProducts,
+                totalAmount: total.totalAmount,
                 status: status,
                 date: new Date()
             }
@@ -50,15 +74,16 @@ module.exports = {
                 {
                     $match: { user: ObjectId(userId) }
                 },
-                {
-                    $lookup:{
-                        from: collections.PRODUCT_DETAILS,
-                        localField: 'products.item',
-                        foreignField: '_id',
-                        as: 'products'
-                    }
-                }
+                // {
+                //     $lookup:{
+                //         from: collections.PRODUCT_DETAILS,
+                //         localField: 'products.productDetails',
+                //         foreignField: '_id',
+                //         as: 'products'
+                //     }
+                // }
             ]).toArray()
+            console.log("111",productList);
             resolve(productList)
 
         })
@@ -77,7 +102,7 @@ module.exports = {
                 {
                     $lookup:{
                         from: collections.PRODUCT_DETAILS,
-                        localField: 'products.item',
+                        localField: 'products.productDetails',
                         foreignField: '_id',
                         as: 'product'
                     }
