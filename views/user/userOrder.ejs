@@ -16,6 +16,7 @@
                                     <thead style="text-align: center;">
                                         <tr>
                                             <td>Order ID</td>
+                                            <td>Order Date</td>
                                             <td>Payment Type</td>
                                             <td>Order Status</td>
                                             <td>Expected Delivery</td>
@@ -30,28 +31,55 @@
                                                     <%= values._id %>
                                                 </td>
                                                 <td>
+                                                    <% let date = values.date %>
+                                                                <% date = date.toLocaleString(); %> 
+                                                                <%= date %>
+                                                </td>
+                                                <td>
                                                     <%= values.paymentMethod %>
                                                 </td>
-                                                <% if (values.status=="placed" ) { %>
+                                                <% if (values.status=="ordered" ) { %>
                                                     <td>
-                                                        <span class="status green"></span>
+                                                        <span class="status pink"></span>
                                                         <%= values.status %>
                                                     </td>
-                                                    <% } else if(values.status=="pending" ) { %>
+                                                    <% } else if(values.status=="packed" ) { %>
                                                         <td>
-                                                            <span class="status red"></span>
+                                                            <span class="status orange"></span>
                                                             <%= values.status %>
                                                         </td>
-                                                        <% } %>
+                                                        <% }else if(values.status == "shipped") { %>
                                                             <td>
-                                                                <%= values.date %>
+                                                                <span class="status blue"></span>
+                                                                <%= values.status %>
+                                                            </td>
+                                                            <% } else if(values.status == "delivered") { %>
+                                                                <td>
+                                                                    <span class="status green"></span>
+                                                                    <%= values.status %>
+                                                                </td>
+                                                                <% } else if(values.status=="cancelled") { %>
+                                                                    <td>
+                                                                        <span class="status red"></span>
+                                                                        <%= values.status %>
+                                                                    </td>
+                                                                    <% } else if(values.status == "placed") { %>
+                                                                        <td>
+                                                                            <span class="status yellow"></span>
+                                                                            <%= values.status %>
+                                                                        </td>
+                                                                        <% } %>
+                                                            <td>
+                                                                <% let expectedDate = values.expected_Date %>
+                                                                <% expectedDate = expectedDate.toLocaleString(); %> 
+                                                                <%= expectedDate %>
                                                             </td>
                                                             <td>
                                                                 <%= values.totalAmount %>
                                                             </td>
                                                             <td>
                                                                 <!-- <button
-                                                                    onclick="orderDetailView('<%=values._id %>','<%= values.products[0].product_Name %>')"
+                                                                    onclick="orderDetailView('<%=values._id %>','<%= values.product[0].product_Name %>')"
                                                                     class="btn btn-warning">View Detail
                                                                 </button> -->
                                                                 <button type="button" class="btn btn-warning"
@@ -82,8 +110,7 @@
                 <div class="table-responsive" id="table_main">
             </div>
             <div class="modal-footer">
-                <!-- <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                <button type="submit" class="btn btn-primary">CANCEL ORDER</button>
+                <button type="submit" onclick="orderCancel( '<%= values._id %>')" class="btn btn-primary">CANCEL ORDER</button>
             </div>
         </div>
     </div>
@@ -100,7 +127,7 @@
         }).then(res => res.json()).then(data => {
             let datas = data.orderProductDetails
             console.log(datas);
-            console.log("d",datas[0].products.productDetails.product_Name);
+            console.log("d",datas[0].product.productDetails.product_Name);
             let table =
                 `<table class="table table-striped table-hover">
                 <thead>
@@ -116,11 +143,11 @@
                     table +=
                         `<tr>
                             <td>
-                                <div class="mb-3" style="background-image:url('/images/${datas[i].products.productDetails.picture}'); width:50px;height:50px; background-size:contain;background-repeat:no-repeat"></div>
+                                <div class="mb-3" style="background-image:url('/images/${datas[i].product.productDetails.picture}'); width:50px;height:50px; background-size:contain;background-repeat:no-repeat"></div>
                             </td>
-                            <td>${datas[i].products.productDetails.product_Name}</td>
-                            <td>${datas[i].products.productDetails.selling_Price}</td>
-                            <td>${datas[i].products.productDetails.quantity}</td>
+                            <td>${datas[i].product.productDetails.product_Name}</td>
+                            <td>${datas[i].product.productDetails.selling_Price}</td>
+                            <td>${datas[i].product.productDetails.quantity}</td>
                         </tr>`                    
                 }
             table +=
@@ -133,5 +160,17 @@
     $(document).ready(function () {
     $('#order_table').DataTable();
 });
+
+
+// Order Cancel
+function orderCancel(orderID){
+    fetch('/orders/cancel', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ orderID })
+        }).then(res => res.json()).then(data => {
+            window.location ='/orders'
+        })
+}
 
 </script>

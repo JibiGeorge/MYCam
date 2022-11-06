@@ -7,37 +7,61 @@
                         <thead>
                             <tr>
                                 <td>Order ID</td>
+                                <td>Order Date</td>
                                 <td>Customer Name</td>
                                 <td>Order Status</td>
+                                <td>Payment Method</td>
                                 <td>Expected Delivery</td>
                                 <td>Amount</td>
-                                <td>View</td>
-                                <td>Update Status</td>
+                                <!-- <td>View</td>
+                                <td>Update Status</td> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="table-data">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <input type="button"
-                                        style="background: rgb(45, 177, 104); border-radius: 50px; padding: 2px; color: #fff; border: 0px;"
-                                        value="View Details"></input>
-                                </td>
-                                <td>
-                                    <select name="" id=""
-                                        style="background: rgb(122, 115, 115); border-radius: 50px; padding: 4px; color: #fff;">
-                                        <option selected>ordered</option>
-                                        <option value="packed">packed</option>
-                                        <option value="shipped">shipped</option>
-                                        <option value="delivered">delivered</option>
-                                        <option value="canceled">canceled</option>
-                                    </select>
-                                </td>
-                            </tr>
+                            <% for (values of response.user) { %>
+                                <tr class="table-data">
+                                    <td>
+                                        <a href="/admin/viewDetails?id=<%= values._id %>"><%= values._id %></a>
+                                    </td>
+                                    <td>
+                                        <% let date = values.date %>
+                                                                <% date = date.toLocaleString(); %> 
+                                                                <%= date %>
+                                    </td>
+                                    <td style="text-transform: uppercase;">
+                                        <%= values.userDetails[0].user_Name %>
+                                    </td>
+                                    <td>
+                                        <%= values.status %>
+                                    </td>
+                                    <td>
+                                        <%= values.paymentMethod %>
+                                    </td>
+                                    <td>
+                                        <% let expectedDate = values.expected_Date %>
+                                        <% expectedDate = expectedDate.toLocaleString(); %> 
+                                        <%= expectedDate %>
+                                    </td>
+                                    <td>
+                                        <%= values.totalAmount %>
+                                    </td>
+                                    <!-- <td>
+                                        <input type="button"
+                                            style="background: rgb(45, 177, 104); border-radius: 50px; padding: 2px; color: #fff; border: 0px;"
+                                            value="View Details" ></input>
+                                    </td>
+                                    <td>
+                                        <select name="" id=""
+                                            style="background: rgb(122, 115, 115); border-radius: 50px; padding: 4px; color: #fff;">
+                                            <option selected>ordered</option>
+                                            <option value="packed">packed</option>
+                                            <option value="shipped">shipped</option>
+                                            <option value="delivered">delivered</option>
+                                            <option value="canceled">canceled</option>
+                                        </select>
+                                    </td> -->
+                                </tr>
+                                <% } %>
                         </tbody>
                     </table>
                 </div>
@@ -48,6 +72,24 @@
 
 <script>
     $(document).ready(function () {
-    $('#order_table').DataTable();
-});
+        $('#order_table').DataTable();
+    });
+
+
+    // function viewDetail(orderId){
+    //     let data = {order:orderId}
+    //     console.log(data);
+    //     // fetch('/admin/order/viewDetails',{
+    //     //     method: 'post',
+    //     //     headers: {'Content_Type': 'application/json'},
+    //     //     body: JSON.stringify({data:"gcghfc"})
+    //     // })
+    //     $.ajax({
+    //         url:'/admin/order/viewDetails',
+    //         data:{
+    //             order:orderId
+    //         },
+    //         method:'get'
+    //     })
+    // }
 </script>

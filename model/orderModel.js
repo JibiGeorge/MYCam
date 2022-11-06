@@ -11,23 +11,32 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             let cartProducts = await db.get().collection(collections.CART_COLLECTION).aggregate([
                 {
-                    $match: {user: ObjectId(userID)}
+                    $match: { user: ObjectId(userID) }
                 },
                 {
                     $unwind: '$products'
                 },
                 {
-                    $lookup:{
+                    $lookup: {
                         from: collections.PRODUCT_DETAILS,
                         localField: 'products.item',
                         foreignField: '_id',
-                        as: 'products'
+                        as: 'product'
                     }
                 },
                 {
-                    $project:{
-                        _id:0,
-                        productDetails: { $arrayElemAt: ['$products', 0] }
+                    $project: {
+                        item: '$products.item',
+                        quantity: '$products.quantity',
+                        SumOfProducts: '$products.SumOfProducts',
+                        product: 1
+                    }
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        quantity: 1,
+                        productDetails: { $arrayElemAt: ['$product', 0] }
                     }
                 }
 
@@ -35,15 +44,14 @@ module.exports = {
 
             let status = orderDetails.paymentMethod === 'COD' ? 'placed' : 'pending'
             let orderObj = {
-                deliveryDetails: {
-                    address: orderDetails.address,
-                },
+                deliveryDetails: orderDetails.address,
                 user: ObjectId(orderDetails.userID),
                 paymentMethod: orderDetails.paymentMethod,
-                products: cartProducts,
+                product: cartProducts,
                 totalAmount: total.totalAmount,
                 status: status,
-                date: new Date()
+                date: new Date(),
+                expected_Date: new Date(+ new Date() + 7 * 40 * 24 * 60 * 1000)
             }
             db.get().collection(collections.ORDER_COLLECTION).insertOne(orderObj).then((response) => {
                 db.get().collection(collections.CART_COLLECTION).deleteOne({ user: ObjectId(orderDetails.userID) })
@@ -83,32 +91,105 @@ module.exports = {
                 //     }
                 // }
             ]).toArray()
-            console.log("111",productList);
+            console.log("111", productList);
             resolve(productList)
 
         })
     },
-    getOrderedProductDetails: (id)=>{
-        return new Promise (async(resolve,reject)=>{
+    getOrderedProductDetails: (id) => {
+        return new Promise(async (resolve, reject) => {
             let productDetail = await db.get().collection(collections.ORDER_COLLECTION).aggregate([
                 {
-                    $match:{
-                        _id:ObjectId(id)
+                    $match: {
+                        _id: ObjectId(id)
                     }
                 },
                 {
-                    $unwind: '$products'
-                },
-                {
-                    $lookup:{
-                        from: collections.PRODUCT_DETAILS,
-                        localField: 'products.productDetails',
-                        foreignField: '_id',
-                        as: 'product'
-                    }
+                    $unwind: '$product'
                 }
             ]).toArray()
             resolve(productDetail)
+        })
+    },
+    getAllOrders: () => {
+        return new Promise(async (resolve, reject) => {
+            let ordersList = await db.get().collection(collections.ORDER_COLLECTION).find().toArray()
+            // console.log(ordersList);
+            if (ordersList.length > 0) {
+                let user = await db.get().collection(collections.ORDER_COLLECTION).aggregate([
+                    {
+                        $lookup: {
+                            from: collections.USER_DETAILS,
+                            localField: 'user',
+                            foreignField: '_id',
+                            as: 'userDetails'
+                        }
+                    }
+                ]).toArray()
+                resolve({ user })
+            } else {
+                console.log("Empty");
+                resolve({ ordersEmpty: true })
+            }
+        })
+    },
+    getOrderDetails: (orderID) => {
+        return new Promise(async (resolve, reject) => {
+            let orderDetails = await db.get().collection(collections.ORDER_COLLECTION).aggregate([
+                {
+                    $match: { _id: ObjectId(orderID) }
+                },
+                // {
+                //     $unwind : '$product'
+                // },
+                {
+                    $lookup: {
+                        from: collections.USER_DETAILS,
+                        localField: 'user',
+                        foreignField: '_id',
+                        as: 'userDetails'
+                    }
+                }
+            ]).toArray()
+            resolve(orderDetails)
+        })
+    },
+    updateOrderDetails: (data) => {
+        console.log("data", data);
+        return new Promise(async (resolve, reject) => {
+            let orderId = ObjectId(data.id)
+            console.log(orderId);
+            let status = data.status;
+            let description = data.description;
+            db.get().collection(collections.ORDER_COLLECTION).updateOne(
+                {
+                    _id:orderId
+                },
+                {
+                    $set:{
+                        status: status,
+                        description: description
+                    }
+                }
+            ).then((response)=>{
+                resolve(response)
+            })
+        })
+    },
+    cancelOrder: (orderID)=>{
+        return new Promise ((resolve,reject)=>{
+            db.get().collection(collections.ORDER_COLLECTION).updateOne(
+                {
+                    _id: ObjectId(orderID)
+                },
+                {
+                    $set:{
+                        status: "cancelled"
+                    }
+                }
+            ).then((response)=>{
+                resolve(response)
+            })
         })
     }
 }

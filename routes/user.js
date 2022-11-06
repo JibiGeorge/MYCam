@@ -32,6 +32,7 @@ router.get('/orders',orderController.ordersPage)
 
 router.post('/orders/viewOrderDetails',orderController.getOrderProductDetails)
 router.get('/user/verificationfailed',userLoginController.loginFailed)
+router.post('/orders/cancel',orderController.cancelOrder)
 
 
 router.post('/verifyPayment',(req,res)=>{

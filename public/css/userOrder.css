@@ -46,11 +46,23 @@
     display: flex;
     align-items: center;
 }
+.user-order .status.pink{
+    background: rgb(255, 0, 221);
+}
 .user-order .status.green{
     background: rgb(0, 255, 13);
 }
+.user-order .status.orange{
+    background: rgb(255, 145, 0);
+}
+.user-order .status.blue{
+    background: rgb(0, 238, 255);
+}
 .user-order .status.red{
     background: rgb(255, 0, 0);
+}
+.user-order .status.yellow{
+    background: rgb(251, 255, 0);
 }
 .user-order .table-responsive{
     width: 100%;

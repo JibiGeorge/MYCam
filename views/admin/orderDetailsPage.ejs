@@ -1,0 +1,121 @@
+<main class="main-content">
+    <div class="container-fluid p-2" style="background: #fff;">
+        <div>
+
+            <!-- ---------------------Product Detail Started------------------------>
+            <div>
+                <h4 style="text-decoration: underline;">Product Details</h4>
+                <% for(values of orders.product) { %>
+                    <div class="d-flex mb-3 p-3" style="background: rgb(245, 245, 245);">
+                        <div>
+                            <img width="150px" height="150px" class="image-fluid"
+                                src="/images/<%= values.productDetails.picture%>" alt="" style="object-fit: contain;">
+                        </div>
+                        <div class="ms-3">
+                            <p><strong>PRODUCT NAME :- </strong>
+                                <%= values.productDetails.product_Name %>
+                            </p>
+                            <p style="line-height: 1px;"><strong>Quantity:- </strong><span>
+                                    <%= values.quantity %>
+                                </span></p>
+                            <p style="line-height: 15px;"><strong>Price:- </strong><span>₹ <%=
+                                        values.productDetails.selling_Price %></span></p>
+                            <p style="line-height: 1px;"><strong>Total Price:- </strong><span>₹
+                                    <% let total=values.quantity * values.productDetails.selling_Price %>
+                                        <%= total %>
+                                </span></p>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+            <div style="width: 100%; height: 2px; background: rgb(133, 130, 130);"></div>
+            <!-- ---------------------Product Detail Ended------------------------>
+
+            <!-- ---------------------Order Detail Started------------------------>
+            <div class="mt-4">
+                <h4 style="text-decoration: underline;">Order Details</h4>
+                <p style="line-height: 15px;"><strong>Order Date :- </strong>
+                    <% let orderDate=orders.date %>
+                        <% orderDate=orderDate.toLocaleString(); %>
+                            <%= orderDate %>
+                </p>
+                <p style="line-height: 1px;"><strong>Delivery Date :- </strong>
+                    <% let deliveryDate=orders.expected_Date %>
+                        <% deliveryDate=deliveryDate.toLocaleString(); %>
+                            <%= deliveryDate %>
+                </p>
+                <p style="line-height: 15px;"><strong>Address : - </strong> <span>
+                        <%= orders.deliveryDetails %>
+                    </span></p>
+                <p><strong>Status of Delivery : - </strong>
+                    <%= orders.status %>
+                </p>
+            </div>
+            <div style="width: 100%; height: 2px; background: rgb(133, 130, 130);"></div>
+            <!-- ---------------------Order Detail Ended------------------------>
+
+
+            <!-- ---------------------User Details Started---------------------->
+            <div class="mt-4">
+                <h4 style="text-decoration: underline;">Customer Details</h4>
+                <p><strong>Name :- </strong>
+                    <%= orders.userDetails[0].user_Name %>
+                </p>
+                <p><strong>Email :- </strong>
+                    <%= orders.userDetails[0].user_Email %>
+                </p>
+                <p><strong>Contact No. :- </strong>
+                    <%= orders.userDetails[0].mobile_No %>
+                </p>
+            </div>
+            <div style="width: 100%; height: 2px; background: rgb(133, 130, 130);"></div>
+            <!-- ---------------------User Details Ended------------------------>
+
+            <!-- ---------------------Status Update Started------------------------>
+            <form id="statusForm" action="" style="text-align: left;" class="mb-2">
+                <input style="display: none;" type="" name="id" value="<%= orders._id %>">
+                <div class="mt-4">
+                    <h4 style="text-decoration: underline;">Status Update</h4>
+                    <select name="status" id="" class="mb-3 bg-success"
+                        style="border-radius: 50px; padding: 7px 10px; color: #fff;">
+                        <option selected>ordered</option>
+                        <option value="packed">packed</option>
+                        <option value="shipped">shipped</option>
+                        <option value="delivered">delivered</option>
+                        <option value="cancelled">cancelled</option>
+                    </select>
+                    <div>
+                        <textarea style="width: 100%; box-shadow: 3px 0px 10px rgb(179, 178, 178); padding: 10px;"
+                            placeholder="Any Updates of related Status" name="description" rows="10"></textarea>
+                    </div>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Update">
+            </form>
+            <div style="width: 100%; height: 2px; background: rgb(133, 130, 130);"></div>
+            <!-- ---------------------Status Update Ended------------------------>
+
+        </div>
+    </div>
+</main>
+
+
+<script>
+    const statusForm = document.getElementById('statusForm');
+    statusForm.addEventListener('submit',(e)=>{
+        e.preventDefault()
+        // alert(statusForm)
+        const formData = new FormData(statusForm);
+
+        // Coverting the data to JSON Object
+        const data = Object.fromEntries(formData);
+
+        fetch('/admin/order/statusUpdate',{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        }).then(res => res.json()).then(response =>{
+            window.location ='/admin/orders'
+        })
+    })
+
+</script>

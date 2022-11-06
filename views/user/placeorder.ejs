@@ -21,14 +21,26 @@
                                 <div class="mb-2 d-flex">
                                     <div>
                                         <input type="radio" class="form-check-input me-2" name="address"
-                                            value="<%= addressList.address[i].name %>,<%= addressList.address[i].address %>">                                            
+                                            value="<%= addressList.address[i].name %>,<%= addressList.address[i].address %>,<%= addressList.address[i].locality %>,
+                                            <%= addressList.address[i].city %>,
+                                            <%= addressList.address[i].state %>,
+                                            <%= addressList.address[i].land_Mark %>,
+                                            <%= addressList.address[i].mobile_No %>,
+                                            <%= addressList.address[i].alter_Mobile %>,<%= addressList.address[i].pin_Code %>">                                            
                                     </div>
-                                    <div>
+                                    <div style="text-align: left;">
                                         <p class="m-0" style="font-weight: bold;">
                                             <%= addressList.address[i].name %>
                                         </p>
                                         <p style="font-size: 14px;">
-                                            <%= addressList.address[i].address %> <span style="font-weight: bold;">
+                                            <strong>Address Line : - </strong><%= addressList.address[i].address %><br>
+                                            <strong>Locality : - </strong><%= addressList.address[i].locality %><br>
+                                            <strong>City : - </strong><%= addressList.address[i].city %><br>
+                                            <strong>State : - </strong><%= addressList.address[i].state %><br>
+                                            <strong>LandMark : - </strong><%= addressList.address[i].land_Mark %><br>
+                                            <strong>Mobile No : - </strong><%= addressList.address[i].mobile_No %><br>
+                                            <strong>Alternative No : - </strong><%= addressList.address[i].alter_Mobile %><br>
+                                             <span style="font-weight: bold;">
                                                     <%= addressList.address[i].pin_Code %>
                                                 </span>
                                         </p>
