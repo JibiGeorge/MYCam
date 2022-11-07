@@ -11,7 +11,7 @@ cloudinary.config({
     params: {
 
         folder: 'myCam',
-        allowedFormats: ['jpeg', 'png', 'jpg']
+        allowedFormats: ['jpeg', 'png', 'jpg', 'gif', 'webp', 'avif']
     }
 })
 module.exports = {
