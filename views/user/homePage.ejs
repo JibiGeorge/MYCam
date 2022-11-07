@@ -10,7 +10,7 @@
                         <div class="carousel-inner">
                             <% for (values of SliderImage) { %>
                             <div class="carousel-item active">
-                                <img src="/images/<%=values.sliderImage %>" style="object-fit: cover; height: 100%; width:100%"
+                                <img src="<%=values.file_url %>" style="object-fit: cover; height: 100%; width:100%"
                                     class="d-block w-100" alt="...">
                             </div>
                             <% } %>
@@ -31,7 +31,7 @@
                     <% for (var i=2;i<SliderImage.length && i<4 ;i++) { %>
                     <div class="product-offer" style="width: 100%;">
                         <img class="img-fluid" style="object-fit: cover; height: 100%; width:100%"
-                            src="/images/<%=SliderImage[i].sliderImage %>" alt="">
+                            src="<%=SliderImage[i].file_url %>" alt="">
                     </div>
                     <% } %>
                 </div>
@@ -92,7 +92,7 @@
                         <div class="card" style="background: rgb(255, 255, 255); border-radius: 0;">
                             <div class="d-flex align-items-center">
                                 <div style="width: 100px; height:100px;">
-                                    <img src="/images/<%= category[i].categoryPicture %>" class="card-img-top" alt="...">
+                                    <img src="<%= category[i].file_url %>" class="card-img-top" alt="...">
                                 </div>
                                 <div style="padding-left: 1rem;">
                                     <h6><%= category[i].categoryName %></h6>
@@ -118,7 +118,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
                     <div class="card align-items-center">
                         <div class="product-item">
-                            <img src="/images/<%=featuredProducts[i].picture %>" alt="">
+                            <img src="<%=featuredProducts[i].file_url %>" alt="">
                         </div>
                         <div class="text-center py-4">
                             <a href="/product/showDetail?id=<%=featuredProducts[i]._id %>"><%=featuredProducts[i].product_Name %></a>
@@ -144,7 +144,7 @@
                 <div class="col-lg-6 mb-3">
                     <div class="product-offer" style="height: 300px; width: 100%;">
                         <img class="img-fluid" style="object-fit: cover; height: 100%; width:100%"
-                            src="/images/<%=SliderImage[i].sliderImage %>" alt="">
+                            src="<%=SliderImage[i].file_url %>" alt="">
                     </div>
                 </div>
                 <% } %>             
@@ -164,7 +164,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
                     <div class="card align-items-center">
                         <div class="product-item">
-                            <img src="/images/<%=recentProducts[i].picture %>" alt="">
+                            <img src="<%=recentProducts[i].file_url%>" alt="">
                         </div>
                         <div class="text-center py-4">
                             <a href="/product/showDetail?id=<%=recentProducts[i]._id %>"><%=recentProducts[i].product_Name %></a>

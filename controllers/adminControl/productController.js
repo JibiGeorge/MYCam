@@ -25,6 +25,8 @@ const addProductPage = (req, res) => {
     }
 }
 const addProduct = (req, res) => {
+    console.log("data",req.body);
+    console.log("file",req.file);
     let category_id = ObjectID(req.body.category_Name)
     let brand_id = ObjectID(req.body.brand)
     let actual_Price = parseInt(req.body.actual_Price)
@@ -32,7 +34,8 @@ const addProduct = (req, res) => {
     if (req.session.adminloggedIn) {
         const { product_Name, stock_In_Hand, feature_or_recent, description, specification } = req.body
         productController.addProduct({
-            picture: req.file.filename,
+            fie_Name: req.file.filename,
+            file_url: req.file.path,
             category_id,
             brand_id,
             product_Name,
@@ -74,11 +77,12 @@ const updatePage = async (req, res) => {
 
 const updateProductData = async (req, res) => {
     let id = req.body.productID;
-    let productPicture = req.file.filename
+    let fie_Name = req.file.filename
+    let file_url = req.file.path
     let category_id = ObjectID(req.body.category_Name)
     let brand_id = ObjectID(req.body.brand)
     if (req.session.adminloggedIn) {
-        productController.updateProduct(id, req.body, productPicture, category_id, brand_id).then(() => {
+        productController.updateProduct(id, req.body, fie_Name, file_url, category_id, brand_id).then(() => {
             res.redirect("/admin/productManagement");
         })
     } else {

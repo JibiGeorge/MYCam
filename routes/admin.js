@@ -8,37 +8,39 @@ const userManagementControl = require('../controllers/adminControl/adminUserMana
 const sliderImageManagementControl = require('../controllers/adminControl/sliderImageManagementControl')
 const orderController = require('../controllers/adminControl/orderController');
 const { Db } = require('mongodb');
+const {storage } = require('../cloudinary/index')
+const upload = multer({ storage });
 
 const router = express.Router();
 
 //Storage Setting
-const storage = multer.diskStorage({
-    destination: './public/images', //directory (folder) setting
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + file.originalname) // file name setting
-    }
-})
+// const storage = multer.diskStorage({
+//     destination: './public/images', //directory (folder) setting
+//     filename: (req, file, cb) => {
+//         cb(null, Date.now() + file.originalname) // file name setting
+//     }
+// })
 
 //Upload Setting
-const upload = multer({
-    storage: storage,
-    fileFilter: (req, file, cb) => {
-        if (
-            file.mimetype == 'image/jpeg' ||
-            file.mimetype == 'image/jpg' ||
-            file.mimetype == 'image/png' ||
-            file.mimetype == 'image/gif' ||
-            file.mimetype == 'image/webp'
+// const upload = multer({
+//     storage: storage,
+//     fileFilter: (req, file, cb) => {
+//         if (
+//             file.mimetype == 'image/jpeg' ||
+//             file.mimetype == 'image/jpg' ||
+//             file.mimetype == 'image/png' ||
+//             file.mimetype == 'image/gif' ||
+//             file.mimetype == 'image/webp'
 
-        ) {
-            cb(null, true)
-        }
-        else {
-            cb(null, false);
-            cb(new Error('Only jpeg,  jpg , png, and gif Image allow'))
-        }
-    }
-})
+//         ) {
+//             cb(null, true)
+//         }
+//         else {
+//             cb(null, false);
+//             cb(new Error('Only jpeg,  jpg , png, and gif Image allow'))
+//         }
+//     }
+// })
 
 // router.get('*',noPage)
 router.get('/', adminLoginPage)

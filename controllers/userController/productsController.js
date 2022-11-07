@@ -11,6 +11,7 @@ const showProducts = async (req, res) => {
     let categoryID = req.query.id
     productsModel.getProducts(categoryID).then((products) => {
         categoryController.getCategory().then((category) => {
+            console.log(products);
             res.render('user/productsList', { admin: false, user: true, category, userData, cartCount,products})
         })
     })

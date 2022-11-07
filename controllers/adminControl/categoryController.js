@@ -12,7 +12,7 @@ const categoryPage = (req, res) => {
 }
 const addCategory = (req, res) => {
     if (req.session.adminloggedIn) {
-        categoryModel.addCategory({categoryPicture:req.file.filename,categoryName:req.body.categoryName}).then((data) => {
+        categoryModel.addCategory({file_url:req.file.path,file_Name:req.file.filename,categoryName:req.body.categoryName}).then((data) => {
             res.redirect('/admin/Category')
         })
     } else {
@@ -34,9 +34,10 @@ const updateCategoryDetail = (req, res) => {
     console.log(req.body);
     let id = req.body.categoryID;
     let categoryName = req.body.categoryName
-    let categoryPicture =req.file.filename
+    let file_Name =req.file.filename
+    let file_url = req.file.path
     if (req.session.adminloggedIn) {
-        categoryModel.updateCategory(id,categoryName,categoryPicture).then(() => {
+        categoryModel.updateCategory(id,categoryName,file_Name,file_url).then(() => {
             res.redirect('/admin/Category')
         })
     } else {

@@ -69,7 +69,7 @@ module.exports = {
             resolve(product)
         })
     },
-    updateProduct: (proId, data, image, categoryID, brandID) => {
+    updateProduct: (proId, data, fie_Name, file_url, categoryID, brandID) => {
         return new Promise(async (resolve, reject) => {
             db.get().collection(collections.PRODUCT_DETAILS).updateOne({ _id: ObjectId(proId) }, {
                 $set: {
@@ -81,7 +81,8 @@ module.exports = {
                     stock_In_Hand: data.stock_In_Hand,
                     description: data.description,
                     specification: data.specification,
-                    picture: image
+                    fie_Name: fie_Name,
+                    file_url:file_url
                 }
             }).then((response) => {
                 resolve(response)

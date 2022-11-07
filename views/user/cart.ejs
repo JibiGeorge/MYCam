@@ -18,7 +18,7 @@
                             <% for (var i=0;i<products.length;i++) { %>
                                 <tr style="border-bottom: 15px solid #f5f5f5;">
                                     <td>
-                                        <img src="/images/<%= products[i].product.picture %>" alt="Sorry" width="50px">
+                                        <img src="<%= products[i].product.file_url %>" alt="Sorry" width="50px">
                                         <a href="" style="text-decoration: none; color: #6C757D;"><%= products[i].product.product_Name %></a>
                                     </td>
                                     <td>₹<%= products[i].product.selling_Price %></td>

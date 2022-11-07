@@ -14,7 +14,7 @@ const sliderPage = (req, res) => {
 const sliderImageAdd = (req, res) => {
     if (req.session.adminloggedIn) {
         let deflag = 0
-        sliderImageModel.addImage({ sliderImage: req.file.filename, caption: req.body.caption, deflag }).then((data) => {
+        sliderImageModel.addImage({ file_url: req.file.path, file_Name: req.file.filename, caption: req.body.caption, deflag }).then((data) => {
             res.redirect('/admin/silderImage')
         })
     } else {
@@ -26,8 +26,9 @@ const updateSlider = (req, res) => {
     if (req.session.adminloggedIn) {
         let id = req.body.id
         let caption = req.body.caption
-        let image = req.file.filename
-        sliderImageModel.updateSlider(id, caption, image).then(() => {
+        let file_Name = req.file.filename
+        let file_url = req.file.path
+        sliderImageModel.updateSlider(id, caption, file_Name, file_url).then(() => {
             sliderImageModel.showImages().then((sliderImages) => {
                 res.render('admin/sliderImage', { admin: true, user: false, title: "User Home Page Slider Image", sliderImages })
             })

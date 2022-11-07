@@ -3,9 +3,9 @@ const collections = require('../config/collections')
 const { ObjectID } = require('bson')
 
 module.exports = {
-    addImage: (imageName, caption, deflag) => {
+    addImage: (file_url,file_Name, caption, deflag) => {
         return new Promise(async (resolve, reject) => {
-            db.get().collection(collections.SLIDER_IMAGE).insertOne(imageName, caption, deflag).then((data) => {
+            db.get().collection(collections.SLIDER_IMAGE).insertOne(file_url,file_Name, caption, deflag).then((data) => {
                 resolve.apply(data)
             })
         })
@@ -16,12 +16,13 @@ module.exports = {
             resolve(SliderImage)
         })
     },
-    updateSlider: (id,caption,image)=>{
+    updateSlider: (id,caption,file_Name,file_url)=>{
         return new Promise(async(resolve,response)=>{
             db.get().collection(collections.SLIDER_IMAGE).updateOne({_id: ObjectID(id)},{
                 $set:{
                     caption: caption,
-                    sliderImage: image
+                    file_Name: file_Name,
+                    file_url:file_url
                 }
             }).then((response)=>{
                 resolve()
