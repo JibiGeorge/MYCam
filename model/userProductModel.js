@@ -9,5 +9,16 @@ module.exports = {
                 resolve(result)
             })
         })
+    },
+    getProducts:(ID) => {
+        return new Promise (async(resolve,reject)=>{
+            // let products = await db.get().collection(collections.PRODUCT_DETAILS).find({category_id:ObjectID(ID)}).toArray()
+            let products = await db.get().collection(collections.PRODUCT_DETAILS).aggregate([
+                {
+                    $match: {category_id:ObjectID(ID)}
+                }
+            ]).toArray()
+            resolve(products)
+        })
     }
 }

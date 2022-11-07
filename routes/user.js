@@ -5,6 +5,7 @@ const userLoginController = require('../controllers/userController/userLoginCont
 const userCartController = require('../controllers/userController/userCartController')
 const addressController = require('../controllers/userController/addressController')
 const orderController = require('../controllers/userController/orderController')
+const productsController = require('../controllers/userController/productsController')
 
 router.get('/', userHomePageController.homePage)
 
@@ -34,6 +35,24 @@ router.post('/orders/viewOrderDetails',orderController.getOrderProductDetails)
 router.get('/user/verificationfailed',userLoginController.loginFailed)
 router.post('/orders/cancel',orderController.cancelOrder)
 
+router.get('/category/showProducts',productsController.showProducts)
+
+
+
+// --------------------------------------------------
+const categoryController = require('/Brototype/Week 8/MyCam/model/category')
+const userCartModel = require('/Brototype/Week 8/MyCam/model/userCart')
+router.get('/products',async(req,res)=>{
+    let userData = req.session.user
+    let cartCount = null;
+    if (req.session.userLoggedIn) {
+        cartCount = await userCartModel.getCartCount(req.session.user._id)
+    }
+    categoryController.getCategory().then((category) => {
+    res.render('user/productsList',{admin:false,user:true,category,userData,cartCount})
+    })
+})
+// ----------------------------------------------------
 
 router.post('/verifyPayment',(req,res)=>{
     console.log(req.body);

@@ -18,7 +18,7 @@
             </a>
             <ul class="dropdown-menu">
               <% for(var i=0;i<category.length;i++) { %>
-                <li><a class="dropdown-item" href="#"><%= category[i].categoryName %></a></li>
+                <li><a class="dropdown-item" href="/category/showProducts?id=<%= category[i]._id %>"><%= category[i].categoryName %></a></li>
                 <% } %>
             </ul>
           </li>
