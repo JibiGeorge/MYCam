@@ -36,22 +36,26 @@ router.get('/user/verificationfailed',userLoginController.loginFailed)
 router.post('/orders/cancel',orderController.cancelOrder)
 
 router.get('/category/showProducts',productsController.showProducts)
+router.get('/featured/viewMore',productsController.getFeaturedProducts)
+router.get('/recent/viewMore',productsController.getRecenetProducts)
+router.get('/shop',productsController.showAllProducts)
+
 
 
 
 // --------------------------------------------------
-const categoryController = require('/Brototype/Week 8/MyCam/model/category')
-const userCartModel = require('/Brototype/Week 8/MyCam/model/userCart')
-router.get('/products',async(req,res)=>{
-    let userData = req.session.user
-    let cartCount = null;
-    if (req.session.userLoggedIn) {
-        cartCount = await userCartModel.getCartCount(req.session.user._id)
-    }
-    categoryController.getCategory().then((category) => {
-    res.render('user/productsList',{admin:false,user:true,category,userData,cartCount})
-    })
-})
+// const categoryController = require('/Brototype/Week 8/MyCam/model/category')
+// const userCartModel = require('/Brototype/Week 8/MyCam/model/userCart')
+// router.get('/products',async(req,res)=>{
+//     let userData = req.session.user
+//     let cartCount = null;
+//     if (req.session.userLoggedIn) {
+//         cartCount = await userCartModel.getCartCount(req.session.user._id)
+//     }
+//     categoryController.getCategory().then((category) => {
+//     res.render('user/productsList',{admin:false,user:true,category,userData,cartCount})
+//     })
+// })
 // ----------------------------------------------------
 
 router.post('/verifyPayment',(req,res)=>{

@@ -121,7 +121,7 @@
                             <img src="<%=featuredProducts[i].file_url %>" alt="">
                         </div>
                         <div class="text-center py-4">
-                            <a href="/product/showDetail?id=<%=featuredProducts[i]._id %>"><%=featuredProducts[i].product_Name %></a>
+                            <a href="/product/showDetail?id=<%=featuredProducts[i]._id %>"><p style="height: 50px; overflow:hidden;"><%=featuredProducts[i].product_Name %></p></a>
                             <div class="rate d-flex align-items-center justify-content-center mt-2">
                                 <h5>₹ <%=featuredProducts[i].selling_Price %></h5>
                                 <h6 class="text-muted" style="text-decoration: line-through;">₹ <%=featuredProducts[i].actual_Price %></h6>
@@ -132,7 +132,7 @@
                 <% } %>
             </div>
             <div class="viewmorebtn">
-                    <a class="btn btn-warning ps-4 pe-4">More</a>
+                    <a class="btn btn-warning ps-4 pe-4" href="/featured/viewMore">More</a>
             </div>
         </div>
     </section>
@@ -178,7 +178,7 @@
                 <% } %>
             </div>
             <div class="viewmorebtn">
-                    <a class="btn btn-warning ps-4 pe-4">More</a>
+                    <a class="btn btn-warning ps-4 pe-4" href="/recent/viewMore">More</a>
             </div>
         </div>
     </section>

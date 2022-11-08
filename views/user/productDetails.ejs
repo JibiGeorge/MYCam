@@ -22,35 +22,12 @@
                         </h4>
                     </div>
                     <div class="d-flex">
-                        <span style="font-weight: 600;">Description : <p style="color: #6C757D;">
+                        <span style="font-weight: 600;">Description : <p style="color: #6C757D; height: 148px; overflow: hidden;">
                                 <%= productData.description %>
                             </p></span>
 
                     </div>
                     <div class="d-flex align-items-center mb-4 pt-2">
-                        <!-- <div class="d-flex" style="width:130px; margin-right: 1rem; position: relative">
-                            <div>
-                                <button class="btn btn-primary"
-                                    style="color: #3D464D; background-color: #FFD333; border-color: #FFD333; border-radius: 0;">
-                                    <i class="las la-minus"></i>
-                                </button>
-                            </div>
-                            <input type="text"
-                                style="font-weight: 900; width: 42px; border-radius: 0; text-align: center; background: #F5F5F5;"
-                                class="form-control border-0" value="1">
-                            <div>
-                                <button class="btn btn-primary"
-                                    style="color: #3D464D; background-color: #FFD333; border-color: #FFD333; border-radius: 0;">
-                                    <i class="las la-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <a href="/product/showDetail/add-tocart/<%= productData._id %>" class="btn btn-primary px-3"
-                            style="color: #3D464D; background-color: #FFD333; border-color: #FFD333; border-radius: 0;">
-                            <i class="las la-shopping-cart ms-1"></i>
-                            Add to Cart
-                        </a> -->
-                        <p class="ms-5"></p>
                         <button onclick="addToCart('<%= productData._id %>','<%= productData.selling_Price %>')" class="btn btn-primary px-3"
                         style="color: #3D464D; background-color: #FFD333; border-color: #FFD333; border-radius: 0;">Add to Cart</button>
                     </div>

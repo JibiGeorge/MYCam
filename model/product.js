@@ -81,6 +81,7 @@ module.exports = {
                     stock_In_Hand: data.stock_In_Hand,
                     description: data.description,
                     specification: data.specification,
+                    feature_or_recent: data.feature_or_recent,
                     fie_Name: fie_Name,
                     file_url:file_url
                 }

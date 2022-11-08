@@ -1,6 +1,7 @@
-const productsModel = require('/Brototype/Week 8/MyCam/model/userProductModel')
+const userProductModel = require('/Brototype/Week 8/MyCam/model/userProductModel')
 const categoryController = require('/Brototype/Week 8/MyCam/model/category')
 const userCartModel = require('/Brototype/Week 8/MyCam/model/userCart')
+const productModel = require('/Brototype/Week 8/MyCam/model/product')
 
 const showProducts = async (req, res) => {
     let userData = req.session.user
@@ -9,14 +10,56 @@ const showProducts = async (req, res) => {
         cartCount = await userCartModel.getCartCount(req.session.user._id)
     }
     let categoryID = req.query.id
-    productsModel.getProducts(categoryID).then((products) => {
+    userProductModel.getProducts(categoryID).then((products) => {
         categoryController.getCategory().then((category) => {
-            console.log(products);
             res.render('user/productsList', { admin: false, user: true, category, userData, cartCount,products})
         })
     })
 }
 
+const getFeaturedProducts = async(req,res)=>{
+    console.log("Got it");
+    let userData = req.session.user
+    let cartCount = null;
+    if (req.session.userLoggedIn) {
+        cartCount = await userCartModel.getCartCount(req.session.user._id)
+    }
+    productModel.getFeaturedProducts().then((products)=>{
+        categoryController.getCategory().then((category) => {
+        res.render('user/productsList',{admin:false,user:true,userData,cartCount,products,category})
+        })
+    })
+}
+
+const getRecenetProducts = async(req,res)=>{
+    let userData = req.session.user
+    let cartCount = null;
+    if (req.session.userLoggedIn) {
+        cartCount = await userCartModel.getCartCount(req.session.user._id)
+    }
+    productModel.getRecentProducts().then((products)=>{
+        categoryController.getCategory().then((category) => {
+        res.render('user/productsList',{admin:false,user:true,userData,cartCount,products,category})
+        })
+    })
+}
+
+const showAllProducts = async(req,res)=>{
+    let userData = req.session.user
+    let cartCount = null;
+    if (req.session.userLoggedIn) {
+        cartCount = await userCartModel.getCartCount(req.session.user._id)
+    }
+    categoryController.getCategory().then((category) => {
+        productModel.getProducts().then((products)=>{
+        res.render('user/productsList',{admin:false,user:true,userData,cartCount,category,products})
+    })
+    })
+}
+
 module.exports = {
-    showProducts
+    showProducts,
+    getFeaturedProducts,
+    getRecenetProducts,
+    showAllProducts
 }
