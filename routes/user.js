@@ -6,6 +6,7 @@ const userCartController = require('../controllers/userController/userCartContro
 const addressController = require('../controllers/userController/addressController')
 const orderController = require('../controllers/userController/orderController')
 const productsController = require('../controllers/userController/productsController')
+const userProfileController = require('../controllers/userController/userProfileController')
 
 router.get('/', userHomePageController.homePage)
 
@@ -39,6 +40,8 @@ router.get('/category/showProducts',productsController.showProducts)
 router.get('/featured/viewMore',productsController.getFeaturedProducts)
 router.get('/recent/viewMore',productsController.getRecenetProducts)
 router.get('/shop',productsController.showAllProducts)
+
+router.get('/userProfile',userProfileController.showProfilePage)
 
 
 
