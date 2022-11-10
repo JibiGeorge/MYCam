@@ -98,7 +98,11 @@ const doLogin = (req, res) => {
                 return res.render('user/userLoginPage', { admin: false, user: true, category, errMsg: "User Not Found", userData })
             })
         }
-        console.log(response.status);
+        if (response.blocked) {
+            categoryController.getCategory().then((category) => {
+                return res.render('user/userLoginPage', { admin: false, user: true, category, errMsg: "Account is Blocked or Account is not verified", userData })
+            })
+        }
         if (response.status) {
             req.session.userLoggedIn = true
             req.session.user = response.user

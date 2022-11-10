@@ -51,6 +51,7 @@ router.put('/userProfile/email/update',userProfileController.updateEmailPhone)
 router.get('/userProfile/addressEditPage',userProfileController.addressEditPage)
 router.put('/userProfile/address/update',userProfileController.updateAddress)
 router.delete('/userProfile/addressDelete',userProfileController.addressDelete)
+router.put('/userProfile/password/update',userProfileController.updatePassword)
 
 
 

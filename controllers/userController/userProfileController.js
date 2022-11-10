@@ -78,6 +78,13 @@ const updateAddress = (req,res)=>{
     })
 }
 
+const updatePassword = (req,res)=>{
+    let userID = req.session.user._id
+    userDataModel.updatePassword(userID,req.body).then((response)=>{
+        res.json(response)
+    })
+}
+
 
 module.exports = {
     showProfilePage,
@@ -86,5 +93,6 @@ module.exports = {
     updateEmailPhone,
     addressEditPage,
     updateAddress,
-    addressDelete
+    addressDelete,
+    updatePassword
 }

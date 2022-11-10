@@ -1,6 +1,7 @@
 const db = require('../config/connection')
 const collections = require('../config/collections')
 const { ObjectId } = require('mongodb')
+const bcrypt = require('bcrypt')
 
 module.exports = {
     updateProfile: (uid, data) => {
@@ -92,6 +93,21 @@ module.exports = {
                         'address.$.state': data.state,
                         'address.$.land_Mark': data.land_Mark,
                         'address.$.alter_Mobile': data.alter_Mobile
+                    }
+                }
+            ).then((response) => {
+                resolve(response)
+            })
+        })
+    },
+    updatePassword: async(uid, password) => {
+        password.password = await bcrypt.hash(password.password, 10)
+        return new Promise(async (resolve, reject) => {
+            db.get().collection(collections.USER_DETAILS).updateOne(
+                { _id: uid },
+                {
+                    $set: {
+                        password: password.password
                     }
                 }
             ).then((response)=>{

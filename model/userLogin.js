@@ -31,29 +31,28 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             let user = await db.get().collection(collections.USER_DETAILS).findOne({ user_Email: userLoginData.user_Email })
             if (user) {
-                let success = await db.get().collection(collections.USER_DETAILS).find({$and:[
-                    {
-                        verified: 1
-                    },
-                    {
-                        state: "active"
+                if (user.verified == 1 && user.state == "active") {
+                    let success=true;
+
+                    if (success) {
+                        bcrypt.compare(userLoginData.password, user.password).then((status) => {
+                            if (status) {
+                                console.log("Login Success");
+                                response.user = user
+                                response.status = true
+                                resolve(response)
+                            } else {
+                                console.log("Password Wrong");
+                                resolve({ status: false })
+                            }
+                        })
+                    } else {
+                        console.log("Not Verified  or your account has blocked");
+                        resolve({ verified: false })
                     }
-                ] })
-                if (success) {
-                    bcrypt.compare(userLoginData.password, user.password).then((status) => {
-                        if (status) {
-                            console.log("Login Success");
-                            response.user = user
-                            response.status = true
-                            resolve(response)
-                        } else {
-                            console.log("Password Wrong");
-                            resolve({ status: false })
-                        }
-                    })
-                } else {
-                    console.log("Not Verified  or your account has blocked");
-                    resolve({ verified: false })
+                }else{
+                    console.log("Account is Blocked or Account is not verified");
+                    resolve({blocked:true})
                 }
 
             } else {

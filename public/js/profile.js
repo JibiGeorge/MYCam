@@ -69,18 +69,18 @@ emailUpdateForm.addEventListener('submit', (e) => {
     })
 })
 
-// Update Address Form
-// let updateAddressForm = document.getElementById('updateAddressForm')
+//Update Password
+const changePasswordForm = document.getElementById('changePassword')
+changePasswordForm.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const formData = new FormData(changePasswordForm);
+    const data = Object.fromEntries(formData)
 
-// updateAddressForm.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     const formData = new FormData(updateAddressForm);
-    //Converting the data to Json object
-//     const data = Object.fromEntries(formData)
-
-//     fetch('/userProfile/address/update',{
-//         method: 'put',
-//         headers: {'Content-Type': 'application/json'},
-//         body: JSON.stringify(data)
-//     })
-// })
+    fetch('/userProfile/password/update',{
+        method: 'put',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    }).then(()=>{
+        window.location.reload()
+    })
+})
