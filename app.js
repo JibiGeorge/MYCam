@@ -49,11 +49,9 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('layout', './layout/layout')
 app.set('view engine', 'ejs')
 
-
-
 app.use('/admin', adminRouter)
 app.use('/',userRouter)
 
 app.listen(process.env.PORT, () => {
-    console.log("listening to port 4000 .💕❤️💕");
+    console.log("listening to port 4000 .💕❤️💕👏💪🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃");
 })

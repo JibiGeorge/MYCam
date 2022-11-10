@@ -126,8 +126,6 @@
             body: JSON.stringify({ orderID })
         }).then(res => res.json()).then(data => {
             let datas = data.orderProductDetails
-            console.log(datas);
-            console.log("d",datas[0].product.productDetails.product_Name);
             let table =
                 `<table class="table table-striped table-hover">
                 <thead>

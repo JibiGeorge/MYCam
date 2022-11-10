@@ -30,10 +30,10 @@
                                 <a class="title">Account Settings</a>
                             </div>
                             <div class="submenus">
-                                <a href="/userProfile/profile" class="btn_submenus show" onclick="showContents(this, 'content_1')">
+                                <a href="#" class="btn_submenus show" onclick="showContents(this, 'content_1')">
                                     <div class="subTitle">Profile Information</div>
                                 </a>
-                                <a href="#" class="btn_submenus" onclick="showContents(this, 'content_2')">
+                                <a href="#" class="btn_submenus" onclick="showContents(this, 'content_2') ,showAddress()">
                                     <div class="subTitle">Manage Address</div>
                                 </a>
                                 <a href="#" class="btn_submenus" onclick="showContents(this, 'content_3')">
@@ -51,42 +51,46 @@
                     <div class="tab_subtitleContent show mb-4" id="content_1">
 
                         <!-------------------------Profile Information Started-------------------------->
-                        <span class="title">Profile Information</span><a href="#" class="edit" onclick="editProfile()">Edit</a>
-                        <form action="">
+                        <div class="d-flex" style="align-items: center;">
+                            <span class="title">Profile Information</span>                        
+                            <a href="#" id="proEditBtn" class="edit" onclick="editProfile()">Edit</a>
+                        <a href="#" id="proCaneclBtn" class="edit" onclick="cancelBtn()" style="display: none;">Cancel</a>
+                        </div>
+                        <form action="" id="profileUpdateForm">
                             <div class="pb-2" style="width: 100%;">
-                                <div style="width: 100%; padding-right: 12px;">
+                                <div style="width: 100%; padding-right: 12px;" id="profileData">
                                     <div class="d-flex" style="margin-bottom: 10px;">
                                         <div class="field" style="width: 270px; padding-right: 12px;">
                                             <label for="" class="form-label">First Name</label>
-                                            <input disabled type="text" class="form-control" id="" name=""
-                                                style="width: 100%;">
+                                            <input disabled type="text" class="form-control" id="first_Name" name="first_Name"
+                                                style="width: 100%;" value="<%= userDetails.first_Name %>">
                                         </div>
                                         <div class="field" style="width: 270px; padding-right: 12px;">
                                             <label for="" class="form-label">Last Name</label>
-                                            <input disabled type="text" class="form-control" id="" name=""
-                                                style="width: 100%;">
+                                            <input disabled type="text" class="form-control" id="last_Name" name="last_Name"
+                                                style="width: 100%;" value="<%= userDetails.last_Name %>">
                                         </div>
-                                        <div>
+                                        <div id="proBtn" style="display: none;">
                                             <label for=""></label>
-                                            <input type="button" class="btn btn-primary" id=""
+                                            <input type="submit" class="btn btn-primary" id=""
                                                 name="" style="width: 100%;" value="SAVE">
                                         </div>
                                     </div>
                                     <div class="d-flex" style="margin-bottom: 10px;">
                                         <div class="field" style="width: 270px; padding-right: 12px;">
                                             <label for="" class="form-label">User Name</label>
-                                            <input disabled type="text" class="form-control" id="" name=""
-                                                style="width: 100%;">
+                                            <input disabled type="text" class="form-control" id="user_Name" name="user_Name"
+                                                style="width: 100%;" value="<%= userDetails.user_Name %>">
                                         </div>
                                         <div class="field" style="width: 270px; padding-right: 12px;">
                                             <label for="" class="form-label">Your Gender</label>
                                             <div>
                                                 <input class="form-check-input me-3" type="radio"
-                                                    name="" id="flexRadioDefault1"
-                                                    value="">Male
+                                                    name="gender" id="flexRadioDefault1"
+                                                    value="Male">Male
                                                 <input class="form-check-input ms-4 me-3" type="radio"
-                                                    name="" id="flexRadioDefault1"
-                                                    value="">Female
+                                                    name="gender" id="flexRadioDefault1"
+                                                    value="Female">Female
                                             </div>
                                         </div>
                                     </div>
@@ -96,25 +100,29 @@
                         <!-------------------------Profile Information Ended-------------------------->
 
                         <!-------------------------Email & Mobile Information Started-------------------------->
-                        <span class="title">Email & Mobile Information</span><a href="" class="edit">Edit</a>
-                        <form action="">
+                        <div class="d-flex" style="align-items: center;">
+                        <span class="title">Email & Mobile Information</span>
+                        <a href="#" id="emailEditBtn" class="edit" onclick="emailEdit()">Edit</a>
+                        <a href="#" id="emailCancelBtn" class="edit" style="display: none;" onclick="emailCancel()">Cancel</a>
+                        </div>
+                        <form action="" id="emailUpdateForm">
                             <div class="pb-2" style="width: 100%;">
                                 <div style="width: 100%; padding-right: 12px;">
                                     <div class="d-flex" style="margin-bottom: 10px;">
                                         <div class="field" style="width: 270px; padding-right: 12px;">
                                             <label for="" class="form-label">Mobile No.</label>
-                                            <input disabled type="number" class="form-control" id=""
-                                                name="" style="width: 100%;">
+                                            <input disabled type="number" class="form-control" id="mobile_No"
+                                                name="mobile_No" style="width: 100%;" value="<%= userDetails.mobile_No %>">
                                         </div>
                                         <div class="field" style="width: 270px; padding-right: 12px;">
                                             <label for="" class="form-label">Email</label>
-                                            <input disabled type="email" class="form-control" id=""
-                                                name="" style="width: 100%;">
+                                            <input disabled type="email" class="form-control" id="user_Email"
+                                                name="user_Email" style="width: 100%;" value="<%= userDetails.user_Email %>">
                                         </div>
                                         <div>
                                             <label for=""></label>
-                                            <input type="button" class="btn btn-primary" id=""
-                                                name="" style="width: 100%;" value="SAVE">
+                                            <input type="submit" class="btn btn-primary" id="emailBtn"
+                                                name="" style="width: 100%; display: none;" value="SAVE">
                                         </div>
                                     </div>
                                 </div>
@@ -130,68 +138,11 @@
                         <!-------------------------Manage Address Started-------------------------->
                         <span class="title">Manage Address</span>
                         <div class="mt-3">
-                            <button class="btn"
+                            <a href="/addressPage" class="btn"
                                 style="width: 100%; text-align: left; border: 1px solid #e0e0e0; color: #2874f0;"> + Add
-                                A New Address</button>
+                                A New Address</a>
                         </div>
-                        <div>
-                            <div style="border: 1px solid #e0e0e0; margin-top: 20px; border-radius: 2px 0;">
-                                <div style="width: 100%; overflow: hidden; padding: 20px;">
-                                    <p style="line-height: 1.5">
-                                        <span style="font-weight: 600; font-size: 14px;">JibiGeorge</span>
-                                        <span
-                                            style="font-weight: 600; padding-right: 15px; font-size: 14px;">8893482860</span>
-                                    </p>
-                                    <span style="margin-top: 10px; width: 100%; display: block; font-size: 14px;">
-                                        High Range Coffee Curing Works, Raj Coffee, Plot No. 1
-                                        KIADB Industrial Area, Kudlur, Sundar Nagar
-                                        Kushalnagar - 571234, Sundar Nagar, kushalnagar, Kushalanagara, Karnataka
-                                    </span>
-                                </div>
-                            </div>
-                            <div style="border: 1px solid #e0e0e0; border-radius: 2px 0;">
-                                <div style="width: 100%; overflow: hidden; padding: 20px;">
-                                    <p style="line-height: 1.5">
-                                        <span style="font-weight: 600; font-size: 14px;">JibiGeorge</span>
-                                        <span
-                                            style="font-weight: 600; padding-right: 15px; font-size: 14px;">8893482860</span>
-                                    </p>
-                                    <span style="margin-top: 10px; width: 100%; display: block; font-size: 14px;">
-                                        High Range Coffee Curing Works, Raj Coffee, Plot No. 1
-                                        KIADB Industrial Area, Kudlur, Sundar Nagar
-                                        Kushalnagar - 571234, Sundar Nagar, kushalnagar, Kushalanagara, Karnataka
-                                    </span>
-                                </div>
-                            </div>
-                            <div style="border: 1px solid #e0e0e0; border-radius: 2px 0;">
-                                <div style="width: 100%; overflow: hidden; padding: 20px;">
-                                    <p style="line-height: 1.5">
-                                        <span style="font-weight: 600; font-size: 14px;">JibiGeorge</span>
-                                        <span
-                                            style="font-weight: 600; padding-right: 15px; font-size: 14px;">8893482860</span>
-                                    </p>
-                                    <span style="margin-top: 10px; width: 100%; display: block; font-size: 14px;">
-                                        High Range Coffee Curing Works, Raj Coffee, Plot No. 1
-                                        KIADB Industrial Area, Kudlur, Sundar Nagar
-                                        Kushalnagar - 571234, Sundar Nagar, kushalnagar, Kushalanagara, Karnataka
-                                    </span>
-                                </div>
-                            </div>
-                            <div style="border: 1px solid #e0e0e0; border-radius: 2px 0;">
-                                <div style="width: 100%; overflow: hidden; padding: 20px;">
-                                    <p style="line-height: 1.5">
-                                        <span style="font-weight: 600; font-size: 14px;">JibiGeorge</span>
-                                        <span
-                                            style="font-weight: 600; padding-right: 15px; font-size: 14px;">8893482860</span>
-                                    </p>
-                                    <span style="margin-top: 10px; width: 100%; display: block; font-size: 14px;">
-                                        High Range Coffee Curing Works, Raj Coffee, Plot No. 1
-                                        KIADB Industrial Area, Kudlur, Sundar Nagar
-                                        Kushalnagar - 571234, Sundar Nagar, kushalnagar, Kushalanagara, Karnataka
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                        <div id = "userAddressList"></div>
                         <!-------------------------Manage Address Ended-------------------------->
                     </div>
                     <!-- ()()()()()()()()()()()()() 2nd TAB Content Ended ()()()()()()()()()()()()() -->
@@ -246,6 +197,51 @@
         }
         activeTab.classList.add('show');
         document.getElementById(contentsID).classList.add('show');
+    }
+    
+
+
+    function showAddress(){
+        const address = document.getElementById('userAddressList')
+        fetch('/userProfile/address',{
+            method: 'get',
+            headers: {'Content-Type':'application/json'}
+        }).then(res => res.json()).then(data =>{
+            console.log(data);
+            let datas = data.addressList.address
+            let addressess = 
+            ``
+            for( var i=0;i<datas.length;i++){
+                addressess +=
+                        `<div style="border: 1px solid #e0e0e0; margin-top: 20px; border-radius: 2px 0;">
+                                <div style="width: 100%; overflow: hidden; padding: 20px;">
+                                    <p style="line-height: 1.5">
+                                        <span style="font-weight: 600; font-size: 14px;">${datas[i].name}</span>
+                                        <span
+                                            style="font-weight: 600; padding-right: 15px; font-size: 14px;">${datas[i].mobile_No}</span>
+                                            <a href="/userProfile/addressEditPage?addressID=${datas[i]._id}&addressDoc=${data.addressList._id}" id="emailEditBtn" class="edit">Edit</a>
+                                            <a onclick="addressDelete('${datas[i]._id}','${data.addressList._id}')" href="#" id="emailEditBtn" class="edit">Delete</a>
+                                    </p>
+                                    <span style="margin-top: 10px; width: 100%; display: block; font-size: 14px;">${datas[i].address}</span>
+                                </div>
+                            </div>`                    
+                }
+                addressess +=
+                 ``
+                 address.innerHTML = addressess
+        }).catch((error)=>{
+            console.log(error.message);
+        })
+    }
+
+    function addressDelete(addressID,addressDocID){
+        fetch('/userProfile/addressDelete',{
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({addressID,addressDocID})
+        }).then(()=>{
+            window.location.reload()
+        })
     }
     
 </script>

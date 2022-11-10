@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const methodoverride = require('method-override')
 const userHomePageController = require('../controllers/userController/userHomePageController')
 const userLoginController = require('../controllers/userController/userLoginController')
 const userCartController = require('../controllers/userController/userCartController')
@@ -7,6 +8,8 @@ const addressController = require('../controllers/userController/addressControll
 const orderController = require('../controllers/userController/orderController')
 const productsController = require('../controllers/userController/productsController')
 const userProfileController = require('../controllers/userController/userProfileController')
+
+router.use(methodoverride('_method'))
 
 router.get('/', userHomePageController.homePage)
 
@@ -42,6 +45,12 @@ router.get('/recent/viewMore',productsController.getRecenetProducts)
 router.get('/shop',productsController.showAllProducts)
 
 router.get('/userProfile',userProfileController.showProfilePage)
+router.get('/userProfile/address',userProfileController.showAddress)
+router.put('/userProfile/profile/update',userProfileController.updateProfile)
+router.put('/userProfile/email/update',userProfileController.updateEmailPhone)
+router.get('/userProfile/addressEditPage',userProfileController.addressEditPage)
+router.put('/userProfile/address/update',userProfileController.updateAddress)
+router.delete('/userProfile/addressDelete',userProfileController.addressDelete)
 
 
 
