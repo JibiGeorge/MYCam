@@ -9,16 +9,6 @@ const orderPage = (req, res) => {
     }
 }
 
-// const productDetails = (req, res) => {
-//     console.log(req.query.order);
-//     let orderID = req.query.order
-//     if (req.session.adminloggedIn) {
-//         orderModel.getOrderDetails(orderID)
-//     } else {
-//         res.render('admin/adminLogin', { admin: false, user: false })
-//     }
-// }
-
 const orderDetails = (req,res)=>{
     let orderID = req.query.id
     if (req.session.adminloggedIn) {

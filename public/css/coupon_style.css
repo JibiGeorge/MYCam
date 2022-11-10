@@ -1,0 +1,8 @@
+.coupon table tbody td input,
+.coupon table tbody td select{
+    width: 100%;
+}
+.coupon table thead th,
+.coupon table tbody td{
+    padding-right: 10px;
+}

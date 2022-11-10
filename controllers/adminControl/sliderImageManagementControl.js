@@ -42,7 +42,6 @@ const deleteSlider = (req,res)=>{
     let id = ObjectID(req.body.id)
     if(req.session.adminloggedIn){
         sliderImageModel.deleteSlider(id).then((result)=>{
-            // res.redirect('/admin/silderImage')
             res.json({status:true})
         })
     }else{

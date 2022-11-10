@@ -7,6 +7,7 @@ const productController = require('../controllers/adminControl/productController
 const userManagementControl = require('../controllers/adminControl/adminUserManagement')
 const sliderImageManagementControl = require('../controllers/adminControl/sliderImageManagementControl')
 const orderController = require('../controllers/adminControl/orderController');
+const couponController = require('../controllers/adminControl/couponController')
 const { Db } = require('mongodb');
 const {storage } = require('../cloudinary/index')
 const upload = multer({ storage });
@@ -76,7 +77,8 @@ router.post('/sliderUpdate',upload.single('sliderImage'),sliderImageManagementCo
 router.delete('/sliderDelete',sliderImageManagementControl.deleteSlider)
 
 router.get('/orders',orderController.orderPage)
-// router.get('/order/viewDetails',orderController.productDetails)
 router.get('/viewDetails',orderController.orderDetails)
 router.post('/order/statusUpdate',orderController.updateOrderDetails)
+
+router.get('/coupon',couponController.getCouponPage)
 module.exports = router

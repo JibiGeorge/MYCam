@@ -53,24 +53,6 @@ router.put('/userProfile/address/update',userProfileController.updateAddress)
 router.delete('/userProfile/addressDelete',userProfileController.addressDelete)
 router.put('/userProfile/password/update',userProfileController.updatePassword)
 
-
-
-
-// --------------------------------------------------
-// const categoryController = require('/Brototype/Week 8/MyCam/model/category')
-// const userCartModel = require('/Brototype/Week 8/MyCam/model/userCart')
-// router.get('/products',async(req,res)=>{
-//     let userData = req.session.user
-//     let cartCount = null;
-//     if (req.session.userLoggedIn) {
-//         cartCount = await userCartModel.getCartCount(req.session.user._id)
-//     }
-//     categoryController.getCategory().then((category) => {
-//     res.render('user/productsList',{admin:false,user:true,category,userData,cartCount})
-//     })
-// })
-// ----------------------------------------------------
-
 router.post('/verifyPayment',(req,res)=>{
     console.log(req.body);
 })

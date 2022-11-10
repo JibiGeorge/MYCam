@@ -25,8 +25,6 @@ const addProductPage = (req, res) => {
     }
 }
 const addProduct = (req, res) => {
-    console.log("data",req.body);
-    console.log("file",req.file);
     let category_id = ObjectID(req.body.category_Name)
     let brand_id = ObjectID(req.body.brand)
     let actual_Price = parseInt(req.body.actual_Price)

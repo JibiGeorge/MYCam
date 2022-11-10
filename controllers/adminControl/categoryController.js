@@ -31,7 +31,6 @@ const getCategoryDetail = async (req, res) => {
     }
 }
 const updateCategoryDetail = (req, res) => {
-    console.log(req.body);
     let id = req.body.categoryID;
     let categoryName = req.body.categoryName
     let file_Name =req.file.filename
