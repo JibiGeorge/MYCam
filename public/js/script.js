@@ -218,7 +218,7 @@ function signupValidate(){
     if(mobileNo == ""){
         document.getElementById('mobileError').innerHTML = "*Mobile No. Required";
         errorFlag=1
-    }else if(mobileNo.length<12){
+    }else if(mobileNo.length<10){
         document.getElementById('mobileError').innerHTML = "*Invalid Mobile No.";
         errorFlag=1
     }else{
@@ -261,6 +261,7 @@ function loginValidate(){
 
     if(email == ""){
         document.getElementById('emailError').innerHTML = "*Email Required";
+        document.getElementById('user_Email').style.borderColor ="red"
         errorFlag=1
     }
     // else if(email.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)){
@@ -269,13 +270,16 @@ function loginValidate(){
     // }
     else{
         document.getElementById('emailError').innerHTML = "";
+        document.getElementById('user_Email').style.borderColor ="green"
     }
 
     if(password == ""){
         document.getElementById('passwordError').innerHTML = "*Password Required";
+        document.getElementById('password').style.borderColor ="red"
         errorFlag=1
     }else{
         document.getElementById('passwordError').innerHTML = "";
+        document.getElementById('password').style.borderColor ="green"
     }
 
     if(errorFlag==1){

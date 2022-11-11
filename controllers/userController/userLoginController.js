@@ -128,11 +128,11 @@ const doLogout = (req, res) => {
 const doSignUpVerification = (req, res) => {
     const userOTP = req.body.OTP
     const userId = req.body.id
-    console.log(req.body);
     try {
         if (userOTP == OTP) {
             console.log("correct");
             userOTPModel.updateVerification(userId).then((response) => {
+                console.log(response);
                 res.json({ verificationSuccess: true })
             })
         } else {
