@@ -53,5 +53,5 @@ app.use('/admin', adminRouter)
 app.use('/',userRouter)
 
 app.listen(process.env.PORT, () => {
-    console.log("listening to port 4000 .💕❤️💕👏💪🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃");
+    console.log("listening to port 4000 .🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃");
 })

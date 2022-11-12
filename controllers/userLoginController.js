@@ -41,24 +41,10 @@ const sendVerifyMail = async (name, email, id) => {
 }
 
 const loginPage = (req, res) => {
-    let userData = req.session.user
-    if (req.session.userLoggedIn) {
-        res.redirect('/')
-    } else {
-        categoryController.getCategory().then((category) => {
-            res.render('user/userLoginPage', { admin: false, user: true, category, userData })
-        })
-    }
+    res.redirect('/')
 }
 const signUpPage = (req, res) => {
-    let userData = req.session.user
-    if (req.session.userLoggedIn) {
-        res.redirect('/')
-    } else {
-        categoryController.getCategory().then((category) => {
-            res.render('user/userSignUpPage', { admin: false, user: true, category, userData })
-        })
-    }
+    res.redirect('/')
 }
 const doSignUp = (req, res) => {
     let userData = req.session.user
@@ -91,7 +77,7 @@ const doSignUp = (req, res) => {
     })
 }
 const doLogin = (req, res) => {
-    let userData = req.session.user 
+    let userData = req.session.user
     userLoginModel.doLogin(req.body).then((response) => {
         if (response.userFalse) {
             categoryController.getCategory().then((category) => {
@@ -137,7 +123,7 @@ const doSignUpVerification = (req, res) => {
             })
         } else {
             console.log("wrong");
-                res.json({verificationFail: true})
+            res.json({ verificationFail: true })
         }
     } catch (error) {
         console.log(error.message);
@@ -145,7 +131,7 @@ const doSignUpVerification = (req, res) => {
 }
 
 
-const loginFailed = (req,res)=>{
+const loginFailed = (req, res) => {
     let userData = req.session.user
     const userId = req.body.id
     categoryController.getCategory().then((category) => {
