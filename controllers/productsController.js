@@ -1,7 +1,7 @@
-const userProductModel = require('/Brototype/Week 8/MyCam/model/userProductModel')
-const categoryController = require('/Brototype/Week 8/MyCam/model/category')
-const userCartModel = require('/Brototype/Week 8/MyCam/model/userCart')
-const productModel = require('/Brototype/Week 8/MyCam/model/product')
+const userProductModel = require('../model/userProductModel')
+const categoryController = require('../model/category')
+const userCartModel = require('../model/userCart')
+const productModel = require('../model/product')
 
 const showProducts = async (req, res) => {
     let userData = req.session.user

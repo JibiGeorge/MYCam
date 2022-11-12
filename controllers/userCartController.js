@@ -1,6 +1,6 @@
-const userCartModel = require('/Brototype/Week 8/MyCam/model/userCart')
-const categoryController = require('/Brototype/Week 8/MyCam/model/category')
-const userAddressModel = require('/Brototype/Week 8/MyCam/model/userAddressModel')
+const userCartModel = require('../model/userCart')
+const categoryController = require('../model/category')
+const userAddressModel = require('../model/userAddressModel')
 
 const addtoCart = (req, res) => {
     userCartModel.addToCart(req.body.productID, req.body.price, req.session.user._id).then(() => {
@@ -43,6 +43,7 @@ const proceedToPayment = async (req, res) => {
         cartCount = await userCartModel.getCartCount(req.session.user._id)
     }
     let totalAmount = await userCartModel.getTotalAmount(userData._id)
+    totalAmount = totalAmount.totalAmount
     categoryController.getCategory().then((category) => {
         userAddressModel.getAddressList(req.session.user._id).then((addressList) => {
             userCartModel.getCartParoducts(req.session.user._id).then((products) => {

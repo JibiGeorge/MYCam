@@ -1,7 +1,7 @@
-const userCartModel = require('/Brototype/Week 8/MyCam/model/userCart')
-const categoryController = require('/Brototype/Week 8/MyCam/model/category')
-const userAddressModel = require('/Brototype/Week 8/MyCam/model/userAddressModel')
-const userDataModel = require('/Brototype/Week 8/MyCam/model/userProfile')
+const userCartModel = require('../model/userCart')
+const categoryController = require('../model/category')
+const userAddressModel = require('../model/userAddressModel')
+const userDataModel = require('../model/userProfile')
 
 
 const showProfilePage = async (req, res) => {

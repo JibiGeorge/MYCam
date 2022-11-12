@@ -1,20 +1,16 @@
 const { response } = require('express');
 const session = require('express-session');
-const adminLoginContol = require('../../model/adminLogin')
-const count = require('/Brototype/Week 8/MyCam/model/count')
+const adminLoginContol = require('../model/adminLogin')
+const count = require('../model/count')
 
 
 //For admin Login Page
 const adminLoginPage = async(req,res)=>{
-    if(req.session.adminloggedIn){
         let totalusers = await count.userCount()
         let totalCategory = await count.categoryCount()
         let totalBrand = await count.brandCount()
         let totalProduct = await count.productCount()
         res.render('admin/adminPanel',{admin:true,title:"Dashboard",user:false,totalusers,totalCategory,totalBrand,totalProduct})
-    }else{
-        res.render('admin/adminLogin',{admin:false,user:false})
-    }
 }
 //For admin login to admin panel with predefined credentials
 const adminLogin = (req,res)=>{

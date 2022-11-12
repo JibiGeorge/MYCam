@@ -78,7 +78,6 @@ module.exports = {
                     }
                 }
             ]).toArray()
-            console.log("vadvavadv",cartItems);
             resolve(cartItems)
         })
     },
@@ -127,9 +126,7 @@ module.exports = {
     getTotalAmount: (userID) => {
         return new Promise(async (resolve, reject) => {
             let userCart = await db.get().collection(collections.CART_COLLECTION).findOne({ user: ObjectID(userID) })
-            // console.log("length",userCart.products.length);
             if (userCart.products.length>0) {
-                // console.log("jahvdcjh");
                 let totalAmount = await db.get().collection(collections.CART_COLLECTION).aggregate([
                     {
                         $match: { user: ObjectID(userID) }

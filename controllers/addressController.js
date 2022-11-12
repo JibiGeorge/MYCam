@@ -1,6 +1,6 @@
-const userAddressModel = require('/Brototype/Week 8/MyCam/model/userAddressModel')
-const userCartModel = require('/Brototype/Week 8/MyCam/model/userCart')
-const categoryController = require('/Brototype/Week 8/MyCam/model/category')
+const userAddressModel = require('../model/userAddressModel')
+const userCartModel = require('../model/userCart')
+const categoryController = require('../model/category')
 
 const addAddress = (req,res)=>{
     let data= req.body

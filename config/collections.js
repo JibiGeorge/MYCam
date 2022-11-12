@@ -7,5 +7,6 @@ module.exports={
     SLIDER_IMAGE: 'slideImage',
     CART_COLLECTION: 'cart',
     USER_ADDRESS_COLLECTION: 'userAddress',
-    ORDER_COLLECTION: 'order'
+    ORDER_COLLECTION: 'order',
+    COUPON_COLLECTION: 'coupon'
 }                   

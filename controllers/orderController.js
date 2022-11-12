@@ -1,9 +1,28 @@
-const orderModel = require('/Brototype/Week 8/MyCam/model/orderModel')
-const userCartModel = require('/Brototype/Week 8/MyCam/model/userCart')
-const categoryController = require('/Brototype/Week 8/MyCam/model/category')
+const orderModel = require('../model/orderModel')
+const userCartModel = require('../model/userCart')
+const categoryController = require('../model/category')
+const orderPage = (req, res) => {
+        orderModel.getAllOrders().then((response) => {
+            res.render('admin/productOrder', { admin: true, title: "Orders", user: false, response })
+        })
+}
 
+const orderDetails = (req,res)=>{
+    let orderID = req.query.id
+        orderModel.getOrderDetails(orderID).then((orderDetails)=>{
+            let orders = orderDetails[0] ? orderDetails[0] : "";
+            res.render('admin/orderDetailsPage',{admin: true, user: false,title:"Order Details",orders})
+        })
+}
+
+const updateOrderDetails = (req,res)=>{
+        orderModel.updateOrderDetails(req.body).then((response)=>{
+            res.send(response)
+        })
+}
 const placeOrder = async (req, res) => {
     let totalPrice = await userCartModel.getTotalAmount(req.body.userID)
+    totalPrice = totalPrice.totalAmount
     orderModel.placeOrder(req.body, totalPrice,req.body.userID).then((orderID) => {
         if (req.body.paymentMethod == 'COD') {
 
@@ -42,15 +61,12 @@ const ordersPage = async (req, res) => {
 
 const getOrderProductDetails = (req,res)=>{
     let orderID = req.body.orderID
-    // console.log(orderID);
     orderModel.getOrderedProductDetails(orderID).then((orderProductDetails)=>{
-        // console.log(orderProductDetails);
         res.json({orderProductDetails})
     })
 }
 
 const cancelOrder = (req,res)=>{
-    // console.log(req.body);
     let orderID = req.body.orderID;
     orderModel.cancelOrder(orderID).then((response)=>{
         res.send(response)
@@ -59,6 +75,9 @@ const cancelOrder = (req,res)=>{
 }
 
 module.exports = {
+    orderPage,
+    orderDetails,
+    updateOrderDetails,
     placeOrder,
     orderSuccess,
     ordersPage,

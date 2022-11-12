@@ -1,9 +1,9 @@
-const categoryController = require('/Brototype/Week 8/MyCam/model/category')
-const userLoginModel = require('/Brototype/Week 8/MyCam/model/userLogin')
-const imageSlider = require('/Brototype/Week 8/MyCam/model/sliderImageModel')
-const productModel = require('/Brototype/Week 8/MyCam/model/product')
+const categoryController = require('../model/category')
+const userLoginModel = require('../model/userLogin')
+const imageSlider = require('../model/sliderImageModel')
+const productModel = require('../model/product')
 const nodemailer = require("nodemailer")
-const userOTPModel = require('/Brototype/Week 8/MyCam/model/OTPModel')
+const userOTPModel = require('../model/OTPModel')
 require('dotenv').config();
 
 const OTP = `${Math.floor(1000 + Math.random() * 9000)}`;
