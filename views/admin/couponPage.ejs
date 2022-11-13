@@ -3,8 +3,11 @@
         <div class="row">
             <a href="/admin/couponCreate" class="btn btn-primary" style="width: auto;">Create Coupon</a>
         </div>
+       <div class="mt-2">
+        <span class="pt-4">* Click Coupon code for View Details</span>
+       </div>
     </div>
-    <div class="card mt-3 coupon-table">
+    <div class="card mt-2 coupon-table">
         <div class="card-body">
             <div class="table-responsive">
                 <table width="100%" id="couponTable">
@@ -18,10 +21,10 @@
                             <th>Per(%)</th>
                             <th>Start Date</th>
                             <th>End Date</th>
-                            <th>Status</th>
+                            <th>Coupon Status</th>
                             <th>Usage</th>
                             <th>Action</th>
-                            <th>Detail</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,9 +40,13 @@
                                 <td><%= values.end_Date %></td>
                                 <td><%= values.status %></td>
                                 <td><%= values.total_User %></td>
-                                <!-- <td><a href="#" >Delete</a></td> -->
-                                <td><span for="" style="cursor: pointer; color: #0d6efd;" onclick="couponDelete('<%= values._id %>')">Delete</span></td>
-                                <td><a href="#">History</a></td>
+                                <td>
+                                    <span for="" style="cursor: pointer; color: #0d6efd;" onclick="couponDelete('<%= values._id %>')">Delete</span>
+                                </td>
+                                <td>
+                                    
+                                    <span for="" style="cursor: pointer; color: #0d6efd;" onclick="couponStatus('<%= values._id%>')" data-bs-toggle="modal" data-bs-target="#staticBackdrop">update</span>
+                                </td>
                             </tr>
                             <% } %>
                     </tbody>
@@ -47,34 +54,54 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Status Update</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <input type="text" id="couponID" style="display: none;">
+            <div class="modal-body">
+                <select name="status" id="statusUpdate" class="form-select">
+                    <option value="">Select Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Active">Active</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="Expired">Expired</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
+              <button type="button" class="btn btn-primary" onclick="statusUpdate()" >SAVE</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </main>
 
 <script>
-    $(function () {
-        $('.couponCreate').change(function () {
-            if ($(this).is(':checked')) {
-                $("div#couponForm").show();
-                $("div#couponForm").children().prop('disabled', false);
-            } else {
-                $("div#couponForm").hide();
-                $("div#couponForm").children().prop('disabled', true);
-            }
-        });
-
-        let offerType = document.getElementById('offerType')
-        offerType.addEventListener('change', (e) => {
-            e.preventDefault()
-            if (offerType.value == "Flat") {
-                document.getElementById('couponAmount').style.display = "block";
-                document.getElementById('couponAmount').style.display = "block";
-            } else if (offerType.value == "Percentage") {
-            }
+    // Coupon Status Update
+    function couponStatus(id){
+        let couponIDField = document.getElementById('couponID')
+        couponIDField.value = id
+    }
+    function statusUpdate(){
+        let status = document.getElementById('statusUpdate').value
+        let couponID = document.getElementById('couponID').value
+        fetch('/admin/coupon/update',{
+            method: 'PUT',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({couponID,status})
+        }).then(res => res.json()).then(data=>{
+            window.location.reload()
         })
-    });
+    }
 
     $(document).ready(function () {
         $('#couponTable').DataTable();
     });
+
     function couponDelete(couponID){
         fetch('/admin/coupon/delete',{
             method: 'DELETE',
@@ -85,5 +112,5 @@
         }).catch((error)=>{
             console.log(error.message);
         })
-    }
+    }   
 </script>

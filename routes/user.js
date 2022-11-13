@@ -26,13 +26,15 @@ router.post('/product/showDetail/add-tocart',userCartController.addtoCart)
 
 router.get('/cart',sessionHandle.userLoginSession, userCartController.showCart)
 router.post('/cart/chageProductQuanity', userCartController.changeQuantity)
+router.post('/cart/applyCoupon',userCartController.applyCoupon)
 
 router.post('/addAddress', addressController.addAddress)
-router.get('/cart/proceedToPayment',sessionHandle.userLoginSession, userCartController.proceedToPayment)
+router.post('/cart/proceedToPayment',sessionHandle.userLoginSession, userCartController.proceedToPayment)
 router.get('/addressPage',sessionHandle.userLoginSession, addressController.getAddressPage)
 
 
 router.post('/placeOrder',orderController.placeOrder)
+router.get('/user/placeOrder',orderController.placeOrderPage)
 router.get('/order-success',sessionHandle.userLoginSession, orderController.orderSuccess)
 router.get('/orders',sessionHandle.userLoginSession, orderController.ordersPage)
 

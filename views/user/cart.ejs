@@ -13,73 +13,100 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle">
-                        <% if(products.length >0){ %>
+                        <% if(products.length>0){ %>
 
                             <% for (var i=0;i<products.length;i++) { %>
                                 <tr style="border-bottom: 15px solid #f5f5f5;">
                                     <td>
                                         <img src="<%= products[i].product.file_url %>" alt="Sorry" width="50px">
-                                        <a href="" style="text-decoration: none; color: #6C757D;"><%= products[i].product.product_Name %></a>
+                                        <a href="" style="text-decoration: none; color: #6C757D;">
+                                            <%= products[i].product.product_Name %>
+                                        </a>
                                     </td>
-                                    <td>₹<%= products[i].product.selling_Price %></td>
+                                    <td>₹<%= products[i].product.selling_Price %>
+                                    </td>
                                     <td>
                                         <div class="mx-auto d-flex" style="width: 100px;">
                                             <div>
-                                                <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;"onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',-1,'<%= userData._id %>','<%= products[i].product.selling_Price %>','<%= products[i].SumOfProducts %>')">
+                                                <button class="btn"
+                                                    style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;"
+                                                    onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',-1,'<%= userData._id %>','<%= products[i].product.selling_Price %>','<%= products[i].SumOfProducts %>')">
                                                     <i class="las la-minus"></i>
                                                 </button>
                                             </div>
-                                            <span id="<%= products[i].product._id %>"style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;" class="pt-1"><%= products[i].quantity %></span>
-        
-                                            <!-- <input disabled type="text" value="<%= products[i].quantity %>" style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;" id="<%= products[i].quantity %>"> -->
+                                            <span id="<%= products[i].product._id %>"
+                                                style="width: 1%; flex: 1 1 auto; background: #f5f5f5; border: 0; padding: 0 5px;"
+                                                class="pt-1">
+                                                <%= products[i].quantity %>
+                                            </span>
                                             <div>
-                                                <button class="btn" style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;" onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',1,'<%= userData._id %>','<%= products[i].product.selling_Price %>','<%= products[i].SumOfProducts %>')">
+                                                <button class="btn"
+                                                    style="background: #FFD333; border-radius: 0;padding: 0.35rem 0.5rem; font-size: 0.875rem;"
+                                                    onclick="changeQuantity('<%= products[i]._id%>','<%= products[i].product._id %>',1,'<%= userData._id %>','<%= products[i].product.selling_Price %>','<%= products[i].SumOfProducts %>')">
                                                     <i class="las la-plus"></i>
                                                 </button>
                                             </div>
                                         </div>
                                     </td>
-                                    <td id="<%= products[i].SumOfProducts %>">₹<%= products[i].SumOfProducts %></td>
+                                    <td id="<%= products[i].SumOfProducts %>">₹<%= products[i].SumOfProducts %>
+                                    </td>
                                     <td>
-                                        <button class="btn btn-danger" style="padding: 0.35rem 0.5rem; font-size: 0.875rem;">
+                                        <button class="btn btn-danger"
+                                            style="padding: 0.35rem 0.5rem; font-size: 0.875rem;">
                                             <i class="las la-times"></i>
                                         </button>
                                     </td>
                                 </tr>
-                                <% } %>  
-                            <% } else { %>
-                                <tr style="border-bottom: 15px solid #f5f5f5;">
-                                    <td><h1>Cart is Empty</h1></td>
-                                    </tr>
                                 <% } %>
-
-
-
-
-                                                      
+                                    <% } else { %>
+                                        <tr style="border-bottom: 15px solid #f5f5f5;">
+                                            <td>
+                                                <h1>Cart is Empty</h1>
+                                            </td>
+                                        </tr>
+                                        <% } %>
                     </tbody>
                 </table>
             </div>
 
             <div class="col-lg-4">
+                <!-- Coupon -->
+                <h5 class="mb-3 text-uppercase" style="line-height: 1.2;">Apply Coupon</h5>
+                <div class="bg-light mb-5" style="padding: 30px;">
+                    <div class="" style="border-bottom: 1px solid #dee2e6">
+                        <div class="d-flex justify-content-between mb-3">
+                            <input type="text" class="form-control me-4" id="coupon_Code"
+                                style="text-transform: uppercase;">
+                            <button class="btn btn-warning ps-4 pe-4" onclick="applyCoupon()">APPLY</button>
+                        </div>
+                        <div id="message"></div>
+                    </div>
+
+                </div>
+
                 <h5 class="mb-3 text-uppercase" style="line-height: 1.2;">Cart Summary</h5>
                 <div class="bg-light mb-5" style="padding: 30px;">
                     <div class="pb-2" style="border-bottom: 1px solid #dee2e6">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Sub Total</h6>
-                            <h6 id="subTotal" class="totalAmount"><%=totalAmount %></h6>
+                            <h6 id="subTotal" class="totalAmount">
+                                <%=totalAmount %>
+                            </h6>
                         </div>
-                        <!-- <div class="d-flex justify-content-between">
-                            <h6>Shipping</h6>
-                            <h6 id="shipping"></h6>
-                        </div> -->
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Discount</h6>
+                            <h6 id="discount" class="totalAmount">0</h6>
+                        </div>
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h4 style="font-weight: 600;">Total</h4>
-                            <h4 id="totalAmount" class="totalAmount" style="font-weight: 600;"><%=totalAmount %></h4>
+                            <h4 id="totalAmount" class="totalAmount" style="font-weight: 600;">
+                                <%=totalAmount %>
+                            </h4>
                         </div>
-                        <a style="font-weight: 700; width: 100%; color: #3D464D; background: #FFD333; border: 0;" class="my-3 py-3 btn" href="/cart/proceedToPayment">Procced to Checkout</a>
+                        <button style="font-weight: 700; width: 100%; color: #3D464D; background: #FFD333; border: 0;"
+                            class="my-3 py-3 btn" onclick="ProceedToPayment()">Procced to Checkout</button>
                     </div>
                 </div>
             </div>
@@ -88,39 +115,81 @@
 </div>
 
 <script>
-    function changeQuantity(cartID, productID,count,userID,price,total){
+    function changeQuantity(cartID, productID, count, userID, price, total) {
         let quantity = parseInt(document.getElementById(productID).innerHTML)
+        document.getElementById('discount').innerHTML = 0
         $.ajax({
             url: '/cart/chageProductQuanity',
-            data:{
-                cart:cartID,
-                product:productID,
-                count:count,
+            data: {
+                cart: cartID,
+                product: productID,
+                count: count,
                 quantity: quantity,
-                userID:userID,
-                price:price
+                userID: userID,
+                price: price
             },
-            method:'post',
-            success:(response)=>{
-                if(response.response.removeProduct){
+            method: 'post',
+            success: (response) => {
+                if (response.response.removeProduct) {
                     location.reload()
-                }else{
-                    let counttt = document.getElementById(productID).innerHTML=quantity+count
-                    document.getElementById(total).innerHTML = '₹'+ counttt*price
+                } else {
+                    let counttt = document.getElementById(productID).innerHTML = quantity + count
+                    document.getElementById(total).innerHTML = '₹' + counttt * price
                     document.getElementById("subTotal").innerHTML = response.totalAmount
+                    document.getElementById('discount').innerHTML = 0
                     document.getElementById("totalAmount").innerHTML = response.totalAmount
-                    // document.getElementById("totalProductAmount").innerHTML = counttt*price
-                    // let shippingCharge = (response.totalAmount*5)/100;
-                    // if(response.totalAmount >300000){
-                    //     document.getElementById('shipping').innerHTML = "No Shipping"
-                    // }else{
-                    //     document.getElementById('shipping').innerHTML = shippingCharge
-                    // }
+                    document.getElementById('coupon_Code').value = ""
+                    document.getElementById('message').innerHTML = ""
                 }
             }
         })
     }
 
 
+    // Coupon Apply
+    function applyCoupon() {
+        let code = document.getElementById('coupon_Code').value.toUpperCase()
+        let messageCoupon = document.getElementById('message');
+        fetch('/cart/applyCoupon', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code })
+        }).then(res => res.json()).then(data => {
+            let cartTotalAmount = data.totalAmount
+            if (data.noCoupon) {
+                let message = `<span style="color: red;"><i class="las la-times"></i>Invalid Coupon Code</span>`
+                messageCoupon.innerHTML = message
+            } else if (data.expiry) {
+                let message = `<span style="color: red;"><i class="las la-times"></i>Coupon Expired</span>`
+                messageCoupon.innerHTML = message
+            } else if (data.amountExceed) {
+                let message = `<span style="color: red;"><i class="las la-times"></i>Amount Low</span>`
+                messageCoupon.innerHTML = message
+            } else if (data.flatDiscount) {
+                document.getElementById('discount').innerHTML = data.discount
+                document.getElementById('totalAmount').innerHTML = cartTotalAmount - data.discount
+                let message = `<span style="color: green;"><i class="las la-check"></i>Coupon valid</span>`
+                messageCoupon.innerHTML = message
+            } else {
+                let discounted = document.getElementById('discount').innerHTML = (cartTotalAmount * data.discount) / 100
+                document.getElementById('totalAmount').innerHTML = cartTotalAmount - discounted
+                let message = `<span style="color: green;"><i class="las la-check"></i>Coupon valid</span>`
+                messageCoupon.innerHTML = message
+            }
+        })
+
+    }
+
+    function ProceedToPayment() {
+        let discountAmount = document.getElementById('discount').innerHTML
+        let couponCode = document.getElementById('coupon_Code').value.trim()
+        fetch('/cart/proceedToPayment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ discountAmount, couponCode })
+        }).then(res => res.json()).then(data => {
+            window.location = '/user/placeOrder?discountAmount=' + data.discountAmount + '&couponCode=' + data.couponCode
+        })
+    }
 
 </script>

@@ -7,7 +7,7 @@ require('dotenv').config();
 var instance = new Razorpay({ key_id: process.env.RAZORPAY_KEY_ID, key_secret: process.env.RAZORPAY_KEY_SECRET })
 
 module.exports = {
-    placeOrder: (orderDetails, total, userID) => {
+    placeOrder: (orderDetails, total, userID, finalPrice, coupon, discountAmount) => {
         return new Promise(async (resolve, reject) => {
             let cartProducts = await db.get().collection(collections.CART_COLLECTION).aggregate([
                 {
@@ -48,7 +48,10 @@ module.exports = {
                 user: ObjectId(orderDetails.userID),
                 paymentMethod: orderDetails.paymentMethod,
                 product: cartProducts,
-                totalAmount: total.totalAmount,
+                totalAmount: total,
+                discountAmount: discountAmount,
+                finalPrice: finalPrice,
+                coupon: coupon,
                 status: status,
                 date: new Date(),
                 expected_Date: new Date(+ new Date() + 7 * 40 * 24 * 60 * 1000)
@@ -82,16 +85,7 @@ module.exports = {
                 {
                     $match: { user: ObjectId(userId) }
                 },
-                // {
-                //     $lookup:{
-                //         from: collections.PRODUCT_DETAILS,
-                //         localField: 'products.productDetails',
-                //         foreignField: '_id',
-                //         as: 'products'
-                //     }
-                // }
             ]).toArray()
-            console.log("111", productList);
             resolve(productList)
 
         })
@@ -114,7 +108,6 @@ module.exports = {
     getAllOrders: () => {
         return new Promise(async (resolve, reject) => {
             let ordersList = await db.get().collection(collections.ORDER_COLLECTION).find().toArray()
-            // console.log(ordersList);
             if (ordersList.length > 0) {
                 let user = await db.get().collection(collections.ORDER_COLLECTION).aggregate([
                     {
@@ -139,9 +132,6 @@ module.exports = {
                 {
                     $match: { _id: ObjectId(orderID) }
                 },
-                // {
-                //     $unwind : '$product'
-                // },
                 {
                     $lookup: {
                         from: collections.USER_DETAILS,
@@ -155,39 +145,37 @@ module.exports = {
         })
     },
     updateOrderDetails: (data) => {
-        console.log("data", data);
         return new Promise(async (resolve, reject) => {
             let orderId = ObjectId(data.id)
-            console.log(orderId);
             let status = data.status;
             let description = data.description;
             db.get().collection(collections.ORDER_COLLECTION).updateOne(
                 {
-                    _id:orderId
+                    _id: orderId
                 },
                 {
-                    $set:{
+                    $set: {
                         status: status,
                         description: description
                     }
                 }
-            ).then((response)=>{
+            ).then((response) => {
                 resolve(response)
             })
         })
     },
-    cancelOrder: (orderID)=>{
-        return new Promise ((resolve,reject)=>{
+    cancelOrder: (orderID) => {
+        return new Promise((resolve, reject) => {
             db.get().collection(collections.ORDER_COLLECTION).updateOne(
                 {
                     _id: ObjectId(orderID)
                 },
                 {
-                    $set:{
+                    $set: {
                         status: "cancelled"
                     }
                 }
-            ).then((response)=>{
+            ).then((response) => {
                 resolve(response)
             })
         })

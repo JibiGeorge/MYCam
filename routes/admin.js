@@ -55,6 +55,7 @@ router.get('/coupon',sessionHandle.adminSession, couponController.getCouponPage)
 router.get('/couponCreate',sessionHandle.adminSession, couponController.createPage)
 router.post('/coupon/add',sessionHandle.adminSession, couponController.addCoupon)
 router.delete('/coupon/delete',sessionHandle.adminSession, couponController.deleteCoupon)
+router.put('/coupon/update',sessionHandle.adminSession,couponController.updateStatus)
 
 
 

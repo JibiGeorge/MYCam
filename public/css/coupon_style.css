@@ -1,4 +1,5 @@
-.coupon-table table{
+.coupon-table table,
+.coupon-table table select{
     font-size: 13px;
 }
 .coupon-table td{

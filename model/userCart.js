@@ -126,7 +126,7 @@ module.exports = {
     getTotalAmount: (userID) => {
         return new Promise(async (resolve, reject) => {
             let userCart = await db.get().collection(collections.CART_COLLECTION).findOne({ user: ObjectID(userID) })
-            if (userCart.products.length>0) {
+            if (userCart.products.length > 0) {
                 let totalAmount = await db.get().collection(collections.CART_COLLECTION).aggregate([
                     {
                         $match: { user: ObjectID(userID) }
@@ -155,18 +155,6 @@ module.exports = {
                             product: { $arrayElemAt: ['$cartItems', 0] }
                         }
                     },
-                    // {
-                    //     $project: {
-                    //         quantity: 1,
-                    //         total: {
-                    //             $sum: {
-                    //                 $multiply: [
-                    //                     '$quantity', '$product.selling_Price'
-                    //                 ]
-                    //             }
-                    //         }
-                    //     }
-                    // }
                     {
                         $group: {
                             _id: "",
@@ -181,13 +169,10 @@ module.exports = {
                     }
                 ]).toArray()
                 response.totalAmount = totalAmount[0].total
-                // console.log("have",response.totalAmount);             
                 resolve(response)
             } else {
-                response.totalAmount = 0;                
-                // console.log("empty",response.totalAmount);     
+                response.totalAmount = 0;
                 resolve(response)
-                // console.log("Cart is Empty");
             }
         })
     },
@@ -195,6 +180,37 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             let cart = await db.get().collection(collections.CART_COLLECTION).findOne({ user: ObjectID(userID) })
             resolve(cart.products)
+        })
+    },
+    applyCoupon: (code, totalAmount) => {
+        return new Promise(async (resolve, reject) => {
+            let coupon = await db.get().collection(collections.COUPON_COLLECTION).findOne({ coupon_Code: code })
+            if (coupon) {
+                let end_Date = Date.parse(coupon.end_Date)
+                let todayDate = new Date()
+                todayDate = todayDate.toLocaleDateString("en-US")
+                todayDate = Date.parse(todayDate)
+
+                if (todayDate <= end_Date && coupon.status == "Active") {
+                    if (totalAmount >= coupon.minimum_Amount) {
+                        if (coupon.offer_Type == "Flat") {
+                            response.flatDiscount = true
+                            response.discount = coupon.discount_Amount
+                            resolve(response)
+                        } else if (coupon.offer_Type == "Percentage") {
+                            response.flatDiscount = false
+                            response.discount = coupon.discount_Percentage
+                            resolve(response)
+                        }
+                    } else {
+                        resolve({ amountExceed: true })
+                    }
+                } else {
+                    resolve({ expiry: true })
+                }
+            } else {
+                resolve({ noCoupon: true })
+            }
         })
     }
 }
