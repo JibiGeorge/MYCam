@@ -64,6 +64,9 @@
 .user-order .status.yellow{
     background: rgb(251, 255, 0);
 }
+.user-order .status.skyblue{
+    background: rgb(203, 0, 243);
+}
 .user-order .table-responsive{
     width: 100%;
     overflow: hidden;

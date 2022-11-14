@@ -188,7 +188,7 @@
     function razorpayPayment(order) {
         var options = {
             "key": "rzp_test_K9xHI2IycsZVd3", // Enter the Key ID generated from the Dashboard
-            "amount": order.amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
             "currency": "INR",
             "name": "MyCam",
             "description": "Test Transaction",
@@ -225,7 +225,14 @@
                 payment,
                 order
             },
-            method: 'post'
+            method: 'post',
+            success:(response)=>{
+                if(response.status){
+                    location.href = '/order-success'
+                }else{
+                    alert("Payment Failed")
+                }
+            }
         })
     }
 </script>

@@ -34,6 +34,7 @@ router.get('/addressPage',sessionHandle.userLoginSession, addressController.getA
 
 
 router.post('/placeOrder',orderController.placeOrder)
+router.post('/verifyPayment',orderController.verifyPayment)
 router.get('/user/placeOrder',orderController.placeOrderPage)
 router.get('/order-success',sessionHandle.userLoginSession, orderController.orderSuccess)
 router.get('/orders',sessionHandle.userLoginSession, orderController.ordersPage)
@@ -56,9 +57,7 @@ router.put('/userProfile/address/update',userProfileController.updateAddress)
 router.delete('/userProfile/addressDelete',sessionHandle.userLoginSession, userProfileController.addressDelete)
 router.put('/userProfile/password/update',userProfileController.updatePassword)
 
-router.post('/verifyPayment',(req,res)=>{
-    console.log(req.body);
-})
+
 
 
 

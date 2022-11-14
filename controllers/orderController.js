@@ -96,6 +96,18 @@ const placeOrderPage = async (req, res) => {
     })
 }
 
+const verifyPayment = (req,res)=>{
+    orderModel.verifyPayment(req.body).then(()=>{
+        orderModel.changePaymentStatus(req.body.order.receipt).then(()=>{
+            console.log("Payment SuccessFull");
+            res.json({status:true})
+        })
+    }).catch((err)=>{
+        console.log(err);
+        res.json({status:false,errMsg: ""})
+    })
+}
+
 module.exports = {
     orderPage,
     orderDetails,
@@ -105,5 +117,6 @@ module.exports = {
     ordersPage,
     getOrderProductDetails,
     cancelOrder,
-    placeOrderPage
+    placeOrderPage,
+    verifyPayment
 }

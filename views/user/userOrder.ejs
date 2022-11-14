@@ -38,37 +38,42 @@
                                                     <td>
                                                         <%= values.paymentMethod %>
                                                     </td>
-                                                    <% if (values.status=="ordered" ) { %>
+                                                    <% if (values.status=="Ordered" ) { %>
                                                         <td>
                                                             <span class="status pink"></span>
                                                             <%= values.status %>
                                                         </td>
-                                                        <% } else if(values.status=="packed" ) { %>
+                                                        <% } else if(values.status=="Packed" ) { %>
                                                             <td>
                                                                 <span class="status orange"></span>
                                                                 <%= values.status %>
                                                             </td>
-                                                            <% }else if(values.status=="shipped" ) { %>
+                                                            <% }else if(values.status=="Shipped" ) { %>
                                                                 <td>
                                                                     <span class="status blue"></span>
                                                                     <%= values.status %>
                                                                 </td>
-                                                                <% } else if(values.status=="delivered" ) { %>
+                                                                <% } else if(values.status=="Delivered" ) { %>
                                                                     <td>
                                                                         <span class="status green"></span>
                                                                         <%= values.status %>
                                                                     </td>
-                                                                    <% } else if(values.status=="cancelled" ) { %>
+                                                                    <% } else if(values.status=="Cancelled" ) { %>
                                                                         <td>
                                                                             <span class="status red"></span>
                                                                             <%= values.status %>
                                                                         </td>
-                                                                        <% } else if(values.status=="placed" ) { %>
+                                                                        <% } else if(values.status=="Placed" ) { %>
                                                                             <td>
                                                                                 <span class="status yellow"></span>
                                                                                 <%= values.status %>
                                                                             </td>
-                                                                            <% } %>
+                                                                            <% }else if(values.status == "Pending") { %>
+                                                                                <td>
+                                                                                    <span class="status skyblue"></span>
+                                                                                    <%= values.status %>
+                                                                                </td>
+                                                                                <% } %>
                                                                                 <td>
                                                                                     <% let
                                                                                         expectedDate=values.expected_Date
@@ -108,13 +113,12 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Order Details</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="table-responsive" id="table_main">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" onclick="orderCancel( '<%= values._id %>')" class="btn btn-primary">CANCEL
-                            ORDER</button>
-                    </div>
+                <div class="modal-body" id="table_main">
+                   
+                    
+                    
+                        
+                   
                 </div>
             </div>
         </div>
@@ -130,7 +134,8 @@
             }).then(res => res.json()).then(data => {
                 let datas = data.orderProductDetails
                 let table =
-                    `<table class="table table-striped table-hover">
+                    ` <div class="table-responsive">
+                    <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Product</th>
@@ -153,7 +158,16 @@
                 }
                 table +=
                     `</tbody>
-            </table>`
+            </table>
+        </div>
+        <div class="modal-footer">`
+            for(var i=0; i< datas.length; i++){
+                table+=
+                `<button type="submit" onclick="orderCancel( '${datas[i]._id}')" class="btn btn-primary">CANCEL
+                            ORDER</button>`
+            }
+            table +=
+            ` </div>`
                 tableMain.innerHTML = table
             })
         }
