@@ -9,6 +9,7 @@ const orderController = require('../controllers/orderController')
 const productsController = require('../controllers/productsController')
 const userProfileController = require('../controllers/userProfileController')
 const sessionHandle = require('../middleware/userSession')
+const userWishlistController = require('../controllers/wishlistController')
 
 router.use(methodoverride('_method'))
 
@@ -23,6 +24,10 @@ router.get('/logout', userLoginController.doLogout)
 
 router.get('/product/showDetail', userHomePageController.showDetail)
 router.post('/product/showDetail/add-tocart',userCartController.addtoCart)
+
+router.get('/wishlist',sessionHandle.userLoginSession,userWishlistController.wishlistPage)
+router.post('/product/add-toWishlist',sessionHandle.userLoginSession,userWishlistController.addtoWishlist)
+router.delete('/wishlist/proDelete',sessionHandle.userLoginSession,userWishlistController.deleteProduct)
 
 router.get('/cart',sessionHandle.userLoginSession, userCartController.showCart)
 router.post('/cart/chageProductQuanity', userCartController.changeQuantity)

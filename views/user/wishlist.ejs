@@ -1,0 +1,61 @@
+<div style="background: #eeeeee;">
+    <div class="container-fluid user-order pb-5" style="padding-top: 30px;">
+        <div class="wishlist">
+            <div>
+                <div class="wishlist-title">
+                    <div class="title">
+                        <span>My WishList (<span><%= wishlistCount %></span>)</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <% for (values of wishList) { %>
+                    <div class="content-item">
+                        <div class="d-flex">
+                            <div class="col-11">                                  
+                                <% let product = values.productDetails ? values.productDetails[0] : ""  %>
+                                <a href="/product/showDetail?id=<%= product._id %>">  
+                                    <div class="d-flex">
+                                        <div class="image">
+                                            <img src="<%= product.file_url %>" alt="">
+                                        </div>
+                                        <div class="product">
+                                            <p class="product-Name">
+                                                <%= product.product_Name %>
+                                            </p>
+                                            <p class="product-Rate">
+                                                <span class="s-rate">Rs.
+                                                    <%= product.selling_Price %>
+                                                </span>
+                                            <span class="a-rate">Rs.
+                                                <%= product.actual_Price %>
+                                            </span>
+                                        </p>
+                                        </div>
+                                    </div>                            
+                                </a>
+                            </div>
+                            <div class="col-1">
+                                <button class="btn" onclick="wishlistProDelete('<%=product._id  %>')"><i class="fa-sharp fa-solid fa-trash"></i></button>                               
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function wishlistProDelete(id){
+        fetch('/wishlist/proDelete',{
+            method: 'DELETE',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({id})
+        }).then(res => res.json()).then(data=>{
+            swal("Deleted!", "Your imaginary file has been deleted!", "success");
+            location.reload()
+        })
+    }
+</script>

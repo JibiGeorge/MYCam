@@ -1,5 +1,6 @@
 const userCartModel = require('../model/userCart')
 const categoryController = require('../model/category')
+const userWishlistController = require('../model/wishlistModel')
 
 const addtoCart = (req, res) => {
     userCartModel.addToCart(req.body.productID, req.body.price, req.session.user._id).then(() => {
@@ -10,18 +11,19 @@ const addtoCart = (req, res) => {
 const showCart = async (req, res) => {
     let userData = req.session.user
     let cartCount = null;
+    let wishlistCount = null;
     if (req.session.userLoggedIn) {
         cartCount = await userCartModel.getCartCount(userData._id)
+        wishlistCount = await userWishlistController.getWishListCount(req.session.user._id)
     }
     userCartModel.getTotalAmount(userData._id).then((response) => {
         let totalAmount = response.totalAmount
         userCartModel.getCartParoducts(req.session.user._id).then((products) => {
             categoryController.getCategory().then((category) => {
-                res.render('user/cart', { admin: false, user: true, category, userData, products, cartCount, totalAmount })
+                res.render('user/cart', { admin: false, user: true, category, userData, products, cartCount, totalAmount, wishlistCount })
             })
         })
     })
-
 }
 
 const changeQuantity = (req, res, next) => {
@@ -39,8 +41,10 @@ const proceedToPayment = async (req, res) => {
     let couponCode = req.body.couponCode.toUpperCase()
     let userData = req.session.user
     let cartCount = null;
+    let wishlistCount = null;
     if (req.session.userLoggedIn) {
         cartCount = await userCartModel.getCartCount(req.session.user._id)
+        wishlistCount = await userWishlistController.getWishListCount(req.session.user._id)
     }
     let totalAmount = await userCartModel.getTotalAmount(userData._id)
     totalAmount = totalAmount.totalAmount

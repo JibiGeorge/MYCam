@@ -212,5 +212,5 @@ module.exports = {
                 resolve({ noCoupon: true })
             }
         })
-    }
+    }    
 }

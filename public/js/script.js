@@ -305,3 +305,18 @@ function addToCart(productID,price){
     })
 }
 
+// Add product to Whistlist
+function addtoWhislist(productID){
+    $.ajax({
+        url:'/product/add-toWishlist',
+        data: {productID:productID},
+        method: 'post',
+        success: (response)=>{
+            if(response.status){
+                let count = $('#whishlistCount').html()
+                count = parseInt(count)+1
+                $("#whishlistCount").html(count)
+            }
+        }
+    })
+}

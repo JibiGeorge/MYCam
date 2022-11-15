@@ -2,25 +2,30 @@ const userCartModel = require('../model/userCart')
 const categoryController = require('../model/category')
 const userAddressModel = require('../model/userAddressModel')
 const userDataModel = require('../model/userProfile')
+const userWishlistController = require('../model/wishlistModel')
 
 
 const showProfilePage = async (req, res) => {
     let userData = req.session.user
     let cartCount = null;
+    let wishlistCount = null;
     if (req.session.userLoggedIn) {
         cartCount = await userCartModel.getCartCount(req.session.user._id)
+        wishlistCount = await userWishlistController.getWishListCount(req.session.user._id)
     }
     categoryController.getCategory().then(async (category) => {
         let userDetails = await userDataModel.getUserDetails(userData._id)
-        res.render('user/userProfile', { admin: false, user: true, category, userData, cartCount, userDetails })
+        res.render('user/userProfile', { admin: false, user: true, category, userData, cartCount, userDetails, wishlistCount })
     })
 }
 
 const showAddress = async (req, res) => {
     let userData = req.session.user
     let cartCount = null;
+    let wishlistCount = null;
     if (req.session.userLoggedIn) {
         cartCount = await userCartModel.getCartCount(req.session.user._id)
+        wishlistCount = await userWishlistController.getWishListCount(req.session.user._id)
     }
     categoryController.getCategory().then((category) => {
         userAddressModel.getAddressList(userData._id).then((addressList) => {
@@ -48,14 +53,16 @@ const addressEditPage = async (req, res) => {
     let addressDocId = req.query.addressDoc
     let userData = req.session.user
     let cartCount = null;
+    let wishlistCount = null;
     if (req.session.userLoggedIn) {
         cartCount = await userCartModel.getCartCount(req.session.user._id)
+        wishlistCount = await userWishlistController.getWishListCount(req.session.user._id)
     }
     userDataModel.getAddressDetails(addressID, addressDocId, userData._id).then((addressDetails) => {
         let address = addressDetails[0] ? addressDetails[0].address : "";
         let addressID = addressDetails[0] ? addressDetails[0]._id : "";
         categoryController.getCategory().then(async (category) => {
-            res.render('user/updateBillingAddress', { admin: false, user: true, userData, cartCount, address, category, addressID })
+            res.render('user/updateBillingAddress', { admin: false, user: true, userData, cartCount, address, category, addressID, wishlistCount })
         })
     })
 }

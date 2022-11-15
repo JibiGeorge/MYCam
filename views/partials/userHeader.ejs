@@ -30,10 +30,6 @@
           </li>
         </ul>
       </div>
-      <div class="icons">
-        <div class="las la-shopping-cart" id="cart-btn"></div>
-        <div class="las la-user" id="login-btn"></div>
-      </div>
       <% if (userData) { %>
         <div class="btn-group">
           <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,6 +39,7 @@
             <li><a class="dropdown-item" href="/cart">Cart <span class="badge text-bg-success" id="cartCount"><%= cartCount %></span> </a></li>
             <li><a class="dropdown-item" href="/userProfile">My Profile</a></li>
             <li><a class="dropdown-item" href="/orders">Orders</a></li>
+            <li><a class="dropdown-item" href="/wishlist">WishList<span class="badge text-bg-success" id="whishlistCount"><%= wishlistCount %></span></a></li>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
             
           </ul>

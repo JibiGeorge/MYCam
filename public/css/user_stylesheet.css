@@ -139,55 +139,61 @@
 .category .product-item{
     width: 100%;
 }
-
-/* User Signup Page & Login Page */
-/* .userPage .container-fluid{    
-    background: url('/img/sunset.jpg');
-    background-size: cover;
-}
-.user-signup{
-    background: rgb(230, 210, 210);
-    width: 100%;
-    padding: 2rem;
-    border-radius: 5%;
-    box-shadow: 0 0px 40px #ff7800;
-    box-shadow: 4px #ff7800;
-}
-.user-signup h2{
-    font-weight: bold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-shadow: 0 0 10px #a4e60a;
-    text-decoration: underline;
-}
-.user-signup label{
-    width: 150px;
-    text-align: left;
-}
-.user-signup .signup-data div{
-    padding-bottom: 5px;
-}
-.user-signup .signup-data input[type=text],
-.user-signup .signup-data input[type=email],
-.user-signup .signup-data input[type=number],
-.user-signup .signup-data input[type=password]{
-    border: none;
-    border-radius: 6px;
-    padding: 5px 15px 5px 15px;
-}
-.user-signup .signup-data .btn{
-    background: rgb(27, 226, 176);
-    color: rgb(0, 0, 0);
-    font-size: large;
-    font-weight: 600;
-    transition: .8s;
-}
-.user-signup .signup-data .btn:hover{
-    background: rgb(0, 0, 0);
-    color: rgb(27, 226, 176);
-} */
 .text-center{
     height: 170px;
 }
 .viewmorebtn{
     text-align: center;
+}
+.pro-button{
+    margin: 0 5px;
+    border-radius: 2px;    
+}
+
+/* Wishlist */
+.wishlist{
+    margin: 0 64px;
+    background-color: #fff;
+}
+.wishlist a{
+    color: #000;
+}
+.wishlist-title,
+.wishlist .content-item
+{
+    padding: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+.wishlist-title .title{
+    font-size: 17px;
+    font-weight: 500;
+}
+.wishlist .content-item .image {
+    width: 100px;
+    height: 100px;
+}
+img{
+    width: 100%;
+    height: 100%;
+}
+.wishlist .content-item .product{
+    padding-left: 25px;
+}
+.wishlist .content-item .product-Name{
+font-weight: 400;
+font-size: 15px;
+display: block;
+cursor: pointer;
+margin-bottom: 5px;
+}
+.wishlist .content .s-rate{
+    font-size: 22px;
+    display: inline-block;
+    font-weight: 500;
+}
+.wishlist .content .a-rate{
+    margin-left: 10px;
+    font-size: 14px;
+    display: inline-block;
+    color: #878787;
 }

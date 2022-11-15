@@ -6,14 +6,14 @@
                 <div class="col-lg-8 mb-3">
                     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true"
                         style="position: relative;">
-                        
+
                         <div class="carousel-inner">
                             <% for (values of SliderImage) { %>
-                            <div class="carousel-item active">
-                                <img src="<%=values.file_url %>" style="object-fit: cover; height: 100%; width:100%"
-                                    class="d-block w-100" alt="...">
-                            </div>
-                            <% } %>
+                                <div class="carousel-item active">
+                                    <img src="<%=values.file_url %>" style="object-fit: cover; height: 100%; width:100%"
+                                        class="d-block w-100" alt="...">
+                                </div>
+                                <% } %>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                             data-bs-slide="prev">
@@ -29,11 +29,11 @@
                 </div>
                 <div class="col-lg-4 mb-3">
                     <% for (var i=2;i<SliderImage.length && i<4 ;i++) { %>
-                    <div class="product-offer" style="width: 100%;">
-                        <img class="img-fluid" style="object-fit: cover; height: 100%; width:100%"
-                            src="<%=SliderImage[i].file_url %>" alt="">
-                    </div>
-                    <% } %>
+                        <div class="product-offer" style="width: 100%;">
+                            <img class="img-fluid" style="object-fit: cover; height: 100%; width:100%"
+                                src="<%=SliderImage[i].file_url %>" alt="">
+                        </div>
+                        <% } %>
                 </div>
             </div>
         </div>
@@ -87,21 +87,23 @@
                     <h1>Categories</h1>
                 </div>
                 <% for (var i=0; i<category.length; i++) { %>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1 mr-1rem mb-3">
-                    <a href="/category/showProducts?id=<%=category[i]._id %>" style="text-decoration: none;">
-                        <div class="card" style="background: rgb(255, 255, 255); border-radius: 0;">
-                            <div class="d-flex align-items-center">
-                                <div style="width: 100px; height:100px;">
-                                    <img src="<%= category[i].file_url %>" class="card-img-top" alt="...">
-                                </div>
-                                <div style="padding-left: 1rem;">
-                                    <h6><%= category[i].categoryName %></h6>
+                    <div class="col-lg-3 col-md-4 col-sm-6 pb-1 mr-1rem mb-3">
+                        <a href="/category/showProducts?id=<%=category[i]._id %>" style="text-decoration: none;">
+                            <div class="card" style="background: rgb(255, 255, 255); border-radius: 0;">
+                                <div class="d-flex align-items-center">
+                                    <div style="width: 100px; height:100px;">
+                                        <img src="<%= category[i].file_url %>" class="card-img-top" alt="...">
+                                    </div>
+                                    <div style="padding-left: 1rem;">
+                                        <h6>
+                                            <%= category[i].categoryName %>
+                                        </h6>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-                <% } %>
+                        </a>
+                    </div>
+                    <% } %>
             </div>
         </div>
     </section>
@@ -114,25 +116,45 @@
                 <div class="title mb-4">
                     <h1>Featured Products</h1>
                 </div>
-                    <% for (var i=0;i<featuredProducts.length && i<8 ;i++) { %>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="<%=featuredProducts[i].file_url %>" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="/product/showDetail?id=<%=featuredProducts[i]._id %>"><p style="height: 50px; overflow:hidden;"><%=featuredProducts[i].product_Name %></p></a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ <%=featuredProducts[i].selling_Price %></h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ <%=featuredProducts[i].actual_Price %></h6>
+                <% for (var i=0;i<featuredProducts.length && i<8 ;i++) { %>
+                    <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
+                        <div class="card align-items-center">
+                            <div class="product-item">
+                                <img src="<%=featuredProducts[i].file_url %>" alt="">
+                            </div>
+                            <div class="text-center py-4">
+                                <a href="/product/showDetail?id=<%=featuredProducts[i]._id %>">
+                                    <p style="height: 50px; overflow:hidden;">
+                                        <%=featuredProducts[i].product_Name %>
+                                    </p>
+                                </a>
+                                <div class="rate d-flex align-items-center justify-content-center mt-2">
+                                    <h5>₹ <%=featuredProducts[i].selling_Price %>
+                                    </h5>
+                                    <h6 class="text-muted" style="text-decoration: line-through;">₹
+                                        <%=featuredProducts[i].actual_Price %>
+                                    </h6>
+                                </div>
+                                <div>
+                                    <button class="btn pro-button"
+                                        style="color: #3D464D; background-color: #FFD333; border-color: #FFD333;"
+                                        onclick="addtoWhislist('<%= featuredProducts[i]._id %>')">
+                                        <i class="fa-sharp fa-solid fa-heart"></i>
+                                    </button>
+                                    <button class="btn pro-button"
+                                        style="color: #3D464D; background-color: #FFD333; border-color: #FFD333;"
+                                        onclick="addToCart('<%= featuredProducts[i]._id %>','<%= featuredProducts[i].selling_Price %>')">
+                                        <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-                </div>
-                <% } %>
+                    <% } %>
             </div>
             <div class="viewmorebtn">
-                    <a class="btn btn-warning ps-4 pe-4" href="/featured/viewMore">More</a>
+                <a class="btn btn-warning ps-4 pe-4" href="/featured/viewMore">More</a>
             </div>
         </div>
     </section>
@@ -141,13 +163,13 @@
         <div class="container-fluid mb-3 pb-4">
             <div class="row px-xl-5">
                 <% for (var i=2;i<SliderImage.length && i<4 ;i++) { %>
-                <div class="col-lg-6 mb-3">
-                    <div class="product-offer" style="height: 300px; width: 100%;">
-                        <img class="img-fluid" style="object-fit: cover; height: 100%; width:100%"
-                            src="<%=SliderImage[i].file_url %>" alt="">
+                    <div class="col-lg-6 mb-3">
+                        <div class="product-offer" style="height: 300px; width: 100%;">
+                            <img class="img-fluid" style="object-fit: cover; height: 100%; width:100%"
+                                src="<%=SliderImage[i].file_url %>" alt="">
+                        </div>
                     </div>
-                </div>
-                <% } %>             
+                    <% } %>
             </div>
         </div>
     </section>
@@ -161,27 +183,42 @@
                     <h1>Recent Products</h1>
                 </div>
                 <% for (var i=0;i<recentProducts.length && i<8 ;i++) { %>
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
-                    <div class="card align-items-center">
-                        <div class="product-item">
-                            <img src="<%=recentProducts[i].file_url%>" alt="">
-                        </div>
-                        <div class="text-center py-4">
-                            <a href="/product/showDetail?id=<%=recentProducts[i]._id %>"><%=recentProducts[i].product_Name %></a>
-                            <div class="rate d-flex align-items-center justify-content-center mt-2">
-                                <h5>₹ <%=recentProducts[i].selling_Price %></h5>
-                                <h6 class="text-muted" style="text-decoration: line-through;">₹ <%=recentProducts[i].actual_Price %></h6>
+                    <div class="col-lg-3 col-md-6 col-sm-12 pb-1 mr-1rem mb-3">
+                        <div class="card align-items-center">
+                            <div class="product-item">
+                                <img src="<%=recentProducts[i].file_url%>" alt="">
+                            </div>
+                            <div class="text-center py-4">
+                                <a href="/product/showDetail?id=<%=recentProducts[i]._id %>">
+                                    <%=recentProducts[i].product_Name %>
+                                </a>
+                                <div class="rate d-flex align-items-center justify-content-center mt-2">
+                                    <h5>₹ <%=recentProducts[i].selling_Price %>
+                                    </h5>
+                                    <h6 class="text-muted" style="text-decoration: line-through;">₹
+                                        <%=recentProducts[i].actual_Price %>
+                                    </h6>
+                                </div>
+                                <div>
+                                    <button class="btn pro-button"
+                                        style="color: #3D464D; background-color: #FFD333; border-color: #FFD333;"
+                                        onclick="addtoWhislist('<%= recentProducts[i]._id %>')">
+                                        <i class="fa-sharp fa-solid fa-heart"></i>
+                                    </button>
+                                    <button class="btn pro-button"
+                                        style="color: #3D464D; background-color: #FFD333; border-color: #FFD333;"
+                                        onclick="addToCart('<%= recentProducts[i]._id %>','<%= recentProducts[i].selling_Price %>')">
+                                        <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <% } %>
+                    <% } %>
             </div>
             <div class="viewmorebtn">
-                    <a class="btn btn-warning ps-4 pe-4" href="/recent/viewMore">More</a>
+                <a class="btn btn-warning ps-4 pe-4" href="/recent/viewMore">More</a>
             </div>
         </div>
     </section>
-
-
 </div>

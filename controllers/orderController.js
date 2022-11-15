@@ -2,6 +2,10 @@ const orderModel = require('../model/orderModel')
 const userCartModel = require('../model/userCart')
 const categoryController = require('../model/category')
 const userAddressModel = require('../model/userAddressModel')
+const userWishlistController = require('../model/wishlistModel')
+
+
+
 const orderPage = (req, res) => {
     orderModel.getAllOrders().then((response) => {
         res.render('admin/productOrder', { admin: true, title: "Orders", user: false, response })
@@ -41,23 +45,27 @@ const placeOrder = async (req, res) => {
 const orderSuccess = async (req, res) => {
     let userData = req.session.user
     let cartCount = null;
+    let wishlistCount = null;
     if (req.session.userLoggedIn) {
         cartCount = await userCartModel.getCartCount(req.session.user._id)
+        wishlistCount = await userWishlistController.getWishListCount(req.session.user._id)
     }
     categoryController.getCategory().then((category) => {
-        res.render('user/orderSuccess', { admin: false, user: true, category, userData, cartCount })
+        res.render('user/orderSuccess', { admin: false, user: true, category, userData, cartCount,wishlistCount })
     })
 }
 
 const ordersPage = async (req, res) => {
     let userData = req.session.user
     let cartCount = null;
+    let wishlistCount = null;
     if (req.session.userLoggedIn) {
         cartCount = await userCartModel.getCartCount(req.session.user._id)
+        wishlistCount = await userWishlistController.getWishListCount(req.session.user._id)
     }
     categoryController.getCategory().then((category) => {
         orderModel.getOrderList(userData._id).then((productList) => {
-            res.render('user/userOrder', { admin: false, user: true, category, userData, cartCount, productList })
+            res.render('user/userOrder', { admin: false, user: true, category, userData, cartCount, productList,wishlistCount })
         })
     })
 }
@@ -82,15 +90,17 @@ const placeOrderPage = async (req, res) => {
     let couponCode = req.query.couponCode;
     let userData = req.session.user
     let cartCount = null;
+    let wishlistCount = null;
     let totalAmount = await userCartModel.getTotalAmount(userData._id)
     totalAmount = totalAmount.totalAmount
     if (req.session.userLoggedIn) {
         cartCount = await userCartModel.getCartCount(req.session.user._id)
+        wishlistCount = await userWishlistController.getWishListCount(req.session.user._id)
     }
     categoryController.getCategory().then((category) => {
         userAddressModel.getAddressList(req.session.user._id).then((addressList) => {
             userCartModel.getCartParoducts(req.session.user._id).then((products) => {
-                res.render('user/placeorder', { admin: false, user: true, category, userData, cartCount, addressList, products, totalAmount, discountAmount, couponCode })
+                res.render('user/placeorder', { admin: false, user: true, category, userData, cartCount, addressList, products, totalAmount, discountAmount, couponCode, wishlistCount })
             })
         })
     })
