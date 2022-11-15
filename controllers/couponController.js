@@ -32,10 +32,18 @@ const updateStatus = (req, res) => {
     })
 }
 
+const getCouponDetails = (req,res)=>{
+    let c_code = req.query.coupon_Code
+    couponModel.getCouponDetails(c_code).then((details)=>{
+        res.render('admin/couponDetail',{ admin: true, user: false, title: "Coupon Details" ,details})
+    })
+}
+
 module.exports = {
     getCouponPage,
     createPage,
     addCoupon,
     deleteCoupon,
-    updateStatus
+    updateStatus,
+    getCouponDetails
 }

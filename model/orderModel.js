@@ -56,7 +56,18 @@ module.exports = {
                 date: new Date(),
                 expected_Date: new Date(+ new Date() + 7 * 40 * 24 * 60 * 1000)
             }
-            db.get().collection(collections.ORDER_COLLECTION).insertOne(orderObj).then((response) => {
+            db.get().collection(collections.ORDER_COLLECTION).insertOne(orderObj).then(async(response) => {
+                if(coupon != ""){
+                    await db.get().collection(collections.COUPON_COLLECTION).updateOne(
+                        {coupon_Code:coupon},
+                        {
+                            $inc:{
+                                totalUsage: 1
+                            }
+                        }
+                    )
+                }
+                
                 db.get().collection(collections.CART_COLLECTION).deleteOne({ user: ObjectId(orderDetails.userID) })
                 resolve(response.insertedId)
             })

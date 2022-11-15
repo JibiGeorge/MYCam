@@ -36,7 +36,7 @@ const changeQuantity = (req, res, next) => {
 
 const proceedToPayment = async (req, res) => {
     let discountAmount = req.body.discountAmount;
-    let couponCode = req.body.couponCode;
+    let couponCode = req.body.couponCode.toUpperCase()
     let userData = req.session.user
     let cartCount = null;
     if (req.session.userLoggedIn) {

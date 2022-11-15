@@ -7,10 +7,10 @@
   --orange: #ff7800;
   --black: #130f40;
   --light-color: #666;
-  --box-shadow: 0.5rem 1rem rgba(0,0,0,.1);
-  --border: .2rem solid rgba(0,0,0,.1);
-  --outline: .1rem solid rgba(0,0,0,.1);
-  --outline-hover: .2rem solid  var(--black);
+  --box-shadow: 0.5rem 1rem rgba(0, 0, 0, .1);
+  --border: .2rem solid rgba(0, 0, 0, .1);
+  --outline: .1rem solid rgba(0, 0, 0, .1);
+  --outline-hover: .2rem solid var(--black);
 }
 
 * {
@@ -156,7 +156,8 @@ body {
 .sidebar-menu {
   margin-top: 1rem;
 }
-.sidebar-menu ul{
+
+.sidebar-menu ul {
   padding-left: 0;
 }
 
@@ -173,7 +174,8 @@ body {
   font-size: .8rem;
   text-decoration: none;
 }
-.sidebar-menu a:hover{
+
+.sidebar-menu a:hover {
   color: red;
 }
 
@@ -210,6 +212,7 @@ header label span {
   font-size: 1.7rem;
   padding-right: 1rem;
 }
+
 .user-wrapper {
   display: flex;
   align-items: center;
@@ -222,7 +225,7 @@ header label span {
   width: 40px;
 }
 
-.user-wrapper small a{
+.user-wrapper small a {
   display: inline-block;
   color: var(--text-grey);
 }
@@ -302,49 +305,54 @@ main {
 }
 
 /* Category Table SL No Increment */
-.table-data .slno::before{
+.table-data .slno::before {
   counter-increment: Serial;
-content: "" counter(Serial) "";
+  content: "" counter(Serial) "";
 }
 
 .category-grid,
-.brand-grid{
+.brand-grid {
   display: grid;
   grid-gap: 2rem;
   grid-template-columns: 65% auto;
 }
+
 .category-grid .card,
 .brand-grid .card,
-.product-grid .card{
+.product-grid .card {
   background: #fff;
   border-radius: 5px;
 }
+
 .category-grid .header,
 .category-grid .card-body,
 .brand-grid .header,
 .brand-grid .card-body,
 .product-grid .header,
-.product-grid .card-body{
+.product-grid .card-body {
   padding: 1rem;
 }
+
 .category-grid .header,
 .brand-grid .header,
-.product-grid .header{
+.product-grid .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #f0f0f0;
 }
+
 .category-grid .header h3,
 .brand-grid .header h3,
-.product-grid .header h3{
+.product-grid .header h3 {
   font-weight: bold;
   font-size: 1.17rem;
 }
+
 .category-grid .header button,
 .brand-grid .header button,
 .product-grid .header button,
-.product-grid .header a{
+.product-grid .header a {
   background: var(--main-color);
   border-radius: 10px;
   color: #fff;
@@ -352,36 +360,40 @@ content: "" counter(Serial) "";
   padding: .5rem 1rem;
   border: 1px solid var(--main-color);
 }
-.product-grid .header a{
+
+.product-grid .header a {
   text-decoration: none;
 }
-.category-grid .card-body table
-.brand-grid .card-body table,
-.product-grid .card-body table{
+
+.category-grid .card-body table .brand-grid .card-body table,
+.product-grid .card-body table {
   border-collapse: collapse;
 }
 
 .category-grid .card-body table thead tr,
 .brand-grid .card-body table thead tr,
-.product-grid .card-body table thead tr{
+.product-grid .card-body table thead tr {
   text-align: center;
 }
+
 .category-grid .card-body table thead,
 .brand-grid .card-body table thead,
-.product-grid .card-body table thead  {
+.product-grid .card-body table thead {
   background: #22495E;
   color: #fff;
 }
+
 .category-grid .card-body table thead th,
 .brand-grid .card-body table thead th,
-.product-grid .card-body table thead th  {
+.product-grid .card-body table thead th {
   border: 1px solid #f0f0f0;
   font-weight: 700;
   color: #fff;
 }
+
 .category-grid .card-body table tbody td,
 .brand-grid .card-body table tbody td,
-.product-grid .card-body table tbody td{
+.product-grid .card-body table tbody td {
   border: 1px solid #a7bac4;
   padding: .5rem 1rem;
   font-size: .9rem;
@@ -389,10 +401,57 @@ content: "" counter(Serial) "";
   text-align: left;
 }
 
-.table-responsive{
+.table-responsive {
   overflow: hidden;
 }
+
 /* Validation Error Style */
-.validationError{
+.validationError {
   color: red;
+}
+
+/* CouponDetails Page */
+.coupon-details, .order-details{
+  background: #bedfe8;
+}
+.coupon-details .text-center,
+.order-details .text-center {
+  font-size: 14px;
+}
+.accordion{
+  max-width: 800px;
+}
+.accordion .contentBx{
+  position: relative;
+  margin: 10px 20px;
+}
+.accordion .contentBx .label{
+  position: relative;
+  padding: 10px;
+  background: #2694af;
+  color: #fff;
+  cursor: pointer;
+}
+.accordion .contentBx .label::before{
+  content: '+';
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+}
+.accordion .contentBx.active .label::before{
+  content: '-';
+}
+.accordion .contentBx .content{
+  position: relative;
+  background: #fff;
+  height: 0;
+  overflow: hidden;
+  transition: 0.5s;
+  overflow-y: auto;
+}
+.accordion .contentBx.active .content{
+  height: auto;
+  padding: 10px;
 }

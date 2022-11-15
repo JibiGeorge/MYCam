@@ -1,0 +1,130 @@
+<main class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="coupon-details p-2">
+                    <h5>Coupon Details</h5>
+                    <div class="couponDetails">
+                        <div>
+                            <span class="text-center">Offer Name : </span>
+                            <span>
+                                <%= details.coupon.offer_Name %>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-center">Coupon Code : </span>
+                            <span>
+                                <%= details.coupon.coupon_Code %>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-center">Offer Type : </span>
+                            <span>
+                                <%= details.coupon.offer_Type %>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-center">Offer Method : </span>
+                            <span>
+                                <%= details.coupon.offer_Method %>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-center">Start Date : </span>
+                            <span>
+                                <%= details.coupon.start_Date %>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-center">End Date : </span>
+                            <span>
+                                <%= details.coupon.end_Date %>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-center">Discount Amount : </span>
+                            <span>
+                                <%= details.coupon.discount_Amount %>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-center">Discount Percentage : </span>
+                            <span>
+                                <%= details.coupon.discount_Percentage %>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-center">Minimum Amount : </span>
+                            <span>
+                                <%= details.coupon.minimum_Amount %>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-center">Maximum Users : </span>
+                            <span>
+                                <%= details.coupon.total_User %>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-center">Total Usage : </span>
+                            <span>
+                                <%= details.coupon.totalUsage %>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-center">Status : </span>
+                            <span>
+                                <%= details.coupon.status %>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="order-details p-2">
+                    <h5>Order Details</h5>
+                    <% for (values of details.user) { %>
+                    <div class="accordion">
+                        <div class="contentBx">
+                            <div class="label">Order ID : <%= values._id %></div>
+                            <div class="content">
+                                <div>
+                                    <span class="text-center">User ID : </span>
+                                    <span><%= values.user %></span>
+                                </div>
+                                <div>
+                                    <span class="text-center">Payment Method : </span>
+                                    <span><%= values.paymentMethod %></span>
+                                </div>
+                                <div>
+                                    <span class="text-center">Total Amount :</span>
+                                    <span><%= values.totalAmount %></span>
+                                </div>
+                                <div>
+                                    <span class="text-center">Discount Amount :</span>
+                                    <span><%= values.discountAmount %></span>
+                                </div>
+                                <div>
+                                    <span class="text-center">Final Price :</span>
+                                    <span><%= values.finalPrice %></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<script>
+    const accordion = document.getElementsByClassName('contentBx');
+
+    for (i=0;i<accordion.length;i++){
+        accordion[i].addEventListener('click',function(){
+            this.classList.toggle('active')
+        })
+    }
+</script>

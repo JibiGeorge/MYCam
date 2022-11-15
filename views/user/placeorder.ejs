@@ -153,9 +153,8 @@
 
     //Order Placing
     let addOfferForm = document.getElementById('checkout')
-    let discountAmount = document.getElementById('discount').innerHTML
-    let coupon = document.getElementById('coupon') ? document.getElementById('coupon').innerHTML : ""
-    console.log(discountAmount);
+    let discountAmount = document.getElementById('discount').innerHTML.trim()
+    let coupon = document.getElementById('coupon') ? document.getElementById('coupon').innerHTML.trim() : "";
     $("#checkout").submit((e) => {
         e.preventDefault()
         const formData = new FormData(addOfferForm);
@@ -168,7 +167,6 @@
             discountAmount: discountAmount,
             coupon: coupon
         }
-        console.log(data);
         $.ajax({
             url: '/placeOrder',
             method: 'post',

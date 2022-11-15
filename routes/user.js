@@ -32,7 +32,6 @@ router.post('/addAddress', addressController.addAddress)
 router.post('/cart/proceedToPayment',sessionHandle.userLoginSession, userCartController.proceedToPayment)
 router.get('/addressPage',sessionHandle.userLoginSession, addressController.getAddressPage)
 
-
 router.post('/placeOrder',orderController.placeOrder)
 router.post('/verifyPayment',orderController.verifyPayment)
 router.get('/user/placeOrder',orderController.placeOrderPage)
