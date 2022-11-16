@@ -47,10 +47,10 @@ router.post('/orders/viewOrderDetails',orderController.getOrderProductDetails)
 router.get('/user/verificationfailed',sessionHandle.userLoginSession, userLoginController.loginFailed)
 router.post('/orders/cancel',orderController.cancelOrder)
 
-router.get('/category/showProducts',productsController.showProducts)
 router.get('/featured/viewMore',productsController.getFeaturedProducts)
 router.get('/recent/viewMore',productsController.getRecenetProducts)
-router.get('/shop',productsController.showAllProducts)
+router.get('/shop',productsController.showProductPage)
+router.get('/shop/products',productsController.showAllProducts)
 
 router.get('/userProfile',sessionHandle.userLoginSession, userProfileController.showProfilePage)
 router.get('/userProfile/address',sessionHandle.userLoginSession, userProfileController.showAddress)

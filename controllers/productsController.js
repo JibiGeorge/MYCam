@@ -4,21 +4,6 @@ const userCartModel = require('../model/userCart')
 const productModel = require('../model/product')
 const userWishlistController = require('../model/wishlistModel')
 
-const showProducts = async (req, res) => {
-    let userData = req.session.user
-    let cartCount = null;
-    let wishlistCount = null;
-    if (req.session.userLoggedIn) {
-        cartCount = await userCartModel.getCartCount(req.session.user._id)
-        wishlistCount = await userWishlistController.getWishListCount(req.session.user._id)
-    }
-    let categoryID = req.query.id
-    userProductModel.getProducts(categoryID).then((products) => {
-        categoryController.getCategory().then((category) => {
-            res.render('user/productsList', { admin: false, user: true, category, userData, cartCount,products, wishlistCount})
-        })
-    })
-}
 
 const getFeaturedProducts = async(req,res)=>{
     console.log("Got it");
@@ -51,7 +36,8 @@ const getRecenetProducts = async(req,res)=>{
     })
 }
 
-const showAllProducts = async(req,res)=>{
+const showProductPage = async(req,res)=>{
+    let id = req.query.id;
     let userData = req.session.user
     let cartCount = null;
     let wishlistCount = null;
@@ -60,15 +46,21 @@ const showAllProducts = async(req,res)=>{
         wishlistCount = await userWishlistController.getWishListCount(req.session.user._id)
     }
     categoryController.getCategory().then((category) => {
-        productModel.getProducts().then((products)=>{
-        res.render('user/productsList',{admin:false,user:true,userData,cartCount,category,products,wishlistCount})
+        res.render('user/productsList',{admin:false,user:true,userData,cartCount,wishlistCount,category,id})
     })
+}
+
+const showAllProducts = async(req,res)=>{
+    let id = req.query.id;
+    let limit = req.query.limit
+    productModel.getProductList(id,limit).then((products)=>{
+        res.send(products)
     })
 }
 
 module.exports = {
-    showProducts,
     getFeaturedProducts,
     getRecenetProducts,
+    showProductPage,
     showAllProducts
 }

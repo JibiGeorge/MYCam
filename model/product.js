@@ -101,5 +101,17 @@ module.exports = {
             let recentProducts = await db.get().collection(collections.PRODUCT_DETAILS).find({ feature_or_recent: "Recent Products" }).toArray()
             resolve(recentProducts)
         })
+    },
+    getProductList: (id,limit)=>{
+        limit = parseInt(limit)
+        return new Promise(async (resolve, reject) => {
+            if(id == ""){
+                let products = await db.get().collection(collections.PRODUCT_DETAILS).find().limit(limit).toArray()
+            resolve(products)
+            }else{
+                let products = await db.get().collection(collections.PRODUCT_DETAILS).find({category_id:ObjectId(id)}).limit(limit).toArray()
+                resolve(products)
+            }
+        })
     }
 }
