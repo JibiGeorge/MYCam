@@ -1,9 +1,10 @@
-
 <main class="main-content">
     <div class="cards">
         <div class="card-single">
             <div>
-                <h1><%= totalusers %></h1>
+                <h1 id="totalUsers">
+                    <%= totalusers %>
+                </h1>
                 <span>Users</span>
             </div>
             <div>
@@ -12,7 +13,9 @@
         </div>
         <div class="card-single">
             <div>
-                <h1><%= totalCategory %></h1>
+                <h1>
+                    <%= totalCategory %>
+                </h1>
                 <span>Category</span>
             </div>
             <div>
@@ -21,7 +24,9 @@
         </div>
         <div class="card-single">
             <div>
-                <h1><%= totalBrand %></h1>
+                <h1>
+                    <%= totalBrand %>
+                </h1>
                 <span>Brand</span>
             </div>
             <div>
@@ -30,7 +35,9 @@
         </div>
         <div class="card-single">
             <div>
-                <h1><%= totalProduct %></h1>
+                <h1>
+                    <%= totalProduct %>
+                </h1>
                 <span>Products</span>
             </div>
             <div>
@@ -48,6 +55,43 @@
         </div>
     </div>
 
+    <div class="graphBox">
+        <div class="box">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
 
-    
+
+
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
+<script>
+    let users = document.getElementById('totalUsers').innerHTML;
+    const ctx = document.getElementById('myChart');
+
+    window.addEventListener('load', () => {
+        fetch('/admin/orderCount', {
+            method: 'get'
+        }).then(res => res.json()).then(data => {
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Users', 'Products Sold', 'Products Cancelled', 'Placed Order', 'Pending'],
+                    datasets: [{
+                        label: 'Total',
+                        data: [users, data.delivered, data.cancelled, data.placed, data.pending],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                }
+            });
+        }).catch((err)=>{
+            console.log(err.message);
+        })
+    })
+
+
+</script>

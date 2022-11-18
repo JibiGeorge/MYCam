@@ -118,6 +118,27 @@ const verifyPayment = (req,res)=>{
     })
 }
 
+const orderStatusCount = (req,res)=>{
+    orderModel.getOrderStatusCount().then((response)=>{
+        let pending;
+        let placed;
+        let delivered;
+        let cancelled;
+        for (values of response){
+            if(values._id.status == 'Placed'){
+                placed = values.count
+            }else if(values._id.status == 'Pending'){
+                pending = values.count
+            }else if(values._id.status == 'Delivered'){
+                delivered = values.count
+            }else if(values._id.status == 'Cancelled'){
+                cancelled = values.count
+            }
+        }
+        res.send({pending,placed,delivered,cancelled})
+    })
+}
+
 module.exports = {
     orderPage,
     orderDetails,
@@ -128,5 +149,6 @@ module.exports = {
     getOrderProductDetails,
     cancelOrder,
     placeOrderPage,
-    verifyPayment
+    verifyPayment,
+    orderStatusCount
 }

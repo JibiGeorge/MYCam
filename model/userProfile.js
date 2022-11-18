@@ -102,6 +102,7 @@ module.exports = {
     },
     updatePassword: async(uid, password) => {
         password.password = await bcrypt.hash(password.password, 10)
+        console.log(password.password);
         return new Promise(async (resolve, reject) => {
             db.get().collection(collections.USER_DETAILS).updateOne(
                 { _id: uid },

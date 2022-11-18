@@ -58,6 +58,9 @@ router.delete('/coupon/delete',sessionHandle.adminSession, couponController.dele
 router.put('/coupon/update',sessionHandle.adminSession,couponController.updateStatus)
 router.get('/couponDetails',sessionHandle.adminSession,couponController.getCouponDetails)
 
+// Chart
+router.get('/orderCount',sessionHandle.adminSession,orderController.orderStatusCount)
+
 
 
 

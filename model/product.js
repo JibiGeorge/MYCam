@@ -65,7 +65,6 @@ module.exports = {
                     }
                 }
             ]).toArray()
-            console.log(product);
             resolve(product)
         })
     },
@@ -113,5 +112,6 @@ module.exports = {
                 resolve(products)
             }
         })
-    }
+    },
+    
 }

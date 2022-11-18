@@ -3,6 +3,8 @@ const categoryController = require('../model/category')
 const userCartModel = require('../model/userCart')
 const productModel = require('../model/product')
 const userWishlistController = require('../model/wishlistModel')
+const brnadModel = require('../model/brand')
+const { ObjectID } = require('bson')
 
 
 const getFeaturedProducts = async(req,res)=>{
@@ -45,8 +47,9 @@ const showProductPage = async(req,res)=>{
         cartCount = await userCartModel.getCartCount(req.session.user._id)
         wishlistCount = await userWishlistController.getWishListCount(req.session.user._id)
     }
+    let brands = await brnadModel.getAllBrand()
     categoryController.getCategory().then((category) => {
-        res.render('user/productsList',{admin:false,user:true,userData,cartCount,wishlistCount,category,id})
+        res.render('user/productsList',{admin:false,user:true,userData,cartCount,wishlistCount,category,id,brands})
     })
 }
 
@@ -57,6 +60,8 @@ const showAllProducts = async(req,res)=>{
         res.send(products)
     })
 }
+
+
 
 module.exports = {
     getFeaturedProducts,

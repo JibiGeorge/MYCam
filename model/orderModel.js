@@ -222,5 +222,25 @@ module.exports = {
                     resolve()
                 })
         })
+    },
+    getOrderStatusCount: ()=>{
+        return new Promise (async(resolve,reject)=>{
+            let status = await db.get().collection(collections.ORDER_COLLECTION).aggregate([
+                {
+                    $group: {
+                        _id:{status:"$status"},
+                        count:{$count:{}}
+                        // _id:{status:"$status"}
+                    }
+                },
+                {
+                    $project:{
+                        '_id.status':1,
+                        count:1
+                    }
+                }
+            ]).toArray()
+            resolve(status)
+        })
     }
 }
