@@ -9,6 +9,7 @@ const userManagementControl = require('../controllers/adminUserManagement')
 const sliderImageManagementControl = require('../controllers/sliderImageManagementControl')
 const orderController = require('../controllers/orderController');
 const couponController = require('../controllers/couponController')
+const reportController = require('../controllers/reportController')
 const { Db } = require('mongodb');
 const {storage } = require('../cloudinary/index')
 const upload = multer({ storage });
@@ -50,6 +51,7 @@ router.delete('/sliderDelete',sessionHandle.adminSession, sliderImageManagementC
 router.get('/orders',sessionHandle.adminSession, orderController.orderPage)
 router.get('/viewDetails',sessionHandle.adminSession, orderController.orderDetails)
 router.post('/order/statusUpdate',sessionHandle.adminSession, orderController.updateOrderDetails)
+router.get('/salesReport/filer',sessionHandle.adminSession,reportController.getSalesReports)
 
 router.get('/coupon',sessionHandle.adminSession, couponController.getCouponPage)
 router.get('/couponCreate',sessionHandle.adminSession, couponController.createPage)
@@ -60,6 +62,8 @@ router.get('/couponDetails',sessionHandle.adminSession,couponController.getCoupo
 
 // Chart
 router.get('/orderCount',sessionHandle.adminSession,orderController.orderStatusCount)
+
+
 
 
 

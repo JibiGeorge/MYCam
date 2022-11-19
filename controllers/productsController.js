@@ -8,7 +8,7 @@ const { ObjectID } = require('bson')
 
 
 const getFeaturedProducts = async(req,res)=>{
-    console.log("Got it");
+    let id = req.query.id;
     let userData = req.session.user
     let cartCount = null;
     let wishlistCount = null;
@@ -16,14 +16,16 @@ const getFeaturedProducts = async(req,res)=>{
         cartCount = await userCartModel.getCartCount(req.session.user._id)
         wishlistCount = await userWishlistController.getWishListCount(req.session.user._id)
     }
+    let brands = await brnadModel.getAllBrand()
     productModel.getFeaturedProducts().then((products)=>{
         categoryController.getCategory().then((category) => {
-        res.render('user/productsList',{admin:false,user:true,userData,cartCount,products,category, wishlistCount})
+        res.render('user/productsList',{admin:false,user:true,userData,cartCount,products,category, wishlistCount,brands,id})
         })
     })
 }
 
 const getRecenetProducts = async(req,res)=>{
+    let id = req.query.id;
     let userData = req.session.user
     let cartCount = null;
     let wishlistCount = null;
@@ -31,9 +33,10 @@ const getRecenetProducts = async(req,res)=>{
         cartCount = await userCartModel.getCartCount(req.session.user._id)
         wishlistCount = await userWishlistController.getWishListCount(req.session.user._id)
     }
+    let brands = await brnadModel.getAllBrand()
     productModel.getRecentProducts().then((products)=>{
         categoryController.getCategory().then((category) => {
-        res.render('user/productsList',{admin:false,user:true,userData,cartCount,products,category,wishlistCount})
+        res.render('user/productsList',{admin:false,user:true,userData,cartCount,products,category,wishlistCount,brands,id})
         })
     })
 }
@@ -61,11 +64,27 @@ const showAllProducts = async(req,res)=>{
     })
 }
 
+const filteredProducts = async (req,res)=>{
+    const id = req.body.brandID;
+    const limit = req.body.limit;
+    if(id == ""){
+        productModel.getProductList(id,limit).then((products)=>{
+            res.send(products)
+        })
+    }else{
+        productModel.getFilterProducts(id,limit).then((products)=>{
+            res.send({products,id})
+        })
+    }
+
+}
+
 
 
 module.exports = {
     getFeaturedProducts,
     getRecenetProducts,
     showProductPage,
-    showAllProducts
+    showAllProducts,
+    filteredProducts
 }

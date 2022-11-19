@@ -4,102 +4,64 @@
         <div class="row px-xl-5">
             <!-- Shop Sidebar Start -->
             <div class="col-lg-3 col-md-4">
-                <!-- Price Start -->
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="pr-3">Filter
-                        by price</span></h5>
-                <div class="filter-box p-4">
-                    <form>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="price-all">
-                            <label class="custom-control-label" for="price-all">All Price</label>
+                <form action="" id="productFilter">
+                    <!-- Price Start -->
+                    <!-- <h5 class="section-title position-relative text-uppercase mb-3"><span class="pr-3">Filter
+                            by price</span></h5>
+                    <div class="filter-box p-4" style="max-height: 300px; overflow: auto;">
+                        <div>
+                            <div class="form-check mb-3">
+                                <input type="radio" class="form-check-input" name="price_radio">
+                                <label class="form-check-label" for="price-all">All Price</label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input type="radio" class="form-check-input" name="price_radio">
+                                <label class="form-check-label" for="price-1">Rs.0 - Rs.100</label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input type="radio" class="form-check-input" name="price_radio">
+                                <label class="form-check-label" for="price-2">Rs.100 - Rs.200</label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input type="radio" class="form-check-input" name="price_radio">
+                                <label class="form-check-label" for="price-3">Rs.200 - Rs.300</label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input type="radio" class="form-check-input" name="price_radio">
+                                <label class="form-check-label" for="price-4">Rs.300 - Rs.400</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="price_radio">
+                                <label class="form-check-label" for="price-5">Rs.400 - Rs.500</label>
+                            </div>
                         </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-1">
-                            <label class="custom-control-label" for="price-1">Rs.0 - Rs.100</label>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-2">
-                            <label class="custom-control-label" for="price-2">Rs.100 - Rs.200</label>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-3">
-                            <label class="custom-control-label" for="price-3">Rs.200 - Rs.300</label>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-4">
-                            <label class="custom-control-label" for="price-4">Rs.300 - Rs.400</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="price-5">
-                            <label class="custom-control-label" for="price-5">Rs.400 - Rs.500</label>
-                        </div>
-                    </form>
-                </div>
-                <!-- Price End -->
+                    </div> -->
+                    <!-- Price End -->
 
-                <!-- Color Start -->
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">Filter
-                        by Brand</span></h5>
-                <div class="filter-box p-4">
-                    <form>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="radio" class="custom-control-input" checked id="color-all">
-                            <label class="custom-control-label" for="price-all">All Brand</label>
+                    <!-- Color Start -->
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">Filter
+                            by Brand</span></h5>
+                    <div class="filter-box p-4" style="max-height: 300px; overflow: auto;">
+                        <div>
+                            <div class="form-check mb-2">
+                                <input type="radio" name="brand_radio" class="form-check-input" id="" value="">
+                                <label class="form-check-label" for="color-1">All Brand</label>
+                            </div>
+                            <!-- <% for (values of brands) { %> -->
+                            <!-- <% } %> -->
+                            <% for(var i=0;i<brands.length;i++) { %>
+                                <div class="form-check mb-2">
+                                    <input type="radio" name="brand_radio" value="<%= brands[i]._id %>" class="form-check-input" id="">
+                                    <label class="form-check-label" for="color-1">
+                                        <%= brands[i].brandName %>
+                                    </label>
+                                </div>
+                                <% } %>
                         </div>
-                        <% for (values of brands) { %>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="radio" name="brand_radio" class="custom-control-input" id="">
-                            <label class="custom-control-label" for="color-1"><%= values.brandName %></label>
-                        </div>
-                        <% } %>
-                    </form>
-                </div>
-                <!-- Color End -->
+                    </div>
+                    <!-- Color End -->
 
-                <!-- Size Start -->
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">Filter
-                        by size</span></h5>
-                <div class="filter-box p-4">
-                    <form>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="size-all">
-                            <label class="custom-control-label" for="size-all">All Size</label>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-1">
-                            <label class="custom-control-label" for="size-1">XS</label>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-2">
-                            <label class="custom-control-label" for="size-2">S</label>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-3">
-                            <label class="custom-control-label" for="size-3">M</label>
-                        </div>
-                        <div
-                            class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-4">
-                            <label class="custom-control-label" for="size-4">L</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="size-5">
-                            <label class="custom-control-label" for="size-5">XL</label>
-                        </div>
-                    </form>
-                </div>
-                <!-- Size End -->
+                </form>
             </div>
             <!-- Shop Sidebar End -->
 
@@ -152,12 +114,10 @@
     <script>
 
         let loading = document.querySelector('.loading')
-        let id = document.getElementById('pid').value.trim()
-        let limit =3;
+        let limit = 3;
 
         window.addEventListener('scroll', () => {
             const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-            console.log(scrollTop, scrollHeight, clientHeight);
             if (clientHeight + scrollTop >= scrollHeight - 5) {
                 // show loading
                 showloading();
@@ -166,13 +126,14 @@
 
         function showloading() {
             loading.classList.add('show');
-            limit=limit+limit;
-            
-            setTimeout(getdata, 2000)
-            
+            limit = limit + limit;
+
+            setTimeout(getdata, 2000);
+
         }
-        function getdata(){
-            fetch('/shop/products?id=' + id+'&limit='+limit , {
+        function getdata() {            
+        let id = document.getElementById('pid').value.trim()
+            fetch('/shop/products?id=' + id + '&limit=' + limit, {
                 method: 'get',
                 headers: { 'Content-Type': 'application/json' }
             }).then(res => res.json()).then(data => {
@@ -180,6 +141,7 @@
                     let productsDetails = `<h2>Sorry No Products Available !</h2>`
                     productList.innerHTML = productsDetails
                 } else {
+                    showloading();
                     let productsDetails = ``
                     for (values of data) {
                         productsDetails +=
@@ -227,15 +189,16 @@
                     loading.classList.remove('show')
                 }
 
-
             })
         }
 
-        
-        
+
+
         let productList = document.getElementById('prosList')
-            window.addEventListener("load", (event) => {
-            fetch('/shop/products?id=' + id+'&limit='+limit , {
+        window.addEventListener("load", (event) => {
+            
+        let id = document.getElementById('pid').value.trim()
+            fetch('/shop/products?id=' + id + '&limit=' + limit, {
                 method: 'get',
                 headers: { 'Content-Type': 'application/json' }
             }).then(res => res.json()).then(data => {
@@ -286,7 +249,6 @@
                     productsDetails +=
                         ``
                     productList.innerHTML = productsDetails
-
                     loading.classList.remove('show')
                 }
 
@@ -294,4 +256,73 @@
             })
         })
 
+
+        // Filter
+        let filter = document.getElementById('productFilter')
+
+        filter.addEventListener('change', (e) => {
+            e.preventDefault();
+            const formData = new FormData(filter);
+
+            //Converting the data to Json object
+            const data = Object.fromEntries(formData)
+            fetch('/products/filter',{
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({brandID:data.brand_radio,limit})
+            }).then(res => res.json()).then(result => {
+                const data = result.products
+                const brandID = result.id
+                console.log(data.products);
+                if (data.length == 0) {
+                    let productsDetails = `<h2>Sorry No Products Available !</h2>`
+                    productList.innerHTML = productsDetails
+                } else {
+                    let productsDetails = ``
+                    for (values of data) {
+                        productsDetails +=
+                            `<div class="col-lg-4 col-md-6 col-sm-6 pb-1 pe-3">
+              <div class="product-item mb-4 pb-4">
+                  <div class="product-img position-relative overflow-hidden">
+                      <img class="img-fluid w-100" src="${values.file_url}" alt="">
+                  </div>
+                  <div class="text-center py-4" style="overflow: hidden;">
+                      <a class="h6 text-decoration-none product_Name "
+                          href="/product/showDetail?id=${values._id}">
+                          <p for="" style="height: 40px; overflow: hidden;">
+                              ${values.product_Name}
+                          </p>
+                      </a>
+                      <div class="d-flex align-items-center justify-content-center mt-2">
+                          <h5 style="font-weight: bold;">Rs. ${values.selling_Price}
+                          </h5>
+                          <h6 class="text-muted ms-2" style="text-decoration: line-through;">Rs.
+                              ${values.actual_Price}
+                          </h6>
+                      </div>
+                      <div class="d-flex align-items-center mb-4 pt-2"
+                          style="justify-content: center;">
+                          <button class="btn pro-button"
+                              style="color: #3D464D; background-color: #FFD333; font-weight: bold; border-color: #FFD333;"
+                              onclick="addtoWhislist('${values._id}')">
+                              <i class="fa-sharp fa-solid fa-heart"></i>
+                          </button>
+                          <button
+                              onclick="addToCart('${values._id}','${values.selling_Price}')"
+                              class="btn pro-button"
+                              style="color: #3D464D; background-color: #FFD333; font-weight: bold; border-color: #FFD333;">
+                              <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>`
+                    }
+                    productsDetails +=
+                        ``
+                    productList.innerHTML = productsDetails
+                    document.getElementById('pid').value = brandID
+                }
+            })
+        })
     </script>

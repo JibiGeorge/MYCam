@@ -10,6 +10,7 @@ const productsController = require('../controllers/productsController')
 const userProfileController = require('../controllers/userProfileController')
 const sessionHandle = require('../middleware/userSession')
 const userWishlistController = require('../controllers/wishlistController')
+const contactUsController = require ('../controllers/contactUsController')
 
 router.use(methodoverride('_method'))
 
@@ -51,6 +52,7 @@ router.get('/featured/viewMore',productsController.getFeaturedProducts)
 router.get('/recent/viewMore',productsController.getRecenetProducts)
 router.get('/shop',productsController.showProductPage)
 router.get('/shop/products',productsController.showAllProducts)
+router.post('/products/filter',productsController.filteredProducts)
 
 router.get('/userProfile',sessionHandle.userLoginSession, userProfileController.showProfilePage)
 router.get('/userProfile/address',sessionHandle.userLoginSession, userProfileController.showAddress)
@@ -60,6 +62,8 @@ router.get('/userProfile/addressEditPage',sessionHandle.userLoginSession, userPr
 router.put('/userProfile/address/update',userProfileController.updateAddress)
 router.delete('/userProfile/addressDelete',sessionHandle.userLoginSession, userProfileController.addressDelete)
 router.put('/userProfile/password/update',userProfileController.updatePassword)
+
+router.get('/contactUs',contactUsController.getPage)
 
 
 

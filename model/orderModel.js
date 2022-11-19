@@ -53,8 +53,8 @@ module.exports = {
                 finalPrice: finalPrice,
                 coupon: coupon,
                 status: status,
-                date: new Date(),
-                expected_Date: new Date(+ new Date() + 7 * 40 * 24 * 60 * 1000)
+                date: new Date().toLocaleDateString("en-US"),
+                expected_Date: new Date(+ new Date() + 7 * 40 * 24 * 60 * 1000).toLocaleDateString("en-US")
             }
             db.get().collection(collections.ORDER_COLLECTION).insertOne(orderObj).then(async(response) => {
                 if(coupon != ""){
@@ -197,8 +197,6 @@ module.exports = {
                 createHmac,
               } = require('node:crypto');
             let hmac = createHmac('sha256', process.env.RAZORPAY_KEY_SECRET);   
-            console.log("aaa",details.payment); 
-            console.log("aaa",details.payment.razorpay_payment_id); 
 
             hmac.update(details.payment.razorpay_order_id + '|' + details.payment.razorpay_payment_id);   
             hmac = hmac.digest('hex')

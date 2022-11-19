@@ -1,8 +1,23 @@
 <main class="main-content">
+
+    <!-- Filter Option -->
+    <div class="filter mb-3 d-flex">
+        <form action="" id="salesFilterForm" class="me-3">
+            <label for="">From Date</label>
+            <input type="date" name="from_Date" required>
+            <label for="">To Date</label>
+            <input type="date" name="to_Date" required>
+            <input type="submit">
+        </form>
+        <button class="btn btn-primary" onclick="generatePDF()">Download to PDF</button>
+    </div>
+
+
+
     <div class="product-grid">
         <div class="card">
             <div class="card-body">
-                <div class="table-responsive">
+                <div class="table-responsive" >
                     <table width="100%" id="order_table">
                         <thead>
                             <tr>
@@ -13,11 +28,9 @@
                                 <td>Payment Method</td>
                                 <td>Expected Delivery</td>
                                 <td>Amount</td>
-                                <!-- <td>View</td>
-                                <td>Update Status</td> -->
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="orderTable">
                             <% for (values of response.user) { %>
                                 <tr class="table-data">
                                     <td>
@@ -76,20 +89,67 @@
     });
 
 
-    // function viewDetail(orderId){
-    //     let data = {order:orderId}
-    //     console.log(data);
-    //     // fetch('/admin/order/viewDetails',{
-    //     //     method: 'post',
-    //     //     headers: {'Content_Type': 'application/json'},
-    //     //     body: JSON.stringify({data:"gcghfc"})
-    //     // })
-    //     $.ajax({
-    //         url:'/admin/order/viewDetails',
-    //         data:{
-    //             order:orderId
-    //         },
-    //         method:'get'
-    //     })
-    // }
+    let form = document.getElementById('salesFilterForm');
+    let orderTable = document.getElementById('orderTable')
+    form.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        const formData = new FormData(form);
+        //Converting the data to Json object
+        const data = Object.fromEntries(formData)
+        fetch('/admin/salesReport/filer?from_Date='+data.from_Date+'&to_date='+data.to_Date,{
+            method: 'get'
+        }).then(res => res.json()).then(ordersList=>{
+            console.log("products",ordersList);
+            let table = ``
+            for( values of ordersList){
+                table +=`
+                <tr class="table-data">
+                                    <td>
+                                        <a href="/admin/viewDetails?id=<%= values._id %>"><%= values._id %></a>
+                                    </td>
+                                    <td>
+                                        <% let date = values.date %>
+                                                                <% date = date.toLocaleString(); %> 
+                                                                <%= date %>
+                                    </td>
+                                    <td style="text-transform: uppercase;">
+                                        <%= values.userDetails[0].user_Name %>
+                                    </td>
+                                    <td>
+                                        <%= values.status %>
+                                    </td>
+                                    <td>
+                                        <%= values.paymentMethod %>
+                                    </td>
+                                    <td>
+                                        <% let expectedDate = values.expected_Date %>
+                                        <% expectedDate = expectedDate.toLocaleString(); %> 
+                                        <%= expectedDate %>
+                                    </td>
+                                    <td>
+                                        <%= values.totalAmount %>
+                                    </td>                                    
+                                </tr>
+                `
+            }
+            table += ``
+
+            orderTable.innerHTML = table
+        })
+    })
+
+
+    // File Exporting
+    function generatePDF() {
+        const element = document.getElementById('order_table');
+        var opt = {
+            margin: 1,
+            filename: 'html2pdf_example.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+        };
+        // Choose the element that our invoice is rendered in.
+        html2pdf().set(opt).from(element).save();
+    }
 </script>

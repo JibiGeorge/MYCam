@@ -108,10 +108,22 @@ module.exports = {
                 let products = await db.get().collection(collections.PRODUCT_DETAILS).find().limit(limit).toArray()
             resolve(products)
             }else{
-                let products = await db.get().collection(collections.PRODUCT_DETAILS).find({category_id:ObjectId(id)}).limit(limit).toArray()
+                let products = await db.get().collection(collections.PRODUCT_DETAILS).find(
+                    {
+                        $or:[
+                            {category_id:ObjectId(id)},
+                            {brand_id:ObjectId(id)}
+                        ]
+                    }).limit(limit).toArray()
                 resolve(products)
             }
         })
     },
+    getFilterProducts: (id,limit)=>{
+        return new Promise(async(resolve,reject)=>{
+            let products = await db.get().collection(collections.PRODUCT_DETAILS).find({brand_id:ObjectId(id)}).limit(limit).toArray()
+                resolve(products)
+        })
+    }
     
 }

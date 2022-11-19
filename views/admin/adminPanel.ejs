@@ -1,63 +1,69 @@
 <main class="main-content">
-    <div class="cards">
-        <div class="card-single">
-            <div>
-                <h1 id="totalUsers">
-                    <%= totalusers %>
-                </h1>
-                <span>Users</span>
-            </div>
-            <div>
-                <span class="las la-user"></span>
-            </div>
-        </div>
-        <div class="card-single">
-            <div>
-                <h1>
-                    <%= totalCategory %>
-                </h1>
-                <span>Category</span>
-            </div>
-            <div>
-                <span class="las la-folder"></span>
-            </div>
-        </div>
-        <div class="card-single">
-            <div>
-                <h1>
-                    <%= totalBrand %>
-                </h1>
-                <span>Brand</span>
-            </div>
-            <div>
-                <span class="las la-outdent"></span>
-            </div>
-        </div>
-        <div class="card-single">
-            <div>
-                <h1>
-                    <%= totalProduct %>
-                </h1>
-                <span>Products</span>
-            </div>
-            <div>
-                <span class="lab la-buffer"></span>
-            </div>
-        </div>
-        <div class="card-single" style="background-color: #D02F6E;">
-            <div>
-                <h1>54</h1>
-                <span>Pendding Orders</span>
-            </div>
-            <div>
-                <span class="las la-luggage-cart"></span>
-            </div>
-        </div>
-    </div>
 
-    <div class="graphBox">
-        <div class="box">
-            <canvas id="myChart"></canvas>
+    <div>
+        <button class="btn btn-primary" onclick="generatePDF()">Download to PDF</button>
+    </div>
+    <div id="container_content">
+        <div class="cards">
+            <div class="card-single">
+                <div>
+                    <h1 id="totalUsers">
+                        <%= totalusers %>
+                    </h1>
+                    <span>Users</span>
+                </div>
+                <div>
+                    <span class="las la-user"></span>
+                </div>
+            </div>
+            <div class="card-single">
+                <div>
+                    <h1>
+                        <%= totalCategory %>
+                    </h1>
+                    <span>Category</span>
+                </div>
+                <div>
+                    <span class="las la-folder"></span>
+                </div>
+            </div>
+            <div class="card-single">
+                <div>
+                    <h1>
+                        <%= totalBrand %>
+                    </h1>
+                    <span>Brand</span>
+                </div>
+                <div>
+                    <span class="las la-outdent"></span>
+                </div>
+            </div>
+            <div class="card-single">
+                <div>
+                    <h1>
+                        <%= totalProduct %>
+                    </h1>
+                    <span>Products</span>
+                </div>
+                <div>
+                    <span class="lab la-buffer"></span>
+                </div>
+            </div>
+            <div class="card-single" style="background-color: #D02F6E;">
+                <div>
+                    <h1>54</h1>
+                    <span>Pendding Orders</span>
+                </div>
+                <div>
+                    <span class="las la-luggage-cart"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="graphBox">
+            <div class="box">
+                <canvas id="myChart"></canvas>
+            </div>
         </div>
     </div>
 
@@ -66,6 +72,7 @@
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
+
 <script>
     let users = document.getElementById('totalUsers').innerHTML;
     const ctx = document.getElementById('myChart');
@@ -88,10 +95,25 @@
                     responsive: true,
                 }
             });
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err.message);
         })
     })
+
+
+    // File Exporting
+    function generatePDF() {
+        const element = document.getElementById('container_content');
+        var opt = {
+            margin: 1,
+            filename: 'html2pdf_example.pdf',
+            image: { type: 'png', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        // Choose the element that our invoice is rendered in.
+        html2pdf().set(opt).from(element).save();
+    }
 
 
 </script>
