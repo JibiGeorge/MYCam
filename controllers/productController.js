@@ -34,7 +34,8 @@ const addProduct = (req, res) => {
             stock_In_Hand,
             feature_or_recent,
             description,
-            specification
+            specification,
+            sold:0
         }).then((product) => {
             res.redirect('/admin/addProduct')
         })

@@ -31,9 +31,7 @@
                                                         <%= values._id %>
                                                     </td>
                                                     <td>
-                                                        <% let date=values.date %>
-                                                            <% date=date.toLocaleDateString(); %>
-                                                                <%= date %>
+                                                                <%= values.date %>
                                                     </td>
                                                     <td>
                                                         <%= values.paymentMethod %>
@@ -75,12 +73,7 @@
                                                                                 </td>
                                                                                 <% } %>
                                                                                 <td>
-                                                                                    <% let
-                                                                                        expectedDate=values.expected_Date
-                                                                                        %>
-                                                                                        <% expectedDate=expectedDate.toLocaleDateString();
-                                                                                            %>
-                                                                                            <%= expectedDate %>
+                                                                                            <%= values.expected_Date %>
                                                                                 </td>
                                                                                 <td>
                                                                                     <%= values.finalPrice %>

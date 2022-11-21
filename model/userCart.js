@@ -187,9 +187,11 @@ module.exports = {
             let coupon = await db.get().collection(collections.COUPON_COLLECTION).findOne({ coupon_Code: code })
             if (coupon) {
                 let end_Date = Date.parse(coupon.end_Date)
+                console.log(end_Date);
                 let todayDate = new Date()
                 todayDate = todayDate.toLocaleDateString("en-US")
                 todayDate = Date.parse(todayDate)
+                console.log(todayDate);
 
                 if (todayDate <= end_Date && coupon.status == "Active") {
                     if (totalAmount >= coupon.minimum_Amount) {

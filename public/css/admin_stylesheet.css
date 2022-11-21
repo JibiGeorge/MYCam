@@ -368,6 +368,7 @@ main {
 .category-grid .card-body table .brand-grid .card-body table,
 .product-grid .card-body table {
   border-collapse: collapse;
+  font-size: 12px;
 }
 
 .category-grid .card-body table thead tr,
@@ -389,6 +390,8 @@ main {
   border: 1px solid #f0f0f0;
   font-weight: 700;
   color: #fff;
+  font-size: 12px;
+  padding: 4px;
 }
 
 .category-grid .card-body table tbody td,
@@ -396,9 +399,12 @@ main {
 .product-grid .card-body table tbody td {
   border: 1px solid #a7bac4;
   padding: .5rem 1rem;
-  font-size: .9rem;
+  font-size: 12px;
   color: rgb(34, 34, 34);
   text-align: left;
+}
+table.dataTable thead>tr>th{
+  text-align: center;
 }
 
 .table-responsive {

@@ -21,13 +21,13 @@
                     <table width="100%" id="order_table">
                         <thead>
                             <tr>
-                                <td>Order ID</td>
-                                <td>Order Date</td>
-                                <td>Customer Name</td>
-                                <td>Order Status</td>
-                                <td>Payment Method</td>
-                                <td>Expected Delivery</td>
-                                <td>Amount</td>
+                                <th>Order ID</th>
+                                <th>Order Date</th>
+                                <th>Customer Name</th>
+                                <th>Order Status</th>
+                                <th>Payment Method</th>
+                                <th>Expected Delivery</th>
+                                <th>Amount</th>
                             </tr>
                         </thead>
                         <tbody id="orderTable">
@@ -56,23 +56,9 @@
                                         <%= expectedDate %>
                                     </td>
                                     <td>
+                                        <span>Rs.</span>
                                         <%= values.totalAmount %>
                                     </td>
-                                    <!-- <td>
-                                        <input type="button"
-                                            style="background: rgb(45, 177, 104); border-radius: 50px; padding: 2px; color: #fff; border: 0px;"
-                                            value="View Details" ></input>
-                                    </td>
-                                    <td>
-                                        <select name="" id=""
-                                            style="background: rgb(122, 115, 115); border-radius: 50px; padding: 4px; color: #fff;">
-                                            <option selected>ordered</option>
-                                            <option value="packed">packed</option>
-                                            <option value="shipped">shipped</option>
-                                            <option value="delivered">delivered</option>
-                                            <option value="canceled">canceled</option>
-                                        </select>
-                                    </td> -->
                                 </tr>
                                 <% } %>
                         </tbody>

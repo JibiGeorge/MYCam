@@ -13,7 +13,7 @@ module.exports = {
             coupon_Code: coupon_Code,
             offer_Type: data.offer_Type,
             offer_Method: data.offer_Method,
-            start_Date: startDate,
+            start_Date: data.start_Date,
             end_Date: data.end_Date,
             discount_Amount: discount_Amount ? discount_Amount : 0,
             discount_Percentage: discount_Percentage ? discount_Percentage : 0,
@@ -58,18 +58,7 @@ module.exports = {
         return new Promise(async(resolve,reject)=>{
             let coupon = await db.get().collection(collections.COUPON_COLLECTION).findOne({coupon_Code:couponCode})
             let user = await db.get().collection(collections.ORDER_COLLECTION).find({coupon:couponCode}).toArray()
-            // let data = await db.get().collection(collections.ORDER_COLLECTION).aggregate([
-            //     {$match:{coupon:couponCode}},
-            //     {
-            //         $lookup:{
-            //             from: collections.USER_DETAILS,
-            //             localField: 'user',
-            //             foreignField: '_id',
-            //             as: "userDetails"
-            //         }
-            //     }
-            // ]).toArray()
-            // console.log("vsadvav",user);
+            
             resolve({coupon,user})
         })
     }

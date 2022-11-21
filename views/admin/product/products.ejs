@@ -28,13 +28,15 @@
                                     <td class="slno"></td>
                                     <td><%= values.categoryItem[0].categoryName%></td>
                                     <td><%= values.brandItem[0].brandName %></td>
-                                    <td><%= values.product_Name%></td>
+                                    <td style="max-width: 250px;"><%= values.product_Name%></td>
                                     <td><span>₹ </span><%= values.selling_Price%></td>
                                     <td><%= values.stock_In_Hand%></td>
-                                    <td></td>
+                                    <td><%= values.sold %></td>
                                     <td>
-                                        <a style="background: #5E4548;" href="/admin/productUpdate?id=<%= values._id %>" class="btn btn-primary">Edit</a>
-                                        <a style="background: #B05541;" href="/admin/Product/delete?id=<%= values._id %>" class="btn btn-primary">Delete</a>
+                                        <div class="d-flex">
+                                            <a style="background: #5E4548; font-size: 12px; color: #fff;" href="/admin/productUpdate?id=<%= values._id %>" class="btn me-2">Edit</a>
+                                        <a style="background: #B05541; font-size: 12px; color: #fff;" href="/admin/Product/delete?id=<%= values._id %>" class="btn">Delete</a>
+                                        </div>
                                     </td>
                                 </tr>
                                 <% } %>

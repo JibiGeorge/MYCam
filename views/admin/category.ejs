@@ -24,7 +24,7 @@
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Image</label>
-                                        <input type="file" class="form-control" name="categoryImage" value="" id="categoryImage">
+                                        <input type="file" class="form-control" name="categoryImage" value="" id="categoryImage" required>
                                     </div>
                                     <div>
                                         <label for="" class="form-label">Category Name</label>
@@ -60,7 +60,7 @@
                                     </div>
                                     <div>
                                         <label for="">Category Name</label>
-                                        <input type="text" name="categoryName" id="editCategoryName" value="">
+                                        <input type="text" name="categoryName" id="editCategoryName" value="" required>
                                         <span class="validationError" id="catergoryError"></span>
                                     </div>
                                 </div>
@@ -78,10 +78,10 @@
                         <table width="100%" id="category_Table">
                             <thead class="category">
                                 <tr>
-                                    <td>SL NO.</td>
-                                    <td>Category Name</td>
-                                    <td>Images</td>
-                                    <td>Action</td>
+                                    <th>SL NO.</th>
+                                    <th>Category Name</th>
+                                    <th>Images</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>

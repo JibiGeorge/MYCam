@@ -1,84 +1,3 @@
-<!-- <main class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div>
-                <table>
-                    <tr>
-                        <div>
-                            <td>Offer Name</td>
-                            <td>:</td>
-                        </div>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <div>
-                            <td>Offer Type</td>
-                            <td>:</td>
-                        </div>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <div>
-                            <td>Method</td>
-                            <td>:</td>
-                        </div>
-                        <td>
-                            <select name="" id="">
-                                <option value="Flat">Flat</option>
-                                <option value="Percentage">Percentage</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <div>
-                            <td>Start Date & Time</td>
-                            <td>:</td>
-                        </div>
-                        <td><input type="date"></td>
-                        <td><input type="time"></td>
-                    </tr>
-                    <tr>
-                        <div>
-                            <td>End Date & Time</td>
-                            <td>:</td>
-                        </div>
-                        <td><input type="date"></td>
-                        <td><input type="time"></td>
-                    </tr>
-                    <tr>
-                        <div>
-                            <td>Discount Amount</td>
-                            <td>:</td>
-                        </div>
-                        <td><input type="number"></td>
-                    </tr>
-                    <tr>
-                        <div>
-                            <td>Discount Percentage</td>
-                            <td>:</td>
-                        </div>
-                        <td><input type="number"></td>
-                    </tr>
-                    <tr>
-                        <div>
-                            <td>Minimum Amount</td>
-                            <td>:</td>
-                        </div>
-                        <td><input type="number"></td>
-                    </tr>
-                    <tr>
-                        <div>
-                            <td>Maximum Usage</td>
-                            <td>:</td>
-                        </div>
-                        <td><input type="number"></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-</main> -->
-
 
 <main class="main-content">
     <div class="product-grid">
@@ -93,16 +12,16 @@
                             <div style="width: 25%;" class="me-2">
                                 <label for="" class="form-label">Offer Name</label>
                                 <input type="text" class="form-control" name="offer_Name"
-                                    style="text-transform: capitalize;">
+                                    style="text-transform: capitalize;" required>
                             </div>
                             <div style="width: 25%;" class="me-2">
                                 <label for="" class="form-label">Coupon Code</label>
                                 <input type="text" class="form-control" name="coupon_Code"
-                                    style="text-transform: uppercase;">
+                                    style="text-transform: uppercase;" required>
                             </div>
                             <div style="width: 25%;" class="ms-2 me-2">
                                 <label for="" class="form-label">Offer Type</label>
-                                <select id="offerType" class="form-select" name="offer_Type">
+                                <select id="offerType" class="form-select" name="offer_Type" required>
                                     <option value=""></option>
                                     <option value="Flat">Flat</option>
                                     <option value="Percentage">Percentage</option>
@@ -110,7 +29,7 @@
                             </div>
                             <div style="width: 25%;" class="ms-2">
                                 <label for="" class="form-label">Method</label>
-                                <select id="" class="form-select" name="offer_Method">
+                                <select id="" class="form-select" name="offer_Method" required>
                                     <option value=""></option>
                                     <option value="Voucher">Voucher</option>
                                     <option value="Coupon">Coupon</option>
@@ -120,31 +39,31 @@
                         <div class="d-flex mb-3">
                             <div style="width: 25%;" class="me-3">
                                 <label for="" class="form-label">Start Date & Time</label>
-                                <input type="date" class="form-control"  name="start_Date">
+                                <input type="date" class="form-control"  name="start_Date" required>
                             </div>
                             <div style="width: 25%;" class="me-2">
                                 <label for="" class="form-label">End Date & Time</label>
-                                <input type="date" class="form-control"  name="end_Date">
+                                <input type="date" class="form-control"  name="end_Date" required>
                             </div>
                             <div style="width: 25%;" class="ms-2 me-2">
                                 <label for="" class="form-label">Discount Amount</label>
                                 <input type="number" class="form-control" id="couponAmount" disabled
-                                    name="discount_Amount">
+                                    name="discount_Amount" required>
                             </div>
                             <div style="width: 25%;" class="me-2">
                                 <label for="" class="form-label">Discount Percentage</label>
                                 <input type="number" class="form-control" id="couponPercentage" disabled
-                                    name="discount_Percentage">
+                                    name="discount_Percentage" required>
                             </div>
                         </div>
                         <div class="mb-3 d-flex">
                             <div style="width: 50%;" class="me-2">
                                 <label for="" class="form-label">Minimum Amount in the Cart</label>
-                                <input type="number" class="form-control" name="minimum_Amount">
+                                <input type="number" class="form-control" name="minimum_Amount" required>
                             </div>
                             <div style="width: 50%;" class="me-2">
                                 <label for="" class="form-label">Maximum Total Usage</label>
-                                <input type="number" class="form-control" name="total_User">
+                                <input type="number" class="form-control" name="total_User" required>
                             </div>
                         </div>
                         <div>
