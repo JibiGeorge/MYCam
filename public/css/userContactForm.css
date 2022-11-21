@@ -35,7 +35,6 @@
     justify-content: center;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-left: 35%;
   }
   .contact-button:hover {
     background: var(--hover);
