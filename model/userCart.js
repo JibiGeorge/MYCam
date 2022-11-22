@@ -126,7 +126,7 @@ module.exports = {
     getTotalAmount: (userID) => {
         return new Promise(async (resolve, reject) => {
             let userCart = await db.get().collection(collections.CART_COLLECTION).findOne({ user: ObjectID(userID) })
-            console.log(userCart);
+
             if (userCart) {
                 let totalAmount = await db.get().collection(collections.CART_COLLECTION).aggregate([
                     {

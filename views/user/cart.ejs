@@ -105,8 +105,10 @@
                                 <%=totalAmount %>
                             </h4>
                         </div>
-                        <button style="font-weight: 700; width: 100%; color: #3D464D; background: #FFD333; border: 0;"
+                        <% if (totalAmount >0 ){ %>
+                            <button style="font-weight: 700; width: 100%; color: #3D464D; background: #FFD333; border: 0;"
                             class="my-3 py-3 btn" onclick="ProceedToPayment()">Procced to Checkout</button>
+                        <% } %>
                     </div>
                 </div>
             </div>

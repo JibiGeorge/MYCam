@@ -100,6 +100,7 @@ const placeOrderPage = async (req, res) => {
     categoryController.getCategory().then((category) => {
         userAddressModel.getAddressList(req.session.user._id).then((addressList) => {
             userCartModel.getCartParoducts(req.session.user._id).then((products) => {
+                console.log(addressList);
                 res.render('user/placeorder', { admin: false, user: true, category, userData, cartCount, addressList, products, totalAmount, discountAmount, couponCode, wishlistCount })
             })
         })

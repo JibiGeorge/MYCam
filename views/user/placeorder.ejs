@@ -1,8 +1,8 @@
 <div style="background: #eeeeee;">
     <div class="container-fluid pb-5" style="padding-top: 30px;">
+        <form action="" id="checkout">
+            <input type="text" name="userID" id="" value="<%= userData._id %>" hidden>
         <div class="row px-xl-5">
-            <form action="" id="checkout">
-                <input type="text" name="userID" id="" value="<%= userData._id %>" hidden>
                 <div class="col-lg-7 mb-3" style="display: block;  overflow-x: auto;">
                     For select Address
                     <div class="col-lg-12 mb-4">
@@ -17,43 +17,48 @@
                     <div class="col-lg-12 mb-4">
                         <a href="/addressPage" class="btn btn-success mb-2">Add new Address</a>
                         <div class="p-4" style="width: 100%; background: #fff;">
-                            <% for (var i=0;i<addressList.address.length;i++) { %>
-                                <div class="mb-2 d-flex">
-                                    <div>
-                                        <input type="radio" class="form-check-input me-2" name="address"
-                                            value="<%= addressList.address[i].name %>,<%= addressList.address[i].address %>,<%= addressList.address[i].locality %>,
-                                            <%= addressList.address[i].city %>,
-                                            <%= addressList.address[i].state %>,
-                                            <%= addressList.address[i].land_Mark %>,
-                                            <%= addressList.address[i].mobile_No %>,
-                                            <%= addressList.address[i].alter_Mobile %>,<%= addressList.address[i].pin_Code %>">
-                                    </div>
-                                    <div style="text-align: left;">
-                                        <p class="m-0" style="font-weight: bold;">
-                                            <%= addressList.address[i].name %>
-                                        </p>
-                                        <p style="font-size: 14px;">
-                                            <strong>Address Line : - </strong>
-                                            <%= addressList.address[i].address %><br>
-                                                <strong>Locality : - </strong>
-                                                <%= addressList.address[i].locality %><br>
-                                                    <strong>City : - </strong>
-                                                    <%= addressList.address[i].city %><br>
-                                                        <strong>State : - </strong>
-                                                        <%= addressList.address[i].state %><br>
-                                                            <strong>LandMark : - </strong>
-                                                            <%= addressList.address[i].land_Mark %><br>
-                                                                <strong>Mobile No : - </strong>
-                                                                <%= addressList.address[i].mobile_No %><br>
-                                                                    <strong>Alternative No : - </strong>
-                                                                    <%= addressList.address[i].alter_Mobile %><br>
-                                                                        <span style="font-weight: bold;">
-                                                                            <%= addressList.address[i].pin_Code %>
-                                                                        </span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <% } %>
+                            <% let address = addressList ? addressList.address : "" %>
+                            <% if (address == "") { %>
+                                <h4>No Address. Add Some Address</h4>
+                                <% } else { %>
+                                    <% for (var values of address) { %>
+                                        <div class="mb-2 d-flex">
+                                            <div>
+                                                <input type="radio" class="form-check-input me-2" name="address"
+                                                    value="<%= values.name %>,<%= values.address %>,<%= values.locality %>,
+                                                    <%= values.city %>,
+                                                    <%= values.state %>,
+                                                    <%= values.land_Mark %>,
+                                                    <%= values.mobile_No %>,
+                                                    <%= values.alter_Mobile %>,<%= values.pin_Code %>" required>
+                                            </div>
+                                            <div style="text-align: left;">
+                                                <p class="m-0" style="font-weight: bold;">
+                                                    <%= values.name %>
+                                                </p>
+                                                <p style="font-size: 14px;">
+                                                    <strong>Address Line : - </strong>
+                                                    <%= values.address %><br>
+                                                        <strong>Locality : - </strong>
+                                                        <%= values.locality %><br>
+                                                            <strong>City : - </strong>
+                                                            <%= values.city %><br>
+                                                                <strong>State : - </strong>
+                                                                <%= values.state %><br>
+                                                                    <strong>LandMark : - </strong>
+                                                                    <%= values.land_Mark %><br>
+                                                                        <strong>Mobile No : - </strong>
+                                                                        <%= values.mobile_No %><br>
+                                                                            <strong>Alternative No : - </strong>
+                                                                            <%= values.alter_Mobile %><br>
+                                                                                <span style="font-weight: bold;">
+                                                                                    <%= values.pin_Code %>
+                                                                                </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                    <% } %>
                         </div>
                     </div>
                 </div>
@@ -129,9 +134,9 @@
                     </div>
                 </div>
                 <!-- Order Details End -->
-            </form>
-
-        </div>
+                
+            </div>
+        </form>
     </div>
 </div>
 

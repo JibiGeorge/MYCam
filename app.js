@@ -52,6 +52,11 @@ app.set('view engine', 'ejs')
 app.use('/admin', adminRouter)
 app.use('/',userRouter)
 
+// Handling non matching request from the client
+app.get('*',(req,res)=>{
+    res.render('pageNotFound',{admin:false,user:false})
+})
+
 app.listen(process.env.PORT, () => {
     console.log("listening to port 4000 .🏃🏃🏃🏃🏃🏃🏃🏃🏃🏃");
 })
