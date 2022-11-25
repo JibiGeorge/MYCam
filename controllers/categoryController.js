@@ -29,7 +29,8 @@ const updateCategoryDetail = (req, res) => {
 }
 const deleteCategory = (req, res) => {
         categoryModel.deleteCategory(req.query.id).then((response) => {
-            res.redirect('/admin/category')
+            // res.redirect('/admin/category')
+            res.json(response)
         })
 }
 

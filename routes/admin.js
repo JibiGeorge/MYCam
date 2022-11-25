@@ -24,7 +24,7 @@ router.get('/Category',sessionHandle.adminSession, categoryController.categoryPa
 router.post('/category/addCategory',sessionHandle.adminSession, upload.single('categoryImage'), categoryController.addCategory)
 router.get('/category/edit',sessionHandle.adminSession, categoryController.getCategoryDetail)
 router.post('/category/update',sessionHandle.adminSession, upload.single('editCategoryImage'), categoryController.updateCategoryDetail)
-router.get('/category/delete',sessionHandle.adminSession, categoryController.deleteCategory)
+router.delete('/category/delete',sessionHandle.adminSession, categoryController.deleteCategory)
 
 router.get('/brand',sessionHandle.adminSession, branController.brandPage)
 router.post('/brand/addBrand',sessionHandle.adminSession, branController.addBrand)

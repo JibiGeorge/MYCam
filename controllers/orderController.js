@@ -35,7 +35,7 @@ const placeOrder = async (req, res) => {
         if (req.body.paymentMethod == 'COD') {
             res.json({ codSuccess: true })
         } else {
-            orderModel.generateRazorPay(orderID, totalPrice).then((response) => {
+            orderModel.generateRazorPay(orderID, finalPrice).then((response) => {
                 res.json(response)
             })
         }

@@ -24,7 +24,8 @@
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Image</label>
-                                        <input type="file" class="form-control" name="categoryImage" value="" id="categoryImage" required>
+                                        <input type="file" class="form-control" name="categoryImage" value=""
+                                            id="categoryImage" required>
                                     </div>
                                     <div>
                                         <label for="" class="form-label">Category Name</label>
@@ -33,7 +34,6 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <!-- <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
                                     <button type="submit" class="btn btn-primary">SAVE</button>
                                 </div>
                             </form>
@@ -51,12 +51,14 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <form action="/admin/category/update" method="post" id="formData" enctype="multipart/form-data">
+                            <form action="/admin/category/update" method="post" id="formData"
+                                enctype="multipart/form-data">
                                 <div class="modal-body">
                                     <input style="display: none;" type="text" id="categoryID" name="categoryID">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Image</label>
-                                        <input type="file" class="form-control" name="editCategoryImage" value="" id="editCategoryImage">
+                                        <input type="file" class="form-control" name="editCategoryImage" value=""
+                                            id="editCategoryImage">
                                     </div>
                                     <div>
                                         <label for="">Category Name</label>
@@ -65,7 +67,6 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <!-- <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
                                     <button type="submit" class="btn btn-primary">UPDATE</button>
                                 </div>
                             </form>
@@ -92,16 +93,15 @@
                                             <%= category[i].categoryName %>
                                         </td>
                                         <td>
-                                            <img style="object-fit: contain;" src="<%= category[i].file_url %>" width="30px" height="30px" alt="">
+                                            <img style="object-fit: contain;" src="<%= category[i].file_url %>"
+                                                width="30px" height="30px" alt="">
                                         </td>
                                         <td>
-                                            <!-- /admin/category/edit?id=<%= category[i]._id %> -->
-                                            <a style=" text-decoration: none; border-radius: 20px; padding: 10px; color: #fff; border: 0px; background: #5E4548;" href=""
-                                                data-bs-toggle="modal" data-bs-target="#updateCategory"
+                                            <a style=" text-decoration: none; border-radius: 20px; padding: 10px; color: #fff; border: 0px; background: #5E4548;"
+                                                href="" data-bs-toggle="modal" data-bs-target="#updateCategory"
                                                 onclick="categoryEdit('<%= category[i]._id %>','<%= category[i].categoryName %>')">Edit</a>
                                             <a style="text-decoration: none; background: #0d6efd; border-radius: 20px; padding: 10px; color: #fff; border: 0px;"
-                                                href="/admin/category/delete?id=<%= category[i]._id %>"
-                                                >Delete</a>
+                                                href="#" onclick="deleteCategory('<%= category[i]._id %>')">Delete</a>
                                         </td>
                                     </tr>
                                     <% } %>
@@ -112,9 +112,11 @@
             </div>
         </div>
     </div>
+    <div class="spinner spinner--full-height">Loading...</div>
 </main>
 
 <script>
+    let spinner = document.querySelector('.spinner')
     function categoryEdit(id, categoryName) {
         let editName = document.getElementById('editCategoryName');
         let categoryID = document.getElementById('categoryID')
@@ -124,6 +126,28 @@
     }
 
     $(document).ready(function () {
-    $('#category_Table').DataTable();
-});
+        $('#category_Table').DataTable();
+    });
+
+    function deleteCategory(catId) {
+        showloading(catId);
+    }
+    function showloading(catId) {
+        spinner.classList.add('show');
+        setTimeout(deleteData(catId), 2000);
+    }
+    function deleteData(id) {
+        fetch('/admin/category/delete?id=' + id, {
+            method: 'delete'
+        }).then(res => res.json()).then(response => {
+            swal({
+                title: "DELETE!",
+                text: "Successfully Deleted!",
+                icon: "success",
+                button: "OK"
+            }).then(val => {
+                location.reload()
+            })
+        })
+    }
 </script>
