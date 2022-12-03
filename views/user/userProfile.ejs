@@ -4,11 +4,11 @@
             <div class="col-lg-3">
                 <div class="profileSideBar d-flex mb-3">
                     <div>
-                        <img src="/img/man.png" alt="">
+                        <button style="border: 0; background: transparent;"><img src="/img/man.png" alt=""></button>
                     </div>
                     <div class="username">
                         <p class="mb-0">Hello Welcome,</p>
-                        <span>User Name</span>
+                        <span><%= userDetails.user_Name %></span>
                     </div>
                 </div>
 
@@ -242,5 +242,7 @@
             window.location.reload()
         })
     }
+
+    
     
 </script>
