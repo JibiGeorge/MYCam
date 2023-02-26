@@ -11,7 +11,7 @@ const orderController = require('../controllers/orderController');
 const couponController = require('../controllers/couponController')
 const reportController = require('../controllers/reportController')
 const { Db } = require('mongodb');
-const {storage } = require('../cloudinary/index')
+const {storage } = require('../cloudinary/index');
 const upload = multer({ storage });
 
 const router = express.Router();
