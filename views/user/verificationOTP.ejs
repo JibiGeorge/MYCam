@@ -1,12 +1,12 @@
 <section class="userPage">
-    <div class="container-fluid pt-5 pb-5" style="background: #fff;">
+    <div class="container-fluid pt-5 pb-5" style="background: #fff; width: auto; padding: 20px; border-radius: 20px;">
         <div class="row justify-content-center">
             <div class="form-container user-signup">
                 <form action="" id="otpverification">
                     <label for="">Enter Your OTP</label>
                     <input style="display: none;" type="text" name="id" value="<%= userId %>">
-                <input type="text" name="OTP">
-                <input type="submit" class="btn btn-success" value="Submit">
+                    <input type="text" name="OTP">
+                    <input type="submit" class="btn btn-success" value="Submit">
                 </form>
                 <% if(locals.errMsg){%>
                     <div class="errorstyle">
@@ -14,7 +14,7 @@
                             <%= errMsg %>
                         </p>
                     </div>
-                <% } %>
+                    <% } %>
             </div>
         </div>
     </div>
@@ -24,23 +24,23 @@
 <script>
     const verificationForm = document.getElementById('otpverification');
 
-    verificationForm.addEventListener('submit',(e)=>{
+    verificationForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const verificationData = new FormData(verificationForm);
         const data = Object.fromEntries(verificationData);
-        fetch('/signup/verification',{
+        fetch('/signup/verification', {
             method: 'POST',
-            headers: {'Content-Type':'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
-        }).then((response)=>{         
-            console.log(response); 
-            if(response){
-                 window.location = '/login'
-            }else{
+        }).then((response) => {
+            console.log(response);
+            if (response) {
+                window.location = '/login'
+            } else {
                 window.location = '/user/verificationfailed'
             }
-        }).catch((error)=>{
+        }).catch((error) => {
             console.log(error);
         })
     })
